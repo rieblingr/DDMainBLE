@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F1A491019084F500049049B /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1A490F19084F500049049B /* Server.m */; };
 		A1109E2C1905E89D00C0088B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1109E2B1905E89D00C0088B /* Foundation.framework */; };
 		A1109E2E1905E89D00C0088B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1109E2D1905E89D00C0088B /* CoreGraphics.framework */; };
 		A1109E301905E89D00C0088B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1109E2F1905E89D00C0088B /* UIKit.framework */; };
@@ -40,6 +41,8 @@
 /* Begin PBXFileReference section */
 		13183C68D96C4B74A800FCD1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		43E03666A4AF4AAC9A72EFA1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F1A490E19084F500049049B /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		9F1A490F19084F500049049B /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		A1109E281905E89D00C0088B /* DDMainBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDMainBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1109E2B1905E89D00C0088B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1109E2D1905E89D00C0088B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -140,6 +143,8 @@
 				A15EEA5719070B8A00B3C28D /* DDBLEViewController.m */,
 				A17D55B519077095008DD792 /* DDImageUploadViewController.h */,
 				A17D55B619077095008DD792 /* DDImageUploadViewController.m */,
+				9F1A490E19084F500049049B /* Server.h */,
+				9F1A490F19084F500049049B /* Server.m */,
 			);
 			path = DDMainBLE;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				A17D55B719077095008DD792 /* DDImageUploadViewController.m in Sources */,
 				A1109E451905E89D00C0088B /* DDSecondViewController.m in Sources */,
 				A1109E381905E89D00C0088B /* main.m in Sources */,
+				9F1A491019084F500049049B /* Server.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
