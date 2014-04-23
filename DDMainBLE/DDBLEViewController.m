@@ -216,22 +216,32 @@
 {
     NSData *data = [characteristic value];      // 1
     const uint8_t *reportData = [data bytes];
+    
+    // Retrieve the characteristic value for Gyro data received
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {  // 3
+        NSLog(@"Read Display Busy characteristic: %s", reportData);
+        
+    }
+    
     // Updated value for display data written
         if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) { // 1
             // CALL HELPER METHOD 
             NSLog(@"Updated a Display Data characteristic: %s", reportData);
         }
-    // Retrieve the characteristic value for manufacturer name received
-    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {  // 2
-        
+    // Read the characteristic value Display Busy
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {  // 2
+        NSLog(@"Read a Display Target characteristic: %s", reportData);
+        // Call helper
+
     }
-    // Retrieve the characteristic value for the body sensor location received
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:POLARH7_HRM_BODY_LOCATION_CHARACTERISTIC_UUID]]) {  // 3
-       
+    // Retrieve the characteristic value for Gyro data received
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_DATA_CHARACTERISTIC_UUID]]) {  // 3
+        NSLog(@"Read Gyro Data characteristic: %s", reportData);
+
     }
     
     // Add your constructed device information to your UITextView
-    self.deviceInfo.text = [NSString stringWithFormat:@"%@\n%@\n%@\n", self.connected, self.bodyData, self.manufacturer];  // 4
+    self.deviceInfo.text = [NSString stringWithFormat:@"%@\n%@\n%@\n", self.displayTarget, self.displayDataFound, self.dynamidiceDeviceData];  // 4
 }
 
 
