@@ -23,7 +23,7 @@
     
     // Set status textview
     [self.connectionStatus setText:@"Status: Not Connected"];
-	[self.connectionStatus setTextColor:[UIColor darkGrayColor]];
+    [self.connectionStatus setTextColor:[UIColor darkGrayColor]];
     [self.connectionStatus setFont:[UIFont fontWithName:@"Futura-CondensedMedium" size:16]];
     
     [self.connectBLEBtn.layer setBorderWidth:1.0f];
@@ -31,19 +31,16 @@
     [self.connectBLEBtn.layer setCornerRadius:15];
     
     [self.deviceInfo setText:@""];
-	[self.deviceInfo setTextColor:[UIColor blueColor]];
-	[self.deviceInfo setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
-	[self.deviceInfo setFont:[UIFont fontWithName:@"Futura-CondensedMedium" size:25]];
-	[self.deviceInfo setUserInteractionEnabled:NO];
+    [self.deviceInfo setTextColor:[UIColor blueColor]];
+    [self.deviceInfo setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    [self.deviceInfo setFont:[UIFont fontWithName:@"Futura-CondensedMedium" size:25]];
+    [self.deviceInfo setUserInteractionEnabled:NO];
     
     // Initialization of CentralManager
-    self.lgCentralManager = [LGCentralManager sharedInstance];
+    //self.lgCentralManager = [LGCentralManager sharedInstance];
     
-    
-//    NSArray *ddServices = @[[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID],[ CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]];
-//    CBCentralManager *centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-//	[centralManager scanForPeripheralsWithServices:ddServices options:nil];
-//	self.centralManager = centralManager;
+    CBCentralManager *centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    self.centralManager = centralManager;
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,15 +54,19 @@
 
 - (IBAction)connectPressed:(UIButton *)sender
 {
-    // Scaning 4 seconds for peripherals
-    [[LGCentralManager sharedInstance] scanForPeripheralsByInterval:4
-                                                         completion:^(NSArray *peripherals)
-     {
-         // If we found any peripherals sending to test
-         if (peripherals.count) {
-             [self testPeripheral:peripherals[0]];
-         }
-     }];
+    NSArray *ddServices = @[[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID],[ CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]];
+    
+    [self.centralManager scanForPeripheralsWithServices:ddServices options:nil];
+    
+    //    // Scaning 4 seconds for peripherals
+    //    [[LGCentralManager sharedInstance] scanForPeripheralsByInterval:4
+    //                                                         completion:^(NSArray *peripherals)
+    //     {
+    //         // If we found any peripherals sending to test
+    //         if (peripherals.count) {
+    //             [self testPeripheral:peripherals[0]];
+    //         }
+    //     }];
     
 }
 
@@ -133,9 +134,10 @@
         [self.centralManager stopScan];
         self.cbPeripheral = peripheral;
         peripheral.delegate = self;
+        // Connect to peripheral and read/write data
         [self.centralManager connectPeripheral:peripheral options:nil];
     }
-
+    
 }
 
 // method called whenever the device state changes.
@@ -187,14 +189,13 @@
     if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]])  {  // 1
         for (CBCharacteristic *aChar in service.characteristics)
         {
-            
-            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) { // 2
-                [self.cbPeripheral writeValue:[NSData dataWithBytes:&data length:sizeof(data)] forCharacteristic: aChar type:CBCharacteristicWriteWithResponse];                NSLog(@"Found display data characteristic and wrote value %i", dataToWrite);
-            }
-            // Request body sensor location
-            else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) { // 3
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) { // 3
                 [self.cbPeripheral readValueForCharacteristic:aChar];
                 NSLog(@"Found a Display Busy characteristic");
+            }
+            
+            else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) { // 2
+                [self.cbPeripheral writeValue:[NSData dataWithBytes:&data length:sizeof(data)] forCharacteristic: aChar type:CBCharacteristicWriteWithResponse];                NSLog(@"Found Display Data characteristic and wrote value %i", dataToWrite);
             }
         }
     }
@@ -208,7 +209,7 @@
             }
         }
     }
-
+    
 }
 
 // Invoked when you retrieve a specified characteristic's value, or when the peripheral device notifies your app that the characteristic's value has changed.
@@ -224,20 +225,20 @@
     }
     
     // Updated value for display data written
-        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) { // 1
-            // CALL HELPER METHOD 
-            NSLog(@"Updated a Display Data characteristic: %s", reportData);
-        }
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) { // 1
+        // CALL HELPER METHOD
+        NSLog(@"Updated a Display Data characteristic: %s", reportData);
+    }
     // Read the characteristic value Display Busy
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {  // 2
         NSLog(@"Read a Display Target characteristic: %s", reportData);
         // Call helper
-
+        
     }
     // Retrieve the characteristic value for Gyro data received
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_DATA_CHARACTERISTIC_UUID]]) {  // 3
         NSLog(@"Read Gyro Data characteristic: %s", reportData);
-
+        
     }
     
     // Add your constructed device information to your UITextView
