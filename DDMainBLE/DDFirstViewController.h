@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DDBLEViewController.h"
 
-@interface DDFirstViewController : UIViewController
+@interface DDFirstViewController : UIViewController<DDBLEViewControllerDelegate>
+
+@property (nonatomic, strong) NSMutableArray *services;
+
+@property (nonatomic, strong) IBOutlet UIButton *initializeBLEBtn;
+
 
 @end

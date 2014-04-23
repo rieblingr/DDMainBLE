@@ -22,6 +22,9 @@
 		A1109E501905E89D00C0088B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1109E2F1905E89D00C0088B /* UIKit.framework */; };
 		A1109E581905E89D00C0088B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1109E561905E89D00C0088B /* InfoPlist.strings */; };
 		A1109E5A1905E89D00C0088B /* DDMainBLETests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1109E591905E89D00C0088B /* DDMainBLETests.m */; };
+		A15EEA5819070B8A00B3C28D /* DDBLEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A15EEA5719070B8A00B3C28D /* DDBLEViewController.m */; };
+		A17D55B719077095008DD792 /* DDImageUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17D55B619077095008DD792 /* DDImageUploadViewController.m */; };
+		BED9CB4B0B004A84A2E28E09 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E03666A4AF4AAC9A72EFA1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13183C68D96C4B74A800FCD1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		43E03666A4AF4AAC9A72EFA1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1109E281905E89D00C0088B /* DDMainBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDMainBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1109E2B1905E89D00C0088B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1109E2D1905E89D00C0088B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -56,6 +61,10 @@
 		A1109E551905E89D00C0088B /* DDMainBLETests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DDMainBLETests-Info.plist"; sourceTree = "<group>"; };
 		A1109E571905E89D00C0088B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A1109E591905E89D00C0088B /* DDMainBLETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDMainBLETests.m; sourceTree = "<group>"; };
+		A15EEA5619070B8A00B3C28D /* DDBLEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDBLEViewController.h; sourceTree = "<group>"; };
+		A15EEA5719070B8A00B3C28D /* DDBLEViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDBLEViewController.m; sourceTree = "<group>"; };
+		A17D55B519077095008DD792 /* DDImageUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDImageUploadViewController.h; sourceTree = "<group>"; };
+		A17D55B619077095008DD792 /* DDImageUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDImageUploadViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +75,7 @@
 				A1109E2E1905E89D00C0088B /* CoreGraphics.framework in Frameworks */,
 				A1109E301905E89D00C0088B /* UIKit.framework in Frameworks */,
 				A1109E2C1905E89D00C0088B /* Foundation.framework in Frameworks */,
+				BED9CB4B0B004A84A2E28E09 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +99,7 @@
 				A1109E531905E89D00C0088B /* DDMainBLETests */,
 				A1109E2A1905E89D00C0088B /* Frameworks */,
 				A1109E291905E89D00C0088B /* Products */,
+				13183C68D96C4B74A800FCD1 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +119,7 @@
 				A1109E2D1905E89D00C0088B /* CoreGraphics.framework */,
 				A1109E2F1905E89D00C0088B /* UIKit.framework */,
 				A1109E4D1905E89D00C0088B /* XCTest.framework */,
+				43E03666A4AF4AAC9A72EFA1 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -124,6 +136,10 @@
 				A1109E441905E89D00C0088B /* DDSecondViewController.m */,
 				A1109E461905E89D00C0088B /* Images.xcassets */,
 				A1109E321905E89D00C0088B /* Supporting Files */,
+				A15EEA5619070B8A00B3C28D /* DDBLEViewController.h */,
+				A15EEA5719070B8A00B3C28D /* DDBLEViewController.m */,
+				A17D55B519077095008DD792 /* DDImageUploadViewController.h */,
+				A17D55B619077095008DD792 /* DDImageUploadViewController.m */,
 			);
 			path = DDMainBLE;
 			sourceTree = "<group>";
@@ -164,9 +180,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1109E5D1905E89D00C0088B /* Build configuration list for PBXNativeTarget "DDMainBLE" */;
 			buildPhases = (
+				29876802BF0F4A5AB988AB37 /* Check Pods Manifest.lock */,
 				A1109E241905E89D00C0088B /* Sources */,
 				A1109E251905E89D00C0088B /* Frameworks */,
 				A1109E261905E89D00C0088B /* Resources */,
+				6A3F570802B247269FEE22BB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -202,7 +220,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DD;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Ryan Riebling";
 				TargetAttributes = {
 					A1109E4B1905E89D00C0088B = {
@@ -250,13 +268,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		29876802BF0F4A5AB988AB37 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6A3F570802B247269FEE22BB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A1109E241905E89D00C0088B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A15EEA5819070B8A00B3C28D /* DDBLEViewController.m in Sources */,
 				A1109E421905E89D00C0088B /* DDFirstViewController.m in Sources */,
 				A1109E3C1905E89D00C0088B /* DDAppDelegate.m in Sources */,
+				A17D55B719077095008DD792 /* DDImageUploadViewController.m in Sources */,
 				A1109E451905E89D00C0088B /* DDSecondViewController.m in Sources */,
 				A1109E381905E89D00C0088B /* main.m in Sources */,
 			);
@@ -382,6 +435,7 @@
 		};
 		A1109E5E1905E89D00C0088B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13183C68D96C4B74A800FCD1 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -395,6 +449,7 @@
 		};
 		A1109E5F1905E89D00C0088B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13183C68D96C4B74A800FCD1 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -467,6 +522,7 @@
 				A1109E5F1905E89D00C0088B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A1109E601905E89D00C0088B /* Build configuration list for PBXNativeTarget "DDMainBLETests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +531,7 @@
 				A1109E621905E89D00C0088B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
