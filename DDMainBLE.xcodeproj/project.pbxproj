@@ -25,6 +25,8 @@
 		A1109E5A1905E89D00C0088B /* DDMainBLETests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1109E591905E89D00C0088B /* DDMainBLETests.m */; };
 		A15EEA5819070B8A00B3C28D /* DDBLEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A15EEA5719070B8A00B3C28D /* DDBLEViewController.m */; };
 		A17D55B719077095008DD792 /* DDImageUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17D55B619077095008DD792 /* DDImageUploadViewController.m */; };
+		A1D7FD861909845C00293268 /* DDImageSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD851909845C00293268 /* DDImageSet.m */; };
+		A1D7FD8919098A2700293268 /* DDExecuteDiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD8819098A2700293268 /* DDExecuteDiceViewController.m */; };
 		BED9CB4B0B004A84A2E28E09 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E03666A4AF4AAC9A72EFA1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,10 @@
 		A15EEA5719070B8A00B3C28D /* DDBLEViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDBLEViewController.m; sourceTree = "<group>"; };
 		A17D55B519077095008DD792 /* DDImageUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDImageUploadViewController.h; sourceTree = "<group>"; };
 		A17D55B619077095008DD792 /* DDImageUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDImageUploadViewController.m; sourceTree = "<group>"; };
+		A1D7FD841909845C00293268 /* DDImageSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDImageSet.h; sourceTree = "<group>"; };
+		A1D7FD851909845C00293268 /* DDImageSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDImageSet.m; sourceTree = "<group>"; };
+		A1D7FD8719098A2700293268 /* DDExecuteDiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDExecuteDiceViewController.h; sourceTree = "<group>"; };
+		A1D7FD8819098A2700293268 /* DDExecuteDiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDExecuteDiceViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,10 @@
 				A17D55B619077095008DD792 /* DDImageUploadViewController.m */,
 				9F1A490E19084F500049049B /* Server.h */,
 				9F1A490F19084F500049049B /* Server.m */,
+				A1D7FD841909845C00293268 /* DDImageSet.h */,
+				A1D7FD851909845C00293268 /* DDImageSet.m */,
+				A1D7FD8719098A2700293268 /* DDExecuteDiceViewController.h */,
+				A1D7FD8819098A2700293268 /* DDExecuteDiceViewController.m */,
 			);
 			path = DDMainBLE;
 			sourceTree = "<group>";
@@ -313,10 +323,12 @@
 			files = (
 				A15EEA5819070B8A00B3C28D /* DDBLEViewController.m in Sources */,
 				A1109E421905E89D00C0088B /* DDFirstViewController.m in Sources */,
+				A1D7FD8919098A2700293268 /* DDExecuteDiceViewController.m in Sources */,
 				A1109E3C1905E89D00C0088B /* DDAppDelegate.m in Sources */,
 				A17D55B719077095008DD792 /* DDImageUploadViewController.m in Sources */,
 				A1109E451905E89D00C0088B /* DDSecondViewController.m in Sources */,
 				A1109E381905E89D00C0088B /* main.m in Sources */,
+				A1D7FD861909845C00293268 /* DDImageSet.m in Sources */,
 				9F1A491019084F500049049B /* Server.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

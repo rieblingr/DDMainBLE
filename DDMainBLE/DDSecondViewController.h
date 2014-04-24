@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DDImageUploadViewController.h"
 
-@interface DDSecondViewController : UIViewController
+@interface DDSecondViewController : UIViewController <DDImageUploadViewControllerDelegate>
+
+@property (nonatomic, strong) IBOutlet UIButton *configureImages;
+@property (nonatomic, strong) IBOutlet UIButton *viewImageSets;
 
 @end

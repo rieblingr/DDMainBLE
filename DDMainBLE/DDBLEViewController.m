@@ -20,20 +20,26 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     
+    // ErrorFound set to false
+    self.errorFound = NO;
+    self.connectSuccessBtn.enabled = NO;
+    [self.connectSuccessBtn setTintColor:[UIColor redColor]];
     
     // Set status textview
     [self.connectionStatus setText:@"Status: Not Connected"];
     [self.connectionStatus setTextColor:[UIColor darkGrayColor]];
-    [self.connectionStatus setFont:[UIFont fontWithName:@"Futura-CondensedMedium" size:16]];
+    [self.connectionStatus setFont:[UIFont fontWithName:@"Futura-CondensedMedium" size:25]];
+    [self.deviceName setTextColor:[UIColor darkGrayColor]];
+    [self.deviceName setFont:[UIFont fontWithName:@"Futura-CondensedMedium" size:25]];
     
     [self.connectBLEBtn.layer setBorderWidth:1.0f];
     [self.connectBLEBtn.layer setBorderColor:[[UIColor cyanColor] CGColor]];
     [self.connectBLEBtn.layer setCornerRadius:15];
     
-    [self.deviceInfo setText:@""];
+    [self.deviceInfo setText:@"DEVICE INFO\n"];
     [self.deviceInfo setTextColor:[UIColor blueColor]];
     [self.deviceInfo setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
-    [self.deviceInfo setFont:[UIFont fontWithName:@"Futura-CondensedMedium" size:25]];
+    [self.deviceInfo setFont:[UIFont fontWithName:@"Futura-CondensedMedium" size:22]];
     [self.deviceInfo setUserInteractionEnabled:NO];
     
     // Initialization of CentralManager
@@ -121,6 +127,10 @@
     [peripheral setDelegate:self];
     [peripheral discoverServices:nil];
     self.connected = [NSString stringWithFormat:@"Connected: %@", peripheral.state == CBPeripheralStateConnected ? @"YES" : @"NO"];
+    if (peripheral.state == CBPeripheralStateConnected) {
+        [self.connectionStatus setText:@"Status: Connection Established"];
+    }
+    
     NSLog(@"%@", self.connected);
 }
 
@@ -130,7 +140,7 @@
     NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
     if ([localName length] > 0) {
         NSLog(@"Found the DD Service: %@", localName);
-        self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString: [NSString stringWithFormat:@"Found: %@\n", localName]];
+        self.deviceName.text = [self.deviceName.text stringByAppendingString: [NSString stringWithFormat:@" %@", localName]];
         [self.centralManager stopScan];
         self.cbPeripheral = peripheral;
         peripheral.delegate = self;
@@ -146,6 +156,8 @@
     // Determine the state of the peripheral
     if ([central state] == CBCentralManagerStatePoweredOff) {
         NSLog(@"CoreBluetooth BLE hardware is powered off");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Idiot" message:@"Are you sure you have Bluetooth turned on?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
     }
     else if ([central state] == CBCentralManagerStatePoweredOn) {
         NSLog(@"CoreBluetooth BLE hardware is powered on and ready");
@@ -167,25 +179,30 @@
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
     for (CBService *service in peripheral.services) {
-        NSLog(@"Discovered service: %@", service.UUID);
+        
+        NSLog(@"Discovered service: %@", [service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]] ? @"Display Service" : [service.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]] ? @"Gyro Service" : service.UUID);
+        
         [peripheral discoverCharacteristics:nil forService:service];
     }
 }
 
-- (void)peripheral: didInvalidateServices
+- (void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
 {
     NSLog(@"Peripheral Did Invalidate Services invoked.");
-    
-    // display the peripheral connection status
+    [self.connectionStatus setText:@"Status: Connection Lost"];
     
 }
 
 // Invoked when you discover the characteristics of a specified service.
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    int16_t dataToWrite = 10;
-    NSData *data = [NSData dataWithBytes:&dataToWrite length:sizeof(dataToWrite)];
+    int16_t displayDataToWrite = 0x2;
+    NSData *displayData = [NSData dataWithBytes:&displayDataToWrite length:sizeof(displayDataToWrite)];
     
+    int16_t targetDataToWrite = 0x1;
+    NSData *targetData = [NSData dataWithBytes:&targetDataToWrite length:sizeof(targetDataToWrite)];
+    
+    // Retrieve Display Data services
     if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]])  {  // 1
         for (CBCharacteristic *aChar in service.characteristics)
         {
@@ -193,9 +210,18 @@
                 [self.cbPeripheral readValueForCharacteristic:aChar];
                 NSLog(@"Found a Display Busy characteristic");
             }
-            
+            else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) { // 2
+                [self.cbPeripheral writeValue:targetData forCharacteristic: aChar type:CBCharacteristicWriteWithResponse];                NSLog(@"Found Display Target characteristic and wrote value %i", targetDataToWrite);
+                
+                self.displayTargetFound = [NSString stringWithFormat:@"Display Target: %i", targetDataToWrite];
+                self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayTargetFound]];
+                
+            }
             else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) { // 2
-                [self.cbPeripheral writeValue:[NSData dataWithBytes:&data length:sizeof(data)] forCharacteristic: aChar type:CBCharacteristicWriteWithResponse];                NSLog(@"Found Display Data characteristic and wrote value %i", dataToWrite);
+                [self.cbPeripheral writeValue:displayData forCharacteristic: aChar type:CBCharacteristicWriteWithResponse];                NSLog(@"Found Display Data characteristic and wrote value %i", displayDataToWrite);
+                self.displayDataFound = [NSString stringWithFormat:@"Display Data: %i", displayDataToWrite];
+                self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayDataFound]];
+                
             }
         }
     }
@@ -215,38 +241,131 @@
 // Invoked when you retrieve a specified characteristic's value, or when the peripheral device notifies your app that the characteristic's value has changed.
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    NSData *data = [characteristic value];      // 1
-    const uint8_t *reportData = [data bytes];
-    
-    // Retrieve the characteristic value for Gyro data received
-    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {  // 3
-        NSLog(@"Read Display Busy characteristic: %s", reportData);
-        
+    // Retrieve the characteristic value for Display Busy
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {
+        NSLog(@"Reading Display Busy characteristic");
+        [self helpGetDisplayBusy:characteristic];
     }
     
-    // Updated value for display data written
-    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) { // 1
-        // CALL HELPER METHOD
-        NSLog(@"Updated a Display Data characteristic: %s", reportData);
-    }
-    // Read the characteristic value Display Busy
-    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {  // 2
-        NSLog(@"Read a Display Target characteristic: %s", reportData);
-        // Call helper
-        
-    }
     // Retrieve the characteristic value for Gyro data received
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_DATA_CHARACTERISTIC_UUID]]) {  // 3
-        NSLog(@"Read Gyro Data characteristic: %s", reportData);
-        
+        NSLog(@"Reading Gyro Data characteristic");
+        [self helpGetGyroData:characteristic];
     }
     
-    // Add your constructed device information to your UITextView
-    self.deviceInfo.text = [NSString stringWithFormat:@"%@\n%@\n%@\n", self.displayTarget, self.displayDataFound, self.dynamidiceDeviceData];  // 4
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) {
+        NSLog(@"Reading Display Data characteristic that has been written to");
+        [self helpGetDisplayData:characteristic error:error];
+    }
+    
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {
+        NSLog(@"Reading Display Target characteristic that has been written to");
+        [self helpGetDisplayTarget:characteristic error:error];
+    }
+    
+    NSLog(@"%@", self.displayBusyFound);
+    NSLog(@"%hhd", self.errorFound);
+    if (self.errorFound) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BLE Error" message:@"There was an error checking BLE connection, try again please!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+    } else {
+        [self.connectSuccessBtn setTintColor:[UIColor blueColor]];
+        self.connectSuccessBtn.enabled = YES;
+    }
 }
 
+// Invoked when you write data to a characteristic’s value.
+- (void) peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    NSLog(@"didWriteValue characterstic: %@", characteristic.UUID);
+    if (error) {
+        NSLog(@"error didwritevalue: %@", error);
+        NSLog(@"Value was not written, reset to last value");
+        self.errorFound = YES;
+    }
+}
 
 #pragma mark - CBCharacteristic helpers
+
+- (void) helpGetDisplayData:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    // Get the Display Data
+    NSData *data = [characteristic value];      // 1
+    const uint8_t *reportData = [data bytes];
+    uint16_t displayData = 0;
+    
+    //    if ((reportData[0] & 0x01) == 0) {          // 2
+    //        // Retrieve the displayData value for DD
+    //         displayData = reportData[1];
+    //    }  else {
+    //        displayData = CFSwapInt16LittleToHost(*(uint16_t *)(&reportData[1]));  // 3
+    //    }
+    
+    // Display the Display Data value to the UI if no error occurred
+    NSLog(@"Characterstic reportData: %s", reportData);
+    NSLog(@"Error for Display Data: %@", error);
+    if( (characteristic.value)  || !error ) {   // 4
+        self.displayDataValue = displayData;
+        self.displayDataFound = [NSString stringWithFormat:@"Display Data: %s", reportData];
+    }
+    return;
+}
+
+- (void) helpGetGyroData:(CBCharacteristic *)characteristic
+{
+    NSData *sensorData = [characteristic value];
+    uint8_t *gyroData = (uint8_t *)[sensorData bytes];
+    if (gyroData) {
+        self.gyroDataFound = [NSString stringWithFormat:@"Gryo Data: %s", gyroData];
+        NSLog(@"GyroData Value: %s", gyroData);
+    }
+    else {
+        self.gyroDataFound = [NSString stringWithFormat:@"Gryo Data: N/A"];
+    }
+    self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.gyroDataFound]];
+    return;
+}
+
+- (void) helpGetDisplayBusy:(CBCharacteristic *)characteristic
+{
+    // Get the Display Busy
+    NSData *data = [characteristic value];
+    uint8_t *busyData = (uint8_t *) [data bytes];
+    
+    if (busyData) {
+        self.displayBusyFound = [NSString stringWithFormat:@"Display Busy: %s", busyData];
+        NSLog(@"DisplayBusy Value: %s", busyData);
+        self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayBusyFound]];
+    }
+    else {  // 4
+        self.displayBusyFound = [NSString stringWithFormat:@"Display Busy: N/A"];
+    }
+    return;
+    
+}
+- (void) helpGetDisplayTarget:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    // Get the Display Target
+    NSData *data = [characteristic value];
+    const uint8_t *reportData = [data bytes];
+    uint16_t displayTarget = 0;
+    
+    // Display the Display Data value to the UI if no error occurred
+    NSLog(@"Characterstic Value: %s", reportData);
+    NSLog(@"Error for Display Data: %@", error);
+    if( (characteristic.value)  || !error ) {   // 4
+        self.displayTargetValue = displayTarget;
+        self.displayTargetFound = [NSString stringWithFormat:@"Display Target: %i", displayTarget];
+        self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayTargetFound]];
+    }
+    return;
+}
+
+- (void) helpGetDeviceInfo:(CBCharacteristic *)characteristic
+{
+    NSLog(@"Unimplemented Method for Device Info Helper");
+}
 
 // Helper method to get the Display data
 - (void) getDisplayData:(LGPeripheral *)peripheral error:(NSError *)error
@@ -281,10 +400,15 @@
 
 - (IBAction)done:(id)sender
 {
-    [self.delegate ddBLEViewControllerDidSave:self];
+    [self.delegate ddBLEViewControllerDidConnectSuccessful:self];
 }
 
 #pragma - UIModifications
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0){
+        [alertView dismissWithClickedButtonIndex:0 animated:YES];
+    }
+}
 
 @end

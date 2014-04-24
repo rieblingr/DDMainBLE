@@ -16,8 +16,10 @@
 
 @end
 
-@interface DDImageUploadViewController : UIViewController
+@interface DDImageUploadViewController : UITableViewController
 
 @property (nonatomic, weak) id <DDImageUploadViewControllerDelegate> delegate;
+
+- (IBAction)cancel:(id)sender;
 
 @end

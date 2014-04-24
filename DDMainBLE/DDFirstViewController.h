@@ -8,12 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "DDBLEViewController.h"
+#import "Server.h"
 
 @interface DDFirstViewController : UIViewController<DDBLEViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *services;
+@property (nonatomic, strong) NSData *serverState;
 
 @property (nonatomic, strong) IBOutlet UIButton *initializeBLEBtn;
+@property (nonatomic, strong) IBOutlet UILabel* connectionStatus;
 
+@property (strong, nonatomic) IBOutlet UILabel *deviceConnection;
+@property (strong, nonatomic) IBOutlet UILabel *serverStatus;
+
+
+// Instance Methods
+- (void)checkServerState;
+- (void)setServerState:(NSData *)serverState;
 
 @end
