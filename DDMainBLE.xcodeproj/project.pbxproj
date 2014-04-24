@@ -27,6 +27,7 @@
 		A17D55B719077095008DD792 /* DDImageUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17D55B619077095008DD792 /* DDImageUploadViewController.m */; };
 		A1D7FD861909845C00293268 /* DDImageSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD851909845C00293268 /* DDImageSet.m */; };
 		A1D7FD8919098A2700293268 /* DDExecuteDiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD8819098A2700293268 /* DDExecuteDiceViewController.m */; };
+		A1D7FD8B1909A8CE00293268 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */; };
 		BED9CB4B0B004A84A2E28E09 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E03666A4AF4AAC9A72EFA1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		A1D7FD851909845C00293268 /* DDImageSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDImageSet.m; sourceTree = "<group>"; };
 		A1D7FD8719098A2700293268 /* DDExecuteDiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDExecuteDiceViewController.h; sourceTree = "<group>"; };
 		A1D7FD8819098A2700293268 /* DDExecuteDiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDExecuteDiceViewController.m; sourceTree = "<group>"; };
+		A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		A1109E1F1905E89D00C0088B = {
 			isa = PBXGroup;
 			children = (
+				A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */,
 				A1109E311905E89D00C0088B /* DDMainBLE */,
 				A1109E531905E89D00C0088B /* DDMainBLETests */,
 				A1109E2A1905E89D00C0088B /* Frameworks */,
@@ -268,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1109E471905E89D00C0088B /* Images.xcassets in Resources */,
+				A1D7FD8B1909A8CE00293268 /* Default-568h@2x.png in Resources */,
 				A1109E361905E89D00C0088B /* InfoPlist.strings in Resources */,
 				A1109E3F1905E89D00C0088B /* Main.storyboard in Resources */,
 			);
@@ -455,12 +459,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 13183C68D96C4B74A800FCD1 /* Pods.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DDMainBLE/DDMainBLE-Prefix.pch";
 				INFOPLIST_FILE = "DDMainBLE/DDMainBLE-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -469,12 +472,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 13183C68D96C4B74A800FCD1 /* Pods.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DDMainBLE/DDMainBLE-Prefix.pch";
 				INFOPLIST_FILE = "DDMainBLE/DDMainBLE-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

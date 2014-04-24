@@ -8,20 +8,12 @@
 
 #import "DDExecuteDiceViewController.h"
 
+
 @interface DDExecuteDiceViewController ()
 
 @end
 
 @implementation DDExecuteDiceViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -45,5 +37,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Navigation
+
+-(IBAction)stop:(id)sender
+{
+    [self.delegate ddExecuteDiceVCDidStop:self];
+}
 
 @end

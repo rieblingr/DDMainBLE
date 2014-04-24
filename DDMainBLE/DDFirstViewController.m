@@ -23,10 +23,10 @@
     [self.initializeBLEBtn.layer setBorderColor:[[UIColor cyanColor] CGColor]];
     [self.initializeBLEBtn.layer setCornerRadius:15];
     
-    int8_t data = 0x1;
-    NSData *dummyData = [[NSData alloc] init];
-    dummyData = [NSData dataWithBytes:&data length:sizeof(data)];
-    [self setServerState: dummyData];
+    self.serverState = [Server setState:@"1" time:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]];
+    // Convert NSData to Json/NSDictionary
+    // then get object from key "success" 
+    
     [self checkServerState];
 }
 
@@ -63,6 +63,12 @@
         segue.destinationViewController;
         ddBLEViewController.delegate = self;
 	}
+    
+    if ([segue.identifier isEqualToString:@"startExecution"])
+	{
+        DDExecuteDiceViewController *ddExecuteDiceVC = segue.destinationViewController;
+        ddExecuteDiceVC.delegate = self;
+    }
 }
 
 
@@ -83,4 +89,10 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
     
 }
+
+- (void) ddExecuteDiceVCDidStop:(DDExecuteDiceViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 @end

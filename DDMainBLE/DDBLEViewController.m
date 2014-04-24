@@ -203,30 +203,31 @@
     NSData *targetData = [NSData dataWithBytes:&targetDataToWrite length:sizeof(targetDataToWrite)];
     
     // Retrieve Display Data services
-    if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]])  {  // 1
+    if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]])  {
         for (CBCharacteristic *aChar in service.characteristics)
         {
-            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) { // 3
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {
                 [self.cbPeripheral readValueForCharacteristic:aChar];
                 NSLog(@"Found a Display Busy characteristic");
             }
-            else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) { // 2
-                [self.cbPeripheral writeValue:targetData forCharacteristic: aChar type:CBCharacteristicWriteWithResponse];                NSLog(@"Found Display Target characteristic and wrote value %i", targetDataToWrite);
+            else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {
+                [self.cbPeripheral writeValue:targetData forCharacteristic: aChar type:CBCharacteristicWriteWithoutResponse];                NSLog(@"Found Display Target characteristic and wrote value %i", targetDataToWrite);
                 
                 self.displayTargetFound = [NSString stringWithFormat:@"Display Target: %i", targetDataToWrite];
                 self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayTargetFound]];
                 
             }
             else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) { // 2
-                [self.cbPeripheral writeValue:displayData forCharacteristic: aChar type:CBCharacteristicWriteWithResponse];                NSLog(@"Found Display Data characteristic and wrote value %i", displayDataToWrite);
+                [self.cbPeripheral writeValue:displayData forCharacteristic: aChar type:CBCharacteristicWriteWithoutResponse];                NSLog(@"Found Display Data characteristic and wrote value %i", displayDataToWrite);
                 self.displayDataFound = [NSString stringWithFormat:@"Display Data: %i", displayDataToWrite];
                 self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayDataFound]];
                 
             }
         }
     }
+    
     // Retrieve Device Gyro Data services
-    if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]])  { // 4
+    if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]])  {
         for (CBCharacteristic *aChar in service.characteristics)
         {
             if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_DATA_CHARACTERISTIC_UUID]]) {
@@ -255,12 +256,10 @@
     
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) {
         NSLog(@"Reading Display Data characteristic that has been written to");
-        [self helpGetDisplayData:characteristic error:error];
     }
     
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {
         NSLog(@"Reading Display Target characteristic that has been written to");
-        [self helpGetDisplayTarget:characteristic error:error];
     }
     
     NSLog(@"%@", self.displayBusyFound);
@@ -288,37 +287,17 @@
 
 #pragma mark - CBCharacteristic helpers
 
-- (void) helpGetDisplayData:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    // Get the Display Data
-    NSData *data = [characteristic value];      // 1
-    const uint8_t *reportData = [data bytes];
-    uint16_t displayData = 0;
-    
-    //    if ((reportData[0] & 0x01) == 0) {          // 2
-    //        // Retrieve the displayData value for DD
-    //         displayData = reportData[1];
-    //    }  else {
-    //        displayData = CFSwapInt16LittleToHost(*(uint16_t *)(&reportData[1]));  // 3
-    //    }
-    
-    // Display the Display Data value to the UI if no error occurred
-    NSLog(@"Characterstic reportData: %s", reportData);
-    NSLog(@"Error for Display Data: %@", error);
-    if( (characteristic.value)  || !error ) {   // 4
-        self.displayDataValue = displayData;
-        self.displayDataFound = [NSString stringWithFormat:@"Display Data: %s", reportData];
-    }
-    return;
-}
-
 - (void) helpGetGyroData:(CBCharacteristic *)characteristic
 {
     NSData *sensorData = [characteristic value];
     uint8_t *gyroData = (uint8_t *)[sensorData bytes];
+    NSLog(@"Sensor: %@", sensorData);
     if (gyroData) {
         self.gyroDataFound = [NSString stringWithFormat:@"Gryo Data: %s", gyroData];
         NSLog(@"GyroData Value: %s", gyroData);
+//        if (self.gyroDataFound.length < 12 ) {
+//            self.gyroDataFound = [self.gyroDataFound stringByAppendingString:@"0x0"];
+//        }
     }
     else {
         self.gyroDataFound = [NSString stringWithFormat:@"Gryo Data: N/A"];
@@ -337,29 +316,15 @@
         self.displayBusyFound = [NSString stringWithFormat:@"Display Busy: %s", busyData];
         NSLog(@"DisplayBusy Value: %s", busyData);
         self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayBusyFound]];
+//        if (self.displayBusyFound.length < 16 ) {
+//            self.displayBusyFound = [self.displayBusyFound stringByAppendingString:@"0x0"];
+//        }
     }
-    else {  // 4
+    else {
         self.displayBusyFound = [NSString stringWithFormat:@"Display Busy: N/A"];
     }
     return;
     
-}
-- (void) helpGetDisplayTarget:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    // Get the Display Target
-    NSData *data = [characteristic value];
-    const uint8_t *reportData = [data bytes];
-    uint16_t displayTarget = 0;
-    
-    // Display the Display Data value to the UI if no error occurred
-    NSLog(@"Characterstic Value: %s", reportData);
-    NSLog(@"Error for Display Data: %@", error);
-    if( (characteristic.value)  || !error ) {   // 4
-        self.displayTargetValue = displayTarget;
-        self.displayTargetFound = [NSString stringWithFormat:@"Display Target: %i", displayTarget];
-        self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayTargetFound]];
-    }
-    return;
 }
 
 - (void) helpGetDeviceInfo:(CBCharacteristic *)characteristic

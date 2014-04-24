@@ -22,18 +22,18 @@
 @interface DDBLEViewController : UIViewController<CBCentralManagerDelegate, CBPeripheralDelegate, UIAlertViewDelegate>
 // Services on DD hardware
 #define DD_DEVICE_INFO_SERVICE_UUID @"1800"
-#define DD_DISPLAY_SERVICE_UUID @"cd45"
-#define DD_GYRO_SERVICE_UUID @"7cbd"
+#define DD_DISPLAY_SERVICE_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af00"
+#define DD_GYRO_SERVICE_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af10"
 
-// Characteristics - NEED TO CHANGE
+// Characteristics
 #define DD_NAME_CHARACTERISTIC_UUID @"2a00"
 #define DD_APPEARANCE_CHARACTERISTIC_UUID @"2a01"
 
-#define DD_DISPLAY_DATA_CHARACTERISTIC_UUID @"6f1f"
-#define DD_DISPLAY_TARGET_CHARACTERISTIC_UUID @"1daa"
-#define DD_DISPLAY_BUSY_CHARACTERISTIC_UUID @"3b20"
+#define DD_DISPLAY_DATA_CHARACTERISTIC_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af01"
+#define DD_DISPLAY_TARGET_CHARACTERISTIC_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af02"
+#define DD_DISPLAY_BUSY_CHARACTERISTIC_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af03"
 
-#define DD_GYRO_DATA_CHARACTERISTIC_UUID @"49d2"
+#define DD_GYRO_DATA_CHARACTERISTIC_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af11"
 
 @property (nonatomic, strong) LGCentralManager *lgCentralManager;
 @property (nonatomic, strong) LGPeripheral *lgPeripheral;
@@ -70,11 +70,9 @@
 
 @property (nonatomic, weak) id <DDBLEViewControllerDelegate> delegate;
 
-// Instance methods to get the Display Data, Gyro Data, Display Busy, Display Target, Device info
-- (void) helpGetDisplayData:(CBCharacteristic *)characteristic error:(NSError *)error;
+// Instance methods
 - (void) helpGetGyroData:(CBCharacteristic *)characteristic;
 - (void) helpGetDisplayBusy:(CBCharacteristic *)characteristic;
-- (void) helpGetDisplayTarget:(CBCharacteristic *)characteristic error:(NSError *)error;
 - (void) helpGetDeviceInfo:(CBCharacteristic *)characteristic;
 
 // UI Methods

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DDBLEViewController.h"
+#import "DDExecuteDiceViewController.h"
 #import "Server.h"
 
-@interface DDFirstViewController : UIViewController<DDBLEViewControllerDelegate>
+@interface DDFirstViewController : UIViewController<DDBLEViewControllerDelegate, DDExecuteDiceViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *services;
 @property (nonatomic, strong) NSData *serverState;
@@ -23,7 +24,5 @@
 
 
 // Instance Methods
-- (void)checkServerState;
-- (void)setServerState:(NSData *)serverState;
 
 @end
