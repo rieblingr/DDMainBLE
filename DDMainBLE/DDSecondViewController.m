@@ -18,6 +18,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,10 +32,21 @@
 {
 	if ([segue.identifier isEqualToString:@"configureImages"])
 	{
-		DDImageUploadViewController *ddImageUploadVC =
+        UINavigationController *navigationController =
         segue.destinationViewController;
+		DDImageUploadViewController *ddImageUploadVC =
+        [[navigationController viewControllers]
+         objectAtIndex:0];
         ddImageUploadVC.delegate = self;
-        NSLog(@"The prepareForSegue method executed in DDSecondVC");
+        NSLog(@"The prepareForSegue configureImages executed in DDSecondVC");
+	}
+    
+    if ([segue.identifier isEqualToString:@"createImage"])
+	{
+		DDImageUploadViewController *ddCreateImageVC =
+        segue.destinationViewController;
+        ddCreateImageVC.delegate = self;
+        NSLog(@"The prepareForSegue createImage executed in DDSecondVC");
 	}
 }
 
@@ -41,5 +54,11 @@
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+- (void) ddCreateImageVCDidCancel:(DDCreateImageViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 @end

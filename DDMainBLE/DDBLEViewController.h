@@ -77,7 +77,6 @@
 
 // UI Methods
 - (IBAction)connectPressed:(UIButton *)sender;
-- (void)testPeripheral:(LGPeripheral *)peripheral;
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;
 
