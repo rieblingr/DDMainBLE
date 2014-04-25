@@ -14,15 +14,16 @@
 @interface DDFirstViewController : UIViewController<DDBLEViewControllerDelegate, DDExecuteDiceViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *services;
-@property (nonatomic, strong) NSData *serverState;
+@property (nonatomic, strong) NSDictionary *serverStateData;
 
 @property (nonatomic, strong) IBOutlet UIButton *initializeBLEBtn;
 @property (nonatomic, strong) IBOutlet UILabel* connectionStatus;
 
 @property (strong, nonatomic) IBOutlet UILabel *deviceConnection;
 @property (strong, nonatomic) IBOutlet UILabel *serverStatus;
+@property (strong, nonatomic) IBOutlet UIButton *initiateExecutionBtn;
 
 
 // Instance Methods
-
+-(void) updateServerLabel;
 @end

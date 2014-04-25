@@ -23,11 +23,25 @@
     [self.initializeBLEBtn.layer setBorderColor:[[UIColor cyanColor] CGColor]];
     [self.initializeBLEBtn.layer setCornerRadius:15];
     
-    self.serverState = [Server setState:@"1" time:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]]];
-    // Convert NSData to Json/NSDictionary
-    // then get object from key "success" 
+    [self.initiateExecutionBtn setEnabled:NO];
+    [self.initiateExecutionBtn setAlpha:0.4F];
+    [self.initiateExecutionBtn setTintColor:[UIColor redColor]];
     
-    [self checkServerState];
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:[Server getState]
+                          
+                          options:kNilOptions
+                          error:&error];
+    
+    NSArray* dataState = [json objectForKey:@"state"];
+    NSArray* timeStamp = [json objectForKey:@"time"];
+    
+    NSLog(@"Json: %@", json);
+    
+    [self.serverStatus setText:[NSString stringWithFormat:@"Server: %@ at %@", dataState, timeStamp]];
+    
+    NSLog(@"ServerState: %@", dataState);
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,18 +52,24 @@
 
 #pragma mark - Server
 
-- (void)checkServerState
+- (void)updateServerLabel
 {
-    self.serverState = [Server getState];
-    [self.serverStatus setText:[NSString stringWithFormat:@"Server: %@", self.serverState]];
-}
-
-- (void)setServerState:(NSData *)serverState
-{
-    NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
-    NSNumber *timeStampNumber = [NSNumber numberWithDouble: timeStamp];
-    // State of 1 is iOS device?
-    [Server setState:@"1" time:timeStampNumber];
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:[Server getState]
+                          
+                          options:kNilOptions
+                          error:&error];
+    
+    NSArray* dataState = [json objectForKey:@"state"];
+    NSArray* timeStamp = [json objectForKey:@"time"];
+    
+    NSLog(@"Json: %@", json);
+    
+    [self.serverStatus setText:[NSString stringWithFormat:@"Server: %@ at %@", dataState, timeStamp]];
+    
+    NSLog(@"ServerState: %@", dataState);
+    
 }
 
 #pragma mark - Navigation
@@ -74,7 +94,6 @@
 
 - (void) ddBLEViewControllerDidCancel:(DDBLEViewController *)controller
 {
-    [self checkServerState];
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -84,7 +103,10 @@
     
     [self.connectionStatus setText:@"Status: Connection Available"];
     [self.deviceConnection setText:deviceName];
-    [self checkServerState];
+    [self updateServerLabel];
+    [self.initiateExecutionBtn setEnabled:YES];
+    [self.initiateExecutionBtn setTintColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
+    [self.initiateExecutionBtn setAlpha:1.0F];
     
     [self dismissViewControllerAnimated:YES completion:NULL];
     
@@ -92,6 +114,7 @@
 
 - (void) ddExecuteDiceVCDidStop:(DDExecuteDiceViewController *)controller
 {
+    [self updateServerLabel];
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 

@@ -51,7 +51,6 @@
 
 // Properties to hold data characteristics for the peripheral device
 @property (nonatomic, strong) NSString *connected;
-
 @property (nonatomic, strong) NSString *displayTargetFound;
 @property (nonatomic, strong) NSString *gyroDataFound;
 @property (nonatomic, strong) NSString *displayDataFound;

@@ -34,7 +34,7 @@ NSString *url = @"http://kennethksiu.com:3000/DD";
     
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    
+    NSLog(@"Data: %@", data);
     return data;
 }
 

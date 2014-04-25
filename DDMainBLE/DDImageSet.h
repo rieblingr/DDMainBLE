@@ -13,6 +13,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *imageSetName;
 @property (nonatomic, strong) IBOutlet UIImage *image1;
 @property (nonatomic, strong) IBOutlet UIImage *image2;
-
+@property (nonatomic, strong) IBOutlet UIImage *image3;
+@property (nonatomic, strong) IBOutlet UIImage *image4;
+@property (nonatomic, strong) IBOutlet UIImage *image5;
+@property (nonatomic, strong) IBOutlet UIImage *image6;
 
 @end
