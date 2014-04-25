@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9F1A491019084F500049049B /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1A490F19084F500049049B /* Server.m */; };
+		9F28FE23190AEBCD00E51640 /* DDButtonCreateImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F28FE22190AEBCD00E51640 /* DDButtonCreateImage.m */; };
 		9F8ED2E7190ADA0600CE7655 /* DDCreateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ED2E6190ADA0600CE7655 /* DDCreateImageView.m */; };
 		A1109E2C1905E89D00C0088B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1109E2B1905E89D00C0088B /* Foundation.framework */; };
 		A1109E2E1905E89D00C0088B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1109E2D1905E89D00C0088B /* CoreGraphics.framework */; };
@@ -49,6 +50,8 @@
 		43E03666A4AF4AAC9A72EFA1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F1A490E19084F500049049B /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		9F1A490F19084F500049049B /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
+		9F28FE21190AEBCD00E51640 /* DDButtonCreateImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDButtonCreateImage.h; sourceTree = "<group>"; };
+		9F28FE22190AEBCD00E51640 /* DDButtonCreateImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDButtonCreateImage.m; sourceTree = "<group>"; };
 		9F8ED2E5190ADA0600CE7655 /* DDCreateImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCreateImageView.h; sourceTree = "<group>"; };
 		9F8ED2E6190ADA0600CE7655 /* DDCreateImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCreateImageView.m; sourceTree = "<group>"; };
 		A1109E281905E89D00C0088B /* DDMainBLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDMainBLE.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +176,8 @@
 				A1D7FD901909D99B00293268 /* DDTimerController.m */,
 				9F8ED2E5190ADA0600CE7655 /* DDCreateImageView.h */,
 				9F8ED2E6190ADA0600CE7655 /* DDCreateImageView.m */,
+				9F28FE21190AEBCD00E51640 /* DDButtonCreateImage.h */,
+				9F28FE22190AEBCD00E51640 /* DDButtonCreateImage.m */,
 			);
 			path = DDMainBLE;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 				A1109E451905E89D00C0088B /* DDSecondViewController.m in Sources */,
 				A1109E381905E89D00C0088B /* main.m in Sources */,
 				A1D7FD861909845C00293268 /* DDImageSet.m in Sources */,
+				9F28FE23190AEBCD00E51640 /* DDButtonCreateImage.m in Sources */,
 				9F1A491019084F500049049B /* Server.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
