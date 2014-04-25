@@ -13,9 +13,6 @@
 
 @end
 
-// Const Values Initializations
-const uint8_t DISPLAY_IS_BUSY = 0x1;
-
 @implementation DDExecuteDiceViewController
 
 - (void)viewDidLoad
@@ -35,7 +32,8 @@ const uint8_t DISPLAY_IS_BUSY = 0x1;
     
     self.count = 0;
     
-    self.displayBusyValueRead = 0x1;
+    self.displayBusyValueRead = [NSNumber numberWithInt:0];
+    self.gyroDataValueRead = [NSNumber numberWithInt:0];
     
     // First initialize a Timer and set it in a run loop
     // Fire every second and keep deviceTimeStamp updated in case need to set server state
@@ -253,7 +251,7 @@ const uint8_t DISPLAY_IS_BUSY = 0x1;
         NSLog(@"Discovered service: %@", [service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]] ? @"Display Service" : [service.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]] ? @"Gyro Service" : service.UUID);
         
         // if display is busy don't write to Display Data, only read display Busy
-        if (self.displayBusyValueRead == DISPLAY_IS_BUSY) {
+        if (self.displayBusyValueRead.intValue == DISPLAY_IS_BUSY) {
             if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]]) {
                 [peripheral discoverCharacteristics:self.busyCharArray forService:service];
             }
@@ -277,7 +275,7 @@ const uint8_t DISPLAY_IS_BUSY = 0x1;
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
     // Display Busy is busy, read the value
-    if (self.displayBusyValueRead == DISPLAY_IS_BUSY) {
+    if (self.displayBusyValueRead.intValue == DISPLAY_IS_BUSY) {
         if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]])  {
             for (CBCharacteristic *aChar in service.characteristics)
             {
@@ -314,7 +312,8 @@ const uint8_t DISPLAY_IS_BUSY = 0x1;
             NSData *displayBusy = [NSData dataWithBytes:&DISPLAY_IS_BUSY length:sizeof(DISPLAY_IS_BUSY)];
             if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {
                 [self.peripheral writeValue:displayBusy forCharacteristic: aChar type:CBCharacteristicWriteWithoutResponse];                NSLog(@"Display Ready - Found Display Busy characteristic switch display to Busy value: %@", displayBusy);
-                self.displayBusyValueRead = DISPLAY_IS_BUSY;
+                self.displayBusyValueRead = [NSNumber numberWithInt:1];
+                NSLog(@"Display Ready - New DisplayBusyValueFound: %@", self.displayBusyValueRead);
             }
         }
     }
@@ -369,8 +368,10 @@ const uint8_t DISPLAY_IS_BUSY = 0x1;
     if (busyData) {
         self.displayBusyFound = [NSString stringWithFormat:@"Display Busy: %s", busyData];
         NSLog(@"DisplayBusy Value Read: %s", busyData);
-        self.displayBusyValueRead = (uint8_t)(busyData);
-        NSLog(@"DisplayBusy Value Set to: %hhu", self.displayBusyValueRead);
+        self.displayBusyValueRead = [NSNumber numberWithUnsignedChar:*busyData];
+//        NSLog(@"DisplayBusy Value Set to: %@", self.displayBusyValueRead);
+//        NSLog(@"DisplayBusy Value int value: %d", self.displayBusyValueRead.intValue);
+        
     }
     else {
         self.displayBusyFound = [NSString stringWithFormat:@"Display Busy: N/A"];
@@ -386,9 +387,8 @@ const uint8_t DISPLAY_IS_BUSY = 0x1;
     if (gyroData) {
         self.gyroDataFound = [NSString stringWithFormat:@"Gryo Data: %s", gyroData];
         NSLog(@"GyroData Value: %s", gyroData);
-        self.gyroDataValueRead = (uint8_t)gyroData;
-        NSLog(@"GyroData Value Set to: %s", gyroData);
-        
+        self.gyroDataValueRead = [NSNumber numberWithUnsignedChar:*gyroData];
+        //NSLog(@"GyroData Value Set to: %i", self.gyroDataValueRead.intValue);
     }
     else {
         self.gyroDataFound = [NSString stringWithFormat:@"Gryo Data: N/A"];
@@ -438,11 +438,11 @@ const uint8_t DISPLAY_IS_BUSY = 0x1;
     return grayScaleImage;
 }
 
-- (uintmax_t) imageToByteArray:(UIImage *) image
+- (uint8_t *) imageToByteArray:(UIImage *) image
 {
     NSData *data = UIImagePNGRepresentation(image);
     NSUInteger len = data.length;
-    uintmax_t *bytes = (uintmax_t *)[data bytes];
+    uint8_t *bytes = (uint8_t *)[data bytes];
     NSMutableString *result = [NSMutableString stringWithCapacity:len * 3];
     [result appendString:@"["];
     for (NSUInteger i = 0; i < len; i++) {
@@ -453,7 +453,7 @@ const uint8_t DISPLAY_IS_BUSY = 0x1;
     }
     [result appendString:@"]"];
     NSLog(@"%@", result);
-    return *bytes;
+    return bytes;
 }
 
 #pragma mark - Navigation

@@ -18,7 +18,7 @@
 @end
 
 // Constants
-extern const uint8_t DISPLAY_IS_BUSY;
+static const int DISPLAY_IS_BUSY = 1;
 
 @interface DDExecuteDiceViewController : UIViewController<CBCentralManagerDelegate, CBPeripheralDelegate>
 
@@ -88,11 +88,12 @@ extern const uint8_t DISPLAY_IS_BUSY;
 @property (nonatomic, strong) NSString *displayDataFound;
 @property (nonatomic, strong) NSString *displayBusyFound;
 @property (nonatomic, strong) NSString *dynamidiceDeviceData;
-@property (nonatomic, assign) uint8_t displayBusyValueRead;
+
 @property (nonatomic, assign) uint8_t displayBusyValueToWrite;
 @property (nonatomic, assign) uint8_t displayTargetValueToWrite;
 @property (nonatomic, assign) uintmax_t displayDataValueToWrite;
-@property (nonatomic, assign) uint8_t gyroDataValueRead;
+@property (nonatomic, assign) NSNumber *gyroDataValueRead;
+@property (nonatomic, assign) NSNumber *displayBusyValueRead;
 @property (nonatomic, assign) int count;
 
 // Timer for setting server state
