@@ -19,6 +19,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        //set view to DDCreateImageView
+        self.view = [[DDCreateImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        
+        
     }
     return self;
 }
