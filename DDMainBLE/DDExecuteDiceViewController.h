@@ -74,12 +74,12 @@ static const int DISPLAY_IS_BUSY = 1;
 @property (strong, nonatomic) UIImage *imageGray5;
 @property (strong, nonatomic) UIImage *imageGray6;
 // Converted grayscale ByteArray Images
-@property (assign, nonatomic) uintmax_t byteArrayImage1;
-@property (assign, nonatomic) uintmax_t byteArrayImage2;
-@property (assign, nonatomic) uintmax_t byteArrayImage3;
-@property (assign, nonatomic) uintmax_t byteArrayImage4;
-@property (assign, nonatomic) uintmax_t byteArrayImage5;
-@property (assign, nonatomic) uintmax_t byteArrayImage6;
+@property (assign, nonatomic) uint8_t *byteArrayImage1;
+@property (assign, nonatomic) uint8_t *byteArrayImage2;
+@property (assign, nonatomic) uint8_t *byteArrayImage3;
+@property (assign, nonatomic) uint8_t *byteArrayImage4;
+@property (assign, nonatomic) uint8_t *byteArrayImage5;
+@property (assign, nonatomic) uint8_t *byteArrayImage6;
 
 // Properties to hold data characteristics for the peripheral device
 @property (nonatomic, strong) NSString *connected;
@@ -91,7 +91,7 @@ static const int DISPLAY_IS_BUSY = 1;
 
 @property (nonatomic, assign) uint8_t displayBusyValueToWrite;
 @property (nonatomic, assign) uint8_t displayTargetValueToWrite;
-@property (nonatomic, assign) uintmax_t displayDataValueToWrite;
+@property (nonatomic, assign) uint8_t * displayDataValueToWrite;
 @property (nonatomic, assign) NSNumber *gyroDataValueRead;
 @property (nonatomic, assign) NSNumber *displayBusyValueRead;
 @property (nonatomic, assign) int count;

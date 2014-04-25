@@ -123,6 +123,8 @@
     self.imageGray4 = [self imageToGreyImage:self.image4.image];
     self.imageGray5 = [self imageToGreyImage:self.image5.image];
     self.imageGray6 = [self imageToGreyImage:self.image6.image];
+    [self.image6 setImage:self.imageGray6];
+    
     [self.loadingImagesProgress setProgress:60 animated:YES];
     
     // Convert images to byte arrays
@@ -181,7 +183,7 @@
             self.displayDataValueToWrite = self.byteArrayImage1;
             break;
     }
-    NSLog(@"ByteArrayImage to write is now %@", @"UPDATE TO REAL VALUE");
+    NSLog(@"ByteArrayImage to write is now %s", self.displayDataValueToWrite);
     return nil;
 }
 
@@ -289,7 +291,7 @@
         // Write to busy char, write to data char, write to target
         for (CBCharacteristic *aChar in service.characteristics)
         {
-            uintmax_t dataToWrite = self.displayDataValueToWrite;
+            uint8_t *dataToWrite = self.displayDataValueToWrite;
             NSData *displayData = [NSData dataWithBytes:&dataToWrite length:sizeof(dataToWrite)];
             
             if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) {
@@ -300,7 +302,9 @@
                 
             }
             
-            uint8_t targetToWrite = self.displayTargetValueToWrite;
+            // Test
+            //uint8_t targetToWrite = self.displayTargetValueToWrite;
+            uint8_t targetToWrite = 0x2F;
             NSData *displayTarget = [NSData dataWithBytes:&targetToWrite length:sizeof(targetToWrite)];
             
             if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {
@@ -369,9 +373,7 @@
         self.displayBusyFound = [NSString stringWithFormat:@"Display Busy: %s", busyData];
         NSLog(@"DisplayBusy Value Read: %s", busyData);
         self.displayBusyValueRead = [NSNumber numberWithUnsignedChar:*busyData];
-//        NSLog(@"DisplayBusy Value Set to: %@", self.displayBusyValueRead);
-//        NSLog(@"DisplayBusy Value int value: %d", self.displayBusyValueRead.intValue);
-        
+        NSLog(@"DisplayBusy Value Set to: ");
     }
     else {
         self.displayBusyFound = [NSString stringWithFormat:@"Display Busy: N/A"];
@@ -388,7 +390,8 @@
         self.gyroDataFound = [NSString stringWithFormat:@"Gryo Data: %s", gyroData];
         NSLog(@"GyroData Value: %s", gyroData);
         self.gyroDataValueRead = [NSNumber numberWithUnsignedChar:*gyroData];
-        //NSLog(@"GyroData Value Set to: %i", self.gyroDataValueRead.intValue);
+        NSLog(@"GyroData Value Set to:");
+        
     }
     else {
         self.gyroDataFound = [NSString stringWithFormat:@"Gryo Data: N/A"];
@@ -441,6 +444,7 @@
 - (uint8_t *) imageToByteArray:(UIImage *) image
 {
     NSData *data = UIImagePNGRepresentation(image);
+    NSLog(@"Image: %@", image);
     NSUInteger len = data.length;
     uint8_t *bytes = (uint8_t *)[data bytes];
     NSMutableString *result = [NSMutableString stringWithCapacity:len * 3];
@@ -449,7 +453,7 @@
         if (i) {
             [result appendString:@","];
         }
-        [result appendFormat:@"%ju", bytes[i]];
+        [result appendFormat:@"%hhu", bytes[i]];
     }
     [result appendString:@"]"];
     NSLog(@"%@", result);
