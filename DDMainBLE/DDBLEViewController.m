@@ -81,6 +81,11 @@
     NSLog(@"%@", self.connected);
 }
 
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    
+}
+
 // CBCentralManagerDelegate - This is called with the CBPeripheral class as its main input parameter. This contains most of the information there is to know about a BLE peripheral.
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
@@ -128,8 +133,8 @@
     for (CBService *service in peripheral.services) {
         
         NSLog(@"Discovered service: %@", [service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]] ? @"Display Service" : [service.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]] ? @"Gyro Service" : service.UUID);
-        
-        [peripheral discoverCharacteristics:nil forService:service];
+
+            [peripheral discoverCharacteristics:nil forService:service];
     }
 }
 
@@ -162,13 +167,11 @@
                 
                 self.displayTargetFound = [NSString stringWithFormat:@"Display Target: %i", targetDataToWrite];
                 self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayTargetFound]];
-                
             }
             else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) { // 2
                 [self.cbPeripheral writeValue:displayData forCharacteristic: aChar type:CBCharacteristicWriteWithoutResponse];                NSLog(@"Found Display Data characteristic and wrote value %i", displayDataToWrite);
                 self.displayDataFound = [NSString stringWithFormat:@"Display Data: %i", displayDataToWrite];
                 self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayDataFound]];
-                
             }
         }
     }
@@ -242,9 +245,9 @@
     if (gyroData) {
         self.gyroDataFound = [NSString stringWithFormat:@"Gryo Data: %s", gyroData];
         NSLog(@"GyroData Value: %s", gyroData);
-//        if (self.gyroDataFound.length < 12 ) {
-//            self.gyroDataFound = [self.gyroDataFound stringByAppendingString:@"0x0"];
-//        }
+        //        if (self.gyroDataFound.length < 12 ) {
+        //            self.gyroDataFound = [self.gyroDataFound stringByAppendingString:@"0x0"];
+        //        }
     }
     else {
         self.gyroDataFound = [NSString stringWithFormat:@"Gryo Data: N/A"];
@@ -263,15 +266,14 @@
         self.displayBusyFound = [NSString stringWithFormat:@"Display Busy: %s", busyData];
         NSLog(@"DisplayBusy Value: %s", busyData);
         self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayBusyFound]];
-//        if (self.displayBusyFound.length < 16 ) {
-//            self.displayBusyFound = [self.displayBusyFound stringByAppendingString:@"0x0"];
-//        }
+        //        if (self.displayBusyFound.length < 16 ) {
+        //            self.displayBusyFound = [self.displayBusyFound stringByAppendingString:@"0x0"];
+        //        }
     }
     else {
         self.displayBusyFound = [NSString stringWithFormat:@"Display Busy: N/A"];
     }
     return;
-    
 }
 
 - (void) helpGetDeviceInfo:(CBCharacteristic *)characteristic
