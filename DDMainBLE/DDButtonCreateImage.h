@@ -10,4 +10,8 @@
 
 @interface DDButtonCreateImage : UIButton
 
+@property (nonatomic) BOOL isPressed;
+
+-(void) buttonDraw;
+-(void) buttonErase;
 @end

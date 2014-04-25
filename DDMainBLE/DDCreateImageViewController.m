@@ -19,10 +19,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        //set view to DDCreateImageView
-        self.view = [[DDCreateImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        
-        
     }
     return self;
 }
@@ -31,6 +27,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.view addSubview:[[DDCreateImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
+
+
 }
 
 - (void)didReceiveMemoryWarning
