@@ -53,8 +53,7 @@
     [self getServerState];
     
     // Third load images and select first image to transmit based on server state value
-    [self prepareAndLoadImages];
-    [self setSelectedImageByteArray];
+    [self prepareAndLoadImages: YES testData:NO];
     
     // Finally, initiate BLE connection then begin execution
     [self initializeBLE];
@@ -108,35 +107,28 @@
     }
 }
 
-- (void)prepareAndLoadImages
+- (void)prepareAndLoadImages:(BOOL)defaultSelected testData:(BOOL)test
 {
     // Default to the digit images, but implement a selection from root controller
-    [self.image1 setImage:[UIImage imageNamed:@"one.png"]];
-    [self.image2 setImage:[UIImage imageNamed:@"two.png"]];
-    [self.image3 setImage:[UIImage imageNamed:@"three.png"]];
-    [self.image4 setImage:[UIImage imageNamed:@"four.png"]];
-    [self.image5 setImage:[UIImage imageNamed:@"five.png"]];
-    [self.image6 setImage:[UIImage imageNamed:@"six.png"]];
-    [self.loadingImagesProgress setProgress:30 animated:YES];
+    if (defaultSelected) {
+        [self.image1 setImage:[UIImage imageNamed:@"one.png"]];
+        [self.image2 setImage:[UIImage imageNamed:@"two.png"]];
+        [self.image3 setImage:[UIImage imageNamed:@"three.png"]];
+        [self.image4 setImage:[UIImage imageNamed:@"four.png"]];
+        [self.image5 setImage:[UIImage imageNamed:@"five.png"]];
+        [self.image6 setImage:[UIImage imageNamed:@"six.png"]];
+        [self.loadingImagesProgress setProgress:30 animated:YES];
+    }
     
-    // Convert images into gray scale
-    self.imageGray1 = [self imageToGreyImage:self.image1.image];
-    self.imageGray2 = [self imageToGreyImage:self.image2.image];
-    self.imageGray3 = [self imageToGreyImage:self.image3.image];
-    self.imageGray4 = [self imageToGreyImage:self.image4.image];
-    self.imageGray5 = [self imageToGreyImage:self.image5.image];
-    self.imageGray6 = [self imageToGreyImage:self.image6.image];
+    if (test) {
+        
     
+    
+    
+    }
     
     [self.loadingImagesProgress setProgress:60 animated:YES];
     
-    // Convert images to byte arrays
-    self.byteArrayImage1 = [self imageToByteArray:self.imageGray1];
-    self.byteArrayImage2 = [self imageToByteArray:self.imageGray2];
-    self.byteArrayImage3 = [self imageToByteArray:self.imageGray3];
-    self.byteArrayImage4 = [self imageToByteArray:self.imageGray4];
-    self.byteArrayImage5 = [self imageToByteArray:self.imageGray5];
-    self.byteArrayImage6 = [self imageToByteArray:self.imageGray6];
     // NSData values for Images
     self.image1DataBytes = UIImagePNGRepresentation(self.imageGray1);
     self.image2DataBytes = UIImagePNGRepresentation(self.imageGray2);
@@ -244,10 +236,6 @@
                     NSLog(@"Display Busy: %s", busyData);
                     NSLog(@"DISPLAY IS BUSY CONST: %d", DISPLAY_IS_BUSY);
                     
-                    NSLog(@"TESTING IMAGE TRANSMISSION");
-                    NSLog(@"Reading Data in hex %@", [data description]);
-                    [self.image6 setImage:[UIImage imageWithData:data]];
-                    
                     if (*busyData == DISPLAY_IS_BUSY) {
                         NSLog(@"Display is Busy, Do Nothing");
                         //disconnect?
@@ -273,16 +261,20 @@
             NSLog(@"Char: %@", charact);
             NSLog(@"Char UUID: %@", charact.UUIDString);
             if ([charact.UUIDString isEqualToString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]) {
-                // Initialize data to write
-                NSData *writeValue = UIImagePNGRepresentation(self.image1.image);
-                [self.image2 setImage:[UIImage imageWithData:writeValue]];
-                NSLog(@"Writing value to Display Data in hex %@", [writeValue description]);
-                [charact writeValue:writeValue completion:^(NSError *error) {
-                    if (error) {
-                        NSLog(@"Error writing Display Data: %@", (error) ? error : @"No Error");
-                    }
-                    [self writeToDisplayTarget:service];
-                }];
+                // Initialize data to write;
+                NSData *writeValue;
+                for (int i = 0; i < 128; i++) {
+                    
+                    NSLog(@"Writing value to Display Data in hex %@", [writeValue description]);
+                    [charact writeValue:writeValue completion:^(NSError *error) {
+                        if (error) {
+                            NSLog(@"Error writing Display Data: %@", (error) ? error : @"No Error");
+                        }
+                        if (i == 127) {
+                            [self writeToDisplayTarget:service];
+                        }
+                    }];
+                }
             }
         }
     }];
@@ -386,32 +378,66 @@
     //NSLog(@"timerFired @ %@", self.deviceTimeStamp);
 }
 
-- (UIImage *)imageToGreyImage:(UIImage *)image {
-    // Create image rectangle with current image width/height
-    CGFloat actualWidth = image.size.width;
-    CGFloat actualHeight = image.size.height;
+- (UIImage *) convertToGreyscale:(UIImage *)i {
     
-    CGRect imageRect = CGRectMake(0, 0, actualWidth, actualHeight);
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+    int kRed = 1;
+    int kGreen = 2;
+    int kBlue = 4;
     
-    CGContextRef context = CGBitmapContextCreate(nil, actualWidth, actualHeight, 8, 0, colorSpace, kCGImageAlphaNone);
-    CGContextDrawImage(context, imageRect, [image CGImage]);
+    int colors = kGreen | kBlue | kRed;
+    int m_width = i.size.width;
+    int m_height = i.size.height;
     
-    CGImageRef grayImage = CGBitmapContextCreateImage(context);
+    uint32_t *rgbImage = (uint32_t *) malloc(m_width * m_height * sizeof(uint32_t));
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(rgbImage, m_width, m_height, 8, m_width * 4, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
+    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
+    CGContextSetShouldAntialias(context, NO);
+    CGContextDrawImage(context, CGRectMake(0, 0, m_width, m_height), [i CGImage]);
+    CGContextRelease(context);
     CGColorSpaceRelease(colorSpace);
+    
+    // now convert to grayscale
+    uint8_t *m_imageData = (uint8_t *) malloc(m_width * m_height);
+    for(int y = 0; y < m_height; y++) {
+        for(int x = 0; x < m_width; x++) {
+            uint32_t rgbPixel=rgbImage[y*m_width+x];
+            uint32_t sum=0,count=0;
+            if (colors & kRed) {sum += (rgbPixel>>24)&255; count++;}
+            if (colors & kGreen) {sum += (rgbPixel>>16)&255; count++;}
+            if (colors & kBlue) {sum += (rgbPixel>>8)&255; count++;}
+            m_imageData[y*m_width+x]=sum/count;
+        }
+    }
+    free(rgbImage);
+    
+    // convert from a gray scale image back into a UIImage
+    uint8_t *result = (uint8_t *) calloc(m_width * m_height *sizeof(uint32_t), 1);
+    
+    // process the image back to rgb
+    for(int i = 0; i < m_height * m_width; i++) {
+        result[i*4]=0;
+        int val=m_imageData[i];
+        result[i*4+1]=val;
+        result[i*4+2]=val;
+        result[i*4+3]=val;
+    }
+    
+    // create a UIImage
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    context = CGBitmapContextCreate(result, m_width, m_height, 8, m_width * sizeof(uint32_t), colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
+    CGImageRef image = CGBitmapContextCreateImage(context);
     CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    UIImage *resultUIImage = [UIImage imageWithCGImage:image];
+    CGImageRelease(image);
     
-    context = CGBitmapContextCreate(nil, actualWidth, actualHeight, 8, 0, nil, kCGImageAlphaOnly);
-    CGContextDrawImage(context, imageRect, [image CGImage]);
-    CGImageRef mask = CGBitmapContextCreateImage(context);
-    CGContextRelease(context);
+    free(m_imageData);
     
-    UIImage *grayScaleImage = [UIImage imageWithCGImage:CGImageCreateWithMask(grayImage, mask) scale:image.scale orientation:image.imageOrientation];
-    CGImageRelease(grayImage);
-    CGImageRelease(mask);
+    // make sure the data will be released by giving it to an autoreleased NSData
+    [NSData dataWithBytesNoCopy:result length:m_width * m_height];
     
-    // Return the new grayscale image
-    return grayScaleImage;
+    return resultUIImage;
 }
 
 - (NSData *) imageToArrayOfNSData:(UIImage *)image

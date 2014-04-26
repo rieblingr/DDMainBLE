@@ -16,4 +16,5 @@
 @property (nonatomic, strong) IBOutlet UIButton *viewImageSets;
 @property (strong, nonatomic) IBOutlet UIButton *createImage;
 
+@property (strong, nonatomic) IBOutlet UIImageView *createdImage;
 @end

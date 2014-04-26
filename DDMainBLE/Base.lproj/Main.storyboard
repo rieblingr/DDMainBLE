@@ -111,7 +111,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="DynamiDice" image="130-dice" id="u1e-5L-l1D"/>
+                    <tabBarItem key="tabBarItem" title="DynamiDice" image="130-dice.png" id="u1e-5L-l1D"/>
                     <connections>
                         <outlet property="connectionStatus" destination="Wb9-hk-P0H" id="ArC-a5-v33"/>
                         <outlet property="deviceConnection" destination="tP6-u1-xES" id="Hxi-lc-ikI"/>
@@ -462,9 +462,9 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JNk-RM-Zji">
-                                <rect key="frame" x="57" y="338" width="206" height="32"/>
+                                <rect key="frame" x="57" y="371" width="206" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="36-toolbox">
+                                <state key="normal" image="36-toolbox.png">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Image Configurations">
                                             <attributes>
@@ -478,9 +478,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ptn-R5-tmN">
-                                <rect key="frame" x="57" y="264" width="206" height="22"/>
+                                <rect key="frame" x="57" y="310" width="206" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="123-id-card">
+                                <state key="normal" image="123-id-card.png">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Create Your Own Image">
                                             <attributes>
@@ -494,13 +494,18 @@
                                     <segue destination="WWb-Nz-ul1" kind="modal" identifier="createImage" id="8cl-u0-MDx"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cbF-Mj-4wc">
+                                <rect key="frame" x="144" y="232" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Images" image="168-upload-photo-2" id="Z7h-1E-pvt"/>
+                    <tabBarItem key="tabBarItem" title="Images" image="168-upload-photo-2.png" id="Z7h-1E-pvt"/>
                     <connections>
                         <outlet property="configureImages" destination="JNk-RM-Zji" id="sMD-1O-nqP"/>
                         <outlet property="createImage" destination="ptn-R5-tmN" id="8eH-Qv-Az5"/>
+                        <outlet property="createdImage" destination="cbF-Mj-4wc" id="fmO-GV-M0j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qq-4t-Ow8" sceneMemberID="firstResponder"/>
@@ -528,10 +533,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="123-id-card" width="24" height="17"/>
-        <image name="130-dice" width="35" height="28"/>
-        <image name="168-upload-photo-2" width="22" height="25"/>
-        <image name="36-toolbox" width="26" height="20"/>
+        <image name="123-id-card.png" width="24" height="17"/>
+        <image name="130-dice.png" width="35" height="28"/>
+        <image name="168-upload-photo-2.png" width="22" height="25"/>
+        <image name="36-toolbox.png" width="26" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

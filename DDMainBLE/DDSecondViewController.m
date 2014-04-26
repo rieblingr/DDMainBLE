@@ -63,7 +63,8 @@
 }
 
 - (void) ddCreateImageVC:(NSMutableArray *)array {
-    //here is array from created image
+    
+    NSLog(@"Created Image: %@", array);
     [self dismissViewControllerAnimated:YES completion:NULL];
     
 }
