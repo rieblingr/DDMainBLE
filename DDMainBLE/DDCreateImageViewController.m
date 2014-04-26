@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.view addSubview:[[DDCreateImageView alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
+    [self.view addSubview:[[DDCreateImageView alloc] initWithFrame:CGRectMake(0, 44, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 64)]];
 
 
 }

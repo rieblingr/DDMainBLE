@@ -10,7 +10,7 @@
 
 @implementation DDCreateImageView
 
-@synthesize table, BUTTON_SIZE, pan, isDraw, drawButton, eraseButton;
+@synthesize table, BUTTON_SIZE, pan, isDraw, drawButton, eraseButton, eraseAllButton;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -36,6 +36,7 @@
         //make the buttons on the bottom
         drawButton = [UIButton buttonWithType:UIButtonTypeCustom];
         eraseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        eraseAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
         
         //get the height of the last button
         NSMutableArray *arr = [table objectAtIndex:[table count] - 1];
@@ -50,6 +51,13 @@
         [drawButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self addSubview:drawButton];
         
+        //erase all button
+        [eraseAllButton setFrame:CGRectMake(([self frame].size.width / 2) - (CONTROL_WIDTH), height + CONTROL_HEIGHT_OFFSET, CONTROL_WIDTH * 2, CONTROL_HEIGHT)];
+        [eraseAllButton setTitle:@"Erase All" forState:UIControlStateNormal];
+        [eraseAllButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [self addSubview:eraseAllButton];
+        
+        
         //erase button initialization
         [eraseButton setFrame:CGRectMake([self bounds].size.width - CONTROL_WIDTH_OFFSET - CONTROL_WIDTH, height + CONTROL_HEIGHT_OFFSET, CONTROL_WIDTH, CONTROL_HEIGHT)];
         [eraseButton setTitle:@"Erase" forState:UIControlStateNormal];
@@ -58,7 +66,9 @@
         
         //now set the targets to here
         [drawButton addTarget:self action:@selector(drawPressed:) forControlEvents:UIControlEventTouchDown];
+        [eraseAllButton addTarget:self action:@selector(eraseAllPressed:) forControlEvents:UIControlEventTouchDown];
         [eraseButton addTarget:self action:@selector(erasePressed:) forControlEvents:UIControlEventTouchDown];
+
     }
     return self;
 }
@@ -68,6 +78,18 @@
     [drawButton setBackgroundColor:[UIColor lightGrayColor]];
     [eraseButton setBackgroundColor:[UIColor clearColor]];
     isDraw = YES;
+}
+
+-(IBAction)eraseAllPressed:(UIButton*) button {
+    //erase all pressed so erase everything
+    for(int i = 0 ; i < IMAGE_HEIGHT; i++) {
+        NSMutableArray *tempArr = [table objectAtIndex:i];
+        for(int j = 0; j < IMAGE_WIDTH; j++) {
+            //get button
+            DDButtonCreateImage *temp = [tempArr objectAtIndex:j];
+            [temp setBackgroundColor:[UIColor clearColor]];
+        }
+    }
 }
 
 -(IBAction)erasePressed:(UIButton*)button {
@@ -93,8 +115,8 @@
             
             //first check to see if height is within bounds, if not, break from loop
             
-            if( !(([temp frame].origin.y <= point.y) &&
-               ([temp frame].origin.y + [temp frame].size.height) >= point.y) ) {
+            if( !(([temp frame].origin.y + 44 <= point.y) &&
+               ([temp frame].origin.y + [temp frame].size.height + 44) >= point.y) ) {
                 break;
             }
             

@@ -43,7 +43,7 @@
     
     if ([segue.identifier isEqualToString:@"createImage"])
 	{
-		DDImageUploadViewController *ddCreateImageVC =
+		DDCreateImageViewController *ddCreateImageVC =
         segue.destinationViewController;
         ddCreateImageVC.delegate = self;
         NSLog(@"The prepareForSegue createImage executed in DDSecondVC");

@@ -11,7 +11,7 @@
 
 #define IMAGE_WIDTH 32
 #define IMAGE_HEIGHT 32
-#define BUTTON_HEIGHT_OFFSET 44
+#define BUTTON_HEIGHT_OFFSET 0
 #define CONTROL_WIDTH_OFFSET 15
 #define CONTROL_HEIGHT_OFFSET 20
 #define CONTROL_WIDTH 50
@@ -32,5 +32,7 @@
 @property (strong, nonatomic) UIButton *drawButton;
 
 @property (strong, nonatomic) UIButton *eraseButton;
+
+@property (strong, nonatomic) UIButton *eraseAllButton;
 
 @end
