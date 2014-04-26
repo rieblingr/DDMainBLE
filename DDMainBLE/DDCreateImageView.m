@@ -165,41 +165,54 @@
 - (IBAction) makeArray {
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:128];
     
-    for(int i = 0; i < IMAGE_HEIGHT; i++) {
-        int count[8];
-        NSMutableArray *tempArr = [table objectAtIndex:i];
+    //i represents the page it is currently on
+    for(int i = 0; i < 4; i++) {
+        //for each column
         for(int j = 0; j < IMAGE_WIDTH; j++) {
-            //get button
-            DDButtonCreateImage *button = [tempArr objectAtIndex:j];
-            
-            //on the eighth character
-            if(((j+1) % 8) == 0) {
-                //set the last digit in the array
+            int count[8];
+            int index = 0;
+            //this is the starting from the bottom of the column
+            for(int k = (i * 7) + 7; k >= (i * 7); k--) {
+                NSMutableArray *tempArr = [table objectAtIndex:k];
+                DDButtonCreateImage *button = [tempArr objectAtIndex:j];
+                
                 if([button isPressed]) {
-                    count[(j % 8)] = 1;
+                    count[index] = 1;
                 } else {
-                    count[(j % 8)] = 0;
+                    count[index] = 0;
                 }
-                
-                
-                //now make the NSData using the information
-                int tempNum = 0;
-                
-                for(int i = 0; i < 8; i++) {
-                    tempNum += (count[i] * pow(2, (7 - i)));
-                }
-                
-                char* byte = (char*) &tempNum;
-                
-                //now that we have a byte, intiailize nsdata with it
-                NSData *data = [NSData dataWithBytes:(const void*)byte length:sizeof(char*)];
-                
-                [array addObject:data];
-                
-            } else {
-                count[(j % 8)] = [button isPressed];
+                index++;
             }
+            
+            //make the count into NSData and add
+            
+            //now make the NSData using the information
+            int tempNum = 0;
+            
+            for(int i = 0; i < 8; i++) {
+                tempNum += (count[i] * pow(2, (7 - i)));
+            }
+            
+            char* byte = (char*) &tempNum;
+            
+            //now that we have a byte, intiailize nsdata with it
+            NSData *data = [NSData dataWithBytes:(const void*)byte length:sizeof(char*)];
+            
+            [array addObject:data];
+
         }
+    }
+    
+    //now print out array and see if done correctly
+    for(int i = 0; i < 128; i++) {
+        NSData *data = [array objectAtIndex:i];
+        
+        //convert to byte
+        unsigned char* tempChar = (unsigned char*) [data bytes];
+        
+        int charVal = [[NSNumber numberWithUnsignedChar:*tempChar] intValue];
+        
+        NSLog(@"Index: %i Char: %i", i, charVal);
     }
     
     [delegate ddCreateImage:array];
