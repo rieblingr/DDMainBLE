@@ -81,7 +81,6 @@
 }
 
 -(IBAction)eraseAllPressed:(UIButton*) button {
-    [self makeArray];
     //erase all pressed so erase everything
     for(int i = 0 ; i < IMAGE_HEIGHT; i++) {
         NSMutableArray *tempArr = [table objectAtIndex:i];
