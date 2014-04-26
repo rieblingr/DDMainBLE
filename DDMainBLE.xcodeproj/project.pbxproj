@@ -32,6 +32,7 @@
 		A1D7FD8B1909A8CE00293268 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */; };
 		A1D7FD8E1909BBCD00293268 /* DDCreateImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD8D1909BBCD00293268 /* DDCreateImageViewController.m */; };
 		A1D7FD911909D99B00293268 /* DDTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD901909D99B00293268 /* DDTimerController.m */; };
+		A1D7FD93190C39F800293268 /* iPadMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FD92190C39F800293268 /* iPadMain.storyboard */; };
 		BED9CB4B0B004A84A2E28E09 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E03666A4AF4AAC9A72EFA1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		A1D7FD8D1909BBCD00293268 /* DDCreateImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCreateImageViewController.m; sourceTree = "<group>"; };
 		A1D7FD8F1909D99B00293268 /* DDTimerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTimerController.h; sourceTree = "<group>"; };
 		A1D7FD901909D99B00293268 /* DDTimerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTimerController.m; sourceTree = "<group>"; };
+		A1D7FD92190C39F800293268 /* iPadMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPadMain.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				9F8ED2E6190ADA0600CE7655 /* DDCreateImageView.m */,
 				9F28FE21190AEBCD00E51640 /* DDButtonCreateImage.h */,
 				9F28FE22190AEBCD00E51640 /* DDButtonCreateImage.m */,
+				A1D7FD92190C39F800293268 /* iPadMain.storyboard */,
 			);
 			path = DDMainBLE;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			files = (
 				A1109E471905E89D00C0088B /* Images.xcassets in Resources */,
 				A1D7FD8B1909A8CE00293268 /* Default-568h@2x.png in Resources */,
+				A1D7FD93190C39F800293268 /* iPadMain.storyboard in Resources */,
 				A1109E361905E89D00C0088B /* InfoPlist.strings in Resources */,
 				A1109E3F1905E89D00C0088B /* Main.storyboard in Resources */,
 			);
