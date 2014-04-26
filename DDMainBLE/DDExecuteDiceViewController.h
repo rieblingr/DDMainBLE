@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LGBluetooth.h"
 @import QuartzCore;
 @import CoreBluetooth;
 
@@ -18,9 +19,9 @@
 @end
 
 // Constants
-static const int DISPLAY_IS_BUSY = 1;
+static const uint8_t DISPLAY_IS_BUSY = 0x1;
 
-@interface DDExecuteDiceViewController : UIViewController<CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface DDExecuteDiceViewController : UIViewController<UIAlertViewDelegate>
 
 // Services on DD hardware
 #define DD_DEVICE_INFO_SERVICE_UUID @"1800"
@@ -40,10 +41,15 @@ static const int DISPLAY_IS_BUSY = 1;
 @property (strong, nonatomic) CBCentralManager *centralManager;
 @property (nonatomic, strong) CBPeripheral *peripheral;
 
+@property (nonatomic, strong) LGCentralManager *lgCentralManager;
+@property (nonatomic, strong) LGPeripheral *lgPeripheral;
+
 // Bluetooth Service and Characteristic Arrays
 @property (strong, nonatomic) NSArray *ddServices;
-@property (strong, nonatomic) NSArray *busyCharArray;
-@property (strong, nonatomic) NSArray *displayWriteCharsArray;
+@property (strong, nonatomic) NSArray *displayBusyCharArray;
+@property (strong, nonatomic) NSArray *displayDataCharsArray;
+@property (strong, nonatomic) NSArray *displayTargetCharsArray;
+@property (strong, nonatomic) NSArray *gyroDataCharsArray;
 
 // Server State and Time Values
 @property (strong, nonatomic) NSNumber *state;
@@ -80,6 +86,15 @@ static const int DISPLAY_IS_BUSY = 1;
 @property (assign, nonatomic) uint8_t *byteArrayImage4;
 @property (assign, nonatomic) uint8_t *byteArrayImage5;
 @property (assign, nonatomic) uint8_t *byteArrayImage6;
+// Images in NSData
+@property (assign, nonatomic) NSData *image1DataBytes;
+@property (assign, nonatomic) NSData *image2DataBytes;
+@property (assign, nonatomic) NSData *image3DataBytes;;
+@property (assign, nonatomic) NSData *image4DataBytes;
+@property (assign, nonatomic) NSData *image5DataBytes;
+@property (assign, nonatomic) NSData *image6DataBytes;
+
+
 
 // Properties to hold data characteristics for the peripheral device
 @property (nonatomic, strong) NSString *connected;
