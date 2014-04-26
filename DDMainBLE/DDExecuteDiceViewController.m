@@ -273,26 +273,18 @@
             NSLog(@"Char UUID: %@", charact.UUIDString);
             if ([charact.UUIDString isEqualToString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]) {
                 // Initialize data to write;
-                DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
-                self.imageArray = myAppDel.imageArray;
-                NSLog(@"Image Array set by AppDel: %@", self.imageArray);
-                for(int i = 0; i < 128; i++) {
-                    NSData *writeValue = [self.imageArray objectAtIndex:i];
-                    //convert to byte
-                    unsigned char* tempChar = (unsigned char*) [writeValue bytes];
+                NSData *writeValue = UIImagePNGRepresentation(self.image1.image);
+                NSLog(@"NSdata image size: %lu", (unsigned long)writeValue.length);
+                NSLog(@"Writing value to Display Data in hex %@", [writeValue description]);
+                [charact writeValue:writeValue completion:^(NSError *error) {
+                    if (error) {
+                        NSLog(@"Error writing Display Data: %@", (error) ? error : @"No Error");
+                    }
+                    [self writeToDisplayTarget:service];
                     
-                    int charVal = [[NSNumber numberWithUnsignedChar:*tempChar] intValue];
-                    NSLog(@"Writing value to Display Data in hex %@", [writeValue description]);
-                    NSLog(@"Writing value to Display Data in hex %d", charVal);
-                    [charact writeByte:charVal completion:^(NSError *error) {
-                        if (error) {
-                            NSLog(@"Error writing Display Data: %@", (error) ? error : @"No Error");
-                        }
-//                        [self writeToDisplayTarget:service];
-                        
-                    }];
-                }
+                }];
             }
+            
         }
     }];
 }
@@ -339,14 +331,14 @@
             if ([charact.UUIDString isEqualToString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]) {
                 // Initialize data to write
                 NSLog(@"Setting Display to Busy = 1");
+                uint8_t test = 0x01;
+                NSData *busyVal = [NSData dataWithBytes:&test length:sizeof(test)];
+                [charact writeValue:busyVal completion:^(NSError *error) {
+                    if (error) {
+                        NSLog(@"Error reading Display Busy: %@", (error) ? error : @"No Error");
+                    }
+                }];
                 
-                /* Cant actually execute this because Mock module doesn't handle
-                 [charact writeByte:0x01 completion:^(NSError *error) {
-                 if (error) {
-                 NSLog(@"Error reading Display Busy: %@", (error) ? error : @"No Error");
-                 }
-                 }];
-                 */
             }
         }
     }];
