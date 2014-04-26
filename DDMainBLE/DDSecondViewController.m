@@ -55,9 +55,17 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+//create image view controller delegate functions
+
 - (void) ddCreateImageVCDidCancel:(DDCreateImageViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void) ddCreateImageVC:(NSMutableArray *)array {
+    //here is array from created image
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 
 

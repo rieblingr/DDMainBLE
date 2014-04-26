@@ -14,6 +14,8 @@
 
 @implementation DDCreateImageViewController
 
+@synthesize createView, delegate;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -23,11 +25,19 @@
     return self;
 }
 
+//delegate function
+- (void) ddCreateImage:(NSMutableArray *)array {
+    //send to the next delegate
+    [delegate ddCreateImageVC:array];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.view addSubview:[[DDCreateImageView alloc] initWithFrame:CGRectMake(0, 44, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 64)]];
+    createView =[[DDCreateImageView alloc] initWithFrame:CGRectMake(0, 44, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 64)];
+    createView.delegate = self;
+    [self.view addSubview:createView];
 
 
 }

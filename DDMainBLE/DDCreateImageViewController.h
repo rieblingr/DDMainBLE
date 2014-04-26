@@ -15,11 +15,15 @@
 
 - (void) ddCreateImageVCDidCancel: (DDCreateImageViewController *)controller;
 
+- (void) ddCreateImageVC : (NSMutableArray *) array;
+
 @end
 
-@interface DDCreateImageViewController : UIViewController
+@interface DDCreateImageViewController : UIViewController <DDCreateImageViewDelegate>
 
 @property (nonatomic, weak) id <DDCreateImageViewControllerDelegate> delegate;
+
+@property (nonatomic, strong) DDCreateImageView *createView;
 
 - (IBAction)cancel:(id)sender;
 

@@ -10,7 +10,7 @@
 
 @implementation DDCreateImageView
 
-@synthesize table, BUTTON_SIZE, pan, isDraw, drawButton, eraseButton, eraseAllButton;
+@synthesize table, BUTTON_SIZE, pan, isDraw, drawButton, eraseButton, eraseAllButton, doneButton, delegate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -37,6 +37,7 @@
         drawButton = [UIButton buttonWithType:UIButtonTypeCustom];
         eraseButton = [UIButton buttonWithType:UIButtonTypeCustom];
         eraseAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        doneButton = [UIButton buttonWithType:UIButtonTypeSystem];
         
         //get the height of the last button
         NSMutableArray *arr = [table objectAtIndex:[table count] - 1];
@@ -64,10 +65,16 @@
         [eraseButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [self addSubview:eraseButton];
         
+        //done button
+        [doneButton setFrame:CGRectMake(([self frame].size.width / 2) - (CONTROL_WIDTH / 2), height + CONTROL_HEIGHT_OFFSET * 3, CONTROL_WIDTH, CONTROL_HEIGHT)];
+        [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+        [self addSubview:doneButton];
+        
         //now set the targets to here
         [drawButton addTarget:self action:@selector(drawPressed:) forControlEvents:UIControlEventTouchDown];
         [eraseAllButton addTarget:self action:@selector(eraseAllPressed:) forControlEvents:UIControlEventTouchDown];
         [eraseButton addTarget:self action:@selector(erasePressed:) forControlEvents:UIControlEventTouchDown];
+        [doneButton addTarget:self action:@selector(makeArray) forControlEvents:UIControlEventTouchDown];
 
     }
     return self;
@@ -87,7 +94,7 @@
         for(int j = 0; j < IMAGE_WIDTH; j++) {
             //get button
             DDButtonCreateImage *temp = [tempArr objectAtIndex:j];
-            [temp setBackgroundColor:[UIColor clearColor]];
+            [temp buttonErase];
         }
     }
 }
@@ -153,6 +160,49 @@
         //now add array to the top level array
         [table addObject:array];
     }
+}
+
+- (IBAction) makeArray {
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:128];
+    
+    for(int i = 0; i < IMAGE_HEIGHT; i++) {
+        int count[8];
+        NSMutableArray *tempArr = [table objectAtIndex:i];
+        for(int j = 0; j < IMAGE_WIDTH; j++) {
+            //get button
+            DDButtonCreateImage *button = [tempArr objectAtIndex:j];
+            
+            //on the eighth character
+            if(((j+1) % 8) == 0) {
+                //set the last digit in the array
+                if([button isPressed]) {
+                    count[(j % 8)] = 1;
+                } else {
+                    count[(j % 8)] = 0;
+                }
+                
+                
+                //now make the NSData using the information
+                int tempNum = 0;
+                
+                for(int i = 0; i < 8; i++) {
+                    tempNum += (count[i] * pow(2, (7 - i)));
+                }
+                
+                char* byte = (char*) &tempNum;
+                
+                //now that we have a byte, intiailize nsdata with it
+                NSData *data = [NSData dataWithBytes:(const void*)byte length:sizeof(char*)];
+                
+                [array addObject:data];
+                
+            } else {
+                count[(j % 8)] = [button isPressed];
+            }
+        }
+    }
+    
+    [delegate ddCreateImage:array];
 }
 
 /*
