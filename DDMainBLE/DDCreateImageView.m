@@ -81,13 +81,14 @@
 }
 
 -(IBAction)eraseAllPressed:(UIButton*) button {
+    [self makeArray];
     //erase all pressed so erase everything
     for(int i = 0 ; i < IMAGE_HEIGHT; i++) {
         NSMutableArray *tempArr = [table objectAtIndex:i];
         for(int j = 0; j < IMAGE_WIDTH; j++) {
             //get button
             DDButtonCreateImage *temp = [tempArr objectAtIndex:j];
-            [temp setBackgroundColor:[UIColor clearColor]];
+            [temp buttonErase];
         }
     }
 }
@@ -153,6 +154,49 @@
         //now add array to the top level array
         [table addObject:array];
     }
+}
+
+- (NSMutableArray*) makeArray {
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:128];
+    
+    for(int i = 0; i < IMAGE_HEIGHT; i++) {
+        int count[8];
+        NSMutableArray *tempArr = [table objectAtIndex:i];
+        for(int j = 0; j < IMAGE_WIDTH; j++) {
+            //get button
+            DDButtonCreateImage *button = [tempArr objectAtIndex:j];
+            
+            //on the eighth character
+            if(((j+1) % 8) == 0) {
+                //set the last digit in the array
+                if([button isPressed]) {
+                    count[(j % 8)] = 1;
+                } else {
+                    count[(j % 8)] = 0;
+                }
+                
+                
+                //now make the NSData using the information
+                int tempNum = 0;
+                
+                for(int i = 0; i < 8; i++) {
+                    tempNum += (count[i] * pow(2, (7 - i)));
+                }
+                
+                char* byte = (char*) &tempNum;
+                
+                //now that we have a byte, intiailize nsdata with it
+                NSData *data = [NSData dataWithBytes:(const void*)byte length:sizeof(char*)];
+                
+                [array addObject:data];
+                
+            } else {
+                count[(j % 8)] = [button isPressed];
+            }
+        }
+    }
+    
+    return array;
 }
 
 /*
