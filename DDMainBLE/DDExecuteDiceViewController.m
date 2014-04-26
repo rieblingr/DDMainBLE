@@ -1,4 +1,3 @@
-
 //
 //  DDExecuteDiceViewController.m
 //  DDMainBLE
@@ -15,10 +14,12 @@
 @end
 
 @implementation DDExecuteDiceViewController
+@synthesize imageArray;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     NSLog(@"TESTING: %u", DISPLAY_IS_BUSY);
     
@@ -54,6 +55,7 @@
     
     // Third load images and select first image to transmit based on server state value
     [self prepareAndLoadImages: YES testData:NO];
+    //[self setSelectedImageByteArray];
     
     // Finally, initiate BLE connection then begin execution
     [self initializeBLE];
@@ -121,12 +123,21 @@
     }
     
     if (test) {
-        
-    
-    
-    
+        [self.image1 setImage:[UIImage imageNamed:@"testing.png"]];
+        [self.image2 setImage:[UIImage imageNamed:@"testing.png"]];
+        [self.image3 setImage:[UIImage imageNamed:@"testing.png"]];
+        [self.image4 setImage:[UIImage imageNamed:@"testing.png"]];
+        [self.image5 setImage:[UIImage imageNamed:@"testing.png"]];
+        [self.image6 setImage:[UIImage imageNamed:@"testing.png"]];
+        [self.loadingImagesProgress setProgress:30 animated:YES];
     }
     
+    self.imageGray1 = [self convertToGreyscale:self.image1.image];
+    self.imageGray2 = [self convertToGreyscale:self.image2.image];
+    self.imageGray3 = [self convertToGreyscale:self.image3.image];
+    self.imageGray4 = [self convertToGreyscale:self.image4.image];
+    self.imageGray5 = [self convertToGreyscale:self.image5.image];
+    self.imageGray6 = [self convertToGreyscale:self.image6.image];
     [self.loadingImagesProgress setProgress:60 animated:YES];
     
     // NSData values for Images
@@ -262,17 +273,23 @@
             NSLog(@"Char UUID: %@", charact.UUIDString);
             if ([charact.UUIDString isEqualToString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]) {
                 // Initialize data to write;
-                NSData *writeValue;
-                for (int i = 0; i < 128; i++) {
+                DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
+                self.imageArray = myAppDel.imageArray;
+                NSLog(@"Image Array set by AppDel: %@", self.imageArray);
+                for(int i = 0; i < 128; i++) {
+                    NSData *writeValue = [self.imageArray objectAtIndex:i];
+                    //convert to byte
+                    unsigned char* tempChar = (unsigned char*) [writeValue bytes];
                     
+                    int charVal = [[NSNumber numberWithUnsignedChar:*tempChar] intValue];
                     NSLog(@"Writing value to Display Data in hex %@", [writeValue description]);
-                    [charact writeValue:writeValue completion:^(NSError *error) {
+                    NSLog(@"Writing value to Display Data in hex %d", charVal);
+                    [charact writeByte:charVal completion:^(NSError *error) {
                         if (error) {
                             NSLog(@"Error writing Display Data: %@", (error) ? error : @"No Error");
                         }
-                        if (i == 127) {
-                            [self writeToDisplayTarget:service];
-                        }
+//                        [self writeToDisplayTarget:service];
+                        
                     }];
                 }
             }
@@ -340,29 +357,34 @@
     // Select image byte array
     switch (self.state.intValue) {
         case 1:
-            self.displayDataValueToWrite = self.byteArrayImage1;
+            
             break;
         case 2:
-            self.displayDataValueToWrite = self.byteArrayImage2;
+            
             break;
         case 3:
-            self.displayDataValueToWrite = self.byteArrayImage3;
+            
             break;
         case 4:
-            self.displayDataValueToWrite = self.byteArrayImage4;
+            
             break;
         case 5:
-            self.displayDataValueToWrite = self.byteArrayImage5;
+            
             break;
         case 6:
-            self.displayDataValueToWrite = self.byteArrayImage6;
+            
             break;
             
         default:
-            self.displayDataValueToWrite = self.byteArrayImage1;
+            
             break;
     }
-    NSLog(@"ByteArrayImage to write is now %s", self.displayDataValueToWrite);
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:128];
+    
+    
+    // self.displayDataValueToWrite = @[data];
+    NSLog(@"ByteArrayImage to write is now %@", self.displayDataValueToWrite);
+    
 }
 
 #pragma mark - Helpers
@@ -453,6 +475,7 @@
     NSData *data = UIImagePNGRepresentation(image);
     NSLog(@"Image: %@", image);
     NSUInteger len = data.length;
+    NSLog(@"Image to Byte Length: %lu", (unsigned long)len);
     uint8_t *bytes = (uint8_t *)[data bytes];
     NSMutableString *result = [NSMutableString stringWithCapacity:len * 3];
     [result appendString:@"["];
@@ -460,18 +483,125 @@
         if (i) {
             [result appendString:@","];
         }
+        int charVal = [[NSNumber numberWithUnsignedChar:bytes[i]] intValue];
         [result appendFormat:@"%hhu", bytes[i]];
+        NSLog(@"Byte %lu : Char :%i", (unsigned long)i, charVal);
     }
     [result appendString:@"]"];
     NSLog(@"%@", result);
     return bytes;
 }
 
+- (NSArray *)imageToDataAray:(UIImage *)image
+{
+    if (image.size.width > 32 || image.size.height > 32) {
+        [self alertUserWithUIWarning:nil];
+    }
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:128];
+    
+    for (int i = 0; i < 32; i++) {
+        for (int j = 0; j < 32; j++) {
+            [self getRGBAsFromImage:image atX:i andY:j count:4];
+        }
+    }
+    
+    
+    //    //i represents the page it is currently on
+    //    for(int i = 0; i < 4; i++) {
+    //        //for each column
+    //        for(int j = 0; j < image.size.width; j++) {
+    //            int count[8];
+    //            int index = 0;
+    //            //this is the starting from the bottom of the column
+    //            for(int k = (i * 7) + 7; k >= (i * 7); k--) {
+    //
+    //            }
+    //
+    //            //make the count into NSData and add
+    //
+    //            //now make the NSData using the information
+    //            int tempNum = 0;
+    //
+    //            for(int i = 0; i < 8; i++) {
+    //                tempNum += (count[i] * pow(2, (7 - i)));
+    //            }
+    //
+    //            char* byte = (char*) &tempNum;
+    //
+    //            //now that we have a byte, intiailize nsdata with it
+    //            NSData *data = [NSData dataWithBytes:(const void*)byte length:sizeof(char*)];
+    //
+    //            [array addObject:data];
+    //
+    //        }
+    //    }
+    //
+    //    //now print out array and see if done correctly
+    //    for(int i = 0; i < 128; i++) {
+    //        NSData *data = [array objectAtIndex:i];
+    //
+    //        //convert to byte
+    //        unsigned char* tempChar = (unsigned char*) [data bytes];
+    //
+    //        int charVal = [[NSNumber numberWithUnsignedChar:*tempChar] intValue];
+    //
+    //        NSLog(@"Index: %i Char: %i", i, charVal);
+    //    }
+    
+    return nil;
+}
+
+- (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count
+{
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];
+    
+    // First get the image into your data buffer
+    CGImageRef imageRef = [image CGImage];
+    NSUInteger width = CGImageGetWidth(imageRef);
+    NSUInteger height = CGImageGetHeight(imageRef);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    unsigned char *rawData = (unsigned char*) calloc(height * width * 4, sizeof(unsigned char));
+    NSUInteger bytesPerPixel = 4;
+    NSUInteger bytesPerRow = bytesPerPixel * width;
+    NSUInteger bitsPerComponent = 8;
+    CGContextRef context = CGBitmapContextCreate(rawData, width, height,
+                                                 bitsPerComponent, bytesPerRow, colorSpace,
+                                                 kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+    CGColorSpaceRelease(colorSpace);
+    
+    CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
+    CGContextRelease(context);
+    
+    // Now your rawData contains the image data in the RGBA8888 pixel format.
+    int byteIndex = (bytesPerRow * yy) + xx * bytesPerPixel;
+    for (int ii = 0 ; ii < count ; ++ii)
+    {
+        CGFloat red   = (rawData[byteIndex]     * 1.0) / 255.0;
+        CGFloat green = (rawData[byteIndex + 1] * 1.0) / 255.0;
+        CGFloat blue  = (rawData[byteIndex + 2] * 1.0) / 255.0;
+        CGFloat alpha = (rawData[byteIndex + 3] * 1.0) / 255.0;
+        byteIndex += 4;
+        
+        UIColor *acolor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+        [result addObject:acolor];
+        
+        NSLog(@"RGBA Floats: %f %f %f %f", red, green, blue, alpha);
+    }
+    
+    NSLog(@"RGBA Result: %@", result);
+    
+    
+    
+    free(rawData);
+    
+    return result;
+}
+
 #pragma mark - Alerts
 
 - (void)alertUserWithUIWarning:(NSError *)error
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Error: %@", error] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Error: %@", (error) ? error : @"Something was wrong with an image"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alert show];
 }
 
@@ -481,6 +611,17 @@
         [self.timer invalidate];
         [self.delegate ddExecuteDiceVCDidStop:self];
     }
+}
+
+- (void) receiveImageArray:(NSArray *)array
+{
+    NSLog(@"Received Created Image: %@", array);
+    imageArray = [array mutableCopy];
+}
+
+- (void) receiveImageSetArrays:(NSArray *)sets
+{
+    
 }
 
 #pragma mark - Navigation

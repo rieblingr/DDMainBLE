@@ -7,6 +7,7 @@
 //
 
 #import "DDSecondViewController.h"
+#import "DDExecuteDiceViewController.h"
 
 @interface DDSecondViewController ()
 
@@ -18,7 +19,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view
-    
     
 }
 
@@ -66,6 +66,8 @@
     
     NSLog(@"Created Image: %@", array);
     [self dismissViewControllerAnimated:YES completion:NULL];
+    DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
+    myAppDel.imageArray = array;
     
 }
 

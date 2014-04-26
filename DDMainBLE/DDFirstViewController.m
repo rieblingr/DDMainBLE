@@ -88,6 +88,7 @@
 	{
         DDExecuteDiceViewController *ddExecuteDiceVC = segue.destinationViewController;
         ddExecuteDiceVC.delegate = self;
+        
     }
 }
 

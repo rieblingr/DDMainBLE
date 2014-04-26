@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LGBluetooth.h"
+#import "DDSecondViewController.h"
+#import "DDAppDelegate.h"
 @import QuartzCore;
 @import CoreBluetooth;
 
@@ -21,7 +23,9 @@
 // Constants
 static const uint8_t DISPLAY_IS_BUSY = 0x1;
 
-@interface DDExecuteDiceViewController : UIViewController<UIAlertViewDelegate>
+@interface DDExecuteDiceViewController : UIViewController<UIAlertViewDelegate, DDSecondViewControllerDelegate>
+
+@property(nonatomic, strong) NSMutableArray *imageArray;
 
 // Services on DD hardware
 #define DD_DEVICE_INFO_SERVICE_UUID @"1800"
@@ -106,7 +110,7 @@ static const uint8_t DISPLAY_IS_BUSY = 0x1;
 
 @property (nonatomic, assign) uint8_t displayBusyValueToWrite;
 @property (nonatomic, assign) uint8_t displayTargetValueToWrite;
-@property (nonatomic, assign) uint8_t * displayDataValueToWrite;
+@property (nonatomic, assign) NSArray * displayDataValueToWrite;
 @property (nonatomic, assign) NSNumber *gyroDataValueRead;
 @property (nonatomic, assign) NSNumber *displayBusyValueRead;
 @property (nonatomic, assign) int count;

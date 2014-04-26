@@ -13,6 +13,7 @@
 
 @interface DDFirstViewController : UIViewController<DDBLEViewControllerDelegate, DDExecuteDiceViewControllerDelegate>
 
+
 @property (nonatomic, strong) NSMutableArray *services;
 @property (nonatomic, strong) NSDictionary *serverStateData;
 

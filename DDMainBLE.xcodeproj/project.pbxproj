@@ -492,6 +492,7 @@
 		A1D7FE9C190C542800293268 /* 98-palette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "98-palette.png"; sourceTree = "<group>"; };
 		A1D7FE9D190C542800293268 /* 99-umbrella.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "99-umbrella.png"; sourceTree = "<group>"; };
 		A1D7FE9E190C542800293268 /* ddAppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ddAppIcon.png; sourceTree = "<group>"; };
+		A1D7FF6A190C5E6F00293268 /* testing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = testing.png; path = "PNG icons/testing.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -522,6 +523,7 @@
 		A1109E1F1905E89D00C0088B = {
 			isa = PBXGroup;
 			children = (
+				A1D7FF6A190C5E6F00293268 /* testing.png */,
 				A1D7FDD5190C542800293268 /* PNG icons */,
 				A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */,
 				A1109E311905E89D00C0088B /* DDMainBLE */,
