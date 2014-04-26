@@ -17,6 +17,12 @@
 #define CONTROL_WIDTH 50
 #define CONTROL_HEIGHT 20
 
+@protocol DDCreateImageViewDelegate <NSObject>
+
+- (void) ddCreateImage : (NSMutableArray*) array;
+
+@end
+
 //This will be used to show an array of images
 @interface DDCreateImageView : UIView
 
@@ -34,5 +40,9 @@
 @property (strong, nonatomic) UIButton *eraseButton;
 
 @property (strong, nonatomic) UIButton *eraseAllButton;
+
+@property (strong, nonatomic) UIButton *doneButton;
+
+@property (nonatomic, weak) id <DDCreateImageViewDelegate> delegate;
 
 @end
