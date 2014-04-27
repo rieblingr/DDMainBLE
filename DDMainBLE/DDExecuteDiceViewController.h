@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LGBluetooth.h"
 #import "DDSecondViewController.h"
 #import "DDAppDelegate.h"
 @import QuartzCore;
