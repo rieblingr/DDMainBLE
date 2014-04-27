@@ -75,7 +75,7 @@
         [eraseAllButton addTarget:self action:@selector(eraseAllPressed:) forControlEvents:UIControlEventTouchDown];
         [eraseButton addTarget:self action:@selector(erasePressed:) forControlEvents:UIControlEventTouchDown];
         [doneButton addTarget:self action:@selector(makeArray) forControlEvents:UIControlEventTouchDown];
-
+        
     }
     return self;
 }
@@ -123,7 +123,7 @@
             //first check to see if height is within bounds, if not, break from loop
             
             if( !(([temp frame].origin.y + 44 <= point.y) &&
-               ([temp frame].origin.y + [temp frame].size.height + 44) >= point.y) ) {
+                  ([temp frame].origin.y + [temp frame].size.height + 44) >= point.y) ) {
                 break;
             }
             
@@ -163,7 +163,9 @@
 }
 
 - (IBAction) makeArray {
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:128];
+    char bytes[128];
+    
+    int countByteIndex = 0;
     
     //i represents the page it is currently on
     for(int i = 0; i < 4; i++) {
@@ -193,38 +195,25 @@
                 tempNum += (count[i] * pow(2, (7 - i)));
             }
             
-            char* byte = (char*) &tempNum;
+            //add to byte array
+            bytes[countByteIndex] = (char) tempNum;
             
-            //now that we have a byte, intiailize nsdata with it
-            NSData *data = [NSData dataWithBytes:(const void*)byte length:sizeof(char*)];
-            
-            [array addObject:data];
-
+            countByteIndex++;
         }
     }
     
-    //now print out array and see if done correctly
-    for(int i = 0; i < 128; i++) {
-        NSData *data = [array objectAtIndex:i];
-        
-        //convert to byte
-        unsigned char* tempChar = (unsigned char*) [data bytes];
-        
-        int charVal = [[NSNumber numberWithUnsignedChar:*tempChar] intValue];
-        
-        NSLog(@"Index: %i Char: %i", i, charVal);
-    }
+    NSData *data = [NSData dataWithBytes:bytes length:sizeof(bytes)];
     
-    [delegate ddCreateImage:array];
+    [delegate ddCreateImage:data];
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 @end
