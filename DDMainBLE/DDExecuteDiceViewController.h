@@ -99,8 +99,11 @@ static const uint8_t DISPLAY_IS_BUSY = 0x1;
 @property (assign, nonatomic) NSData *image5DataBytes;
 @property (assign, nonatomic) NSData *image6DataBytes;
 
-//bool to figure out where in the busy state we're at
-@property BOOL isInitial;
+//bool to figure out the state we are in
+@property BOOL isFinishBusyCheck;
+@property BOOL isFinishWritingDisplay;
+@property BOOL isFinishWritingTarget;
+@property BOOL isFinishWritingBusy;
 
 // Timer for setting server state
 @property (strong, nonatomic) NSTimer *timer;
