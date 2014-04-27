@@ -67,11 +67,6 @@
 
 #pragma mark - DD Program Initialization
 
-- (void)setServerState
-{
-    
-}
-
 - (void)getServerState
 {
     NSError* error;
@@ -153,8 +148,11 @@
 
 - (void)initializeBLE
 {
-    //set is initial
-    self.isInitial = YES;
+    //set all bools to NO
+    self.isFinishBusyCheck = NO;
+    self.isFinishWritingDisplay = NO;
+    self.isFinishWritingTarget = NO;
+    self.isFinishWritingBusy = NO;
     
     self.ddServices = @[[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID],[ CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]];
     self.displayBusyCharArray = @[[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]];
@@ -233,34 +231,44 @@
 // Invoked when you discover the characteristics of a specified service.
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    NSLog(@"Size: %i", [service.characteristics count]);
     for (CBCharacteristic *aChar in service.characteristics)
     {
-        if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {
-            
-            if(self.isInitial) {
-                self.isInitial = NO;
+        if(!self.isFinishBusyCheck) {
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {
+                NSLog(@"Reading Busy Characteristic");
+                self.isFinishBusyCheck = YES;
                 [self.peripheral readValueForCharacteristic:aChar];
-                NSLog(@"Reading a Display Busy characteristic");
-            } else {
+            }
+            
+        } else if(!self.isFinishWritingDisplay) {
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) {
+                NSLog(@"Writing Display Data");
+                self.isFinishWritingDisplay = YES;
+                [self beginDDExecution:aChar];
+            }
+        } else if(!self.isFinishWritingTarget) {
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {
+                NSLog(@"Writing Target Data");
+                int16_t targetDataToWrite = 0x1;
+                NSData *targetData = [NSData dataWithBytes:&targetDataToWrite length:sizeof(targetDataToWrite)];
+                self.isFinishWritingTarget = YES;
+                
+                [self.peripheral writeValue:targetData forCharacteristic:aChar type:self.writeType];
+                
+                // Discover Display Busy again
+                [self.peripheral discoverCharacteristics:self.displayBusyCharArray forService:self.displayService];
+            }
+            
+        } else if(!self.isFinishWritingBusy) {
+            if([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {
+                NSLog(@"Writing To Busy");
                 // write to busy
                 int16_t busyDataToWrite = 0x1;
                 NSData *busyData = [NSData dataWithBytes:&busyDataToWrite length:sizeof(busyDataToWrite)];
                 [self.peripheral writeValue:busyData forCharacteristic:aChar type:self.writeType];
                 [self executionComplete];
+                self.isFinishWritingBusy = YES;
             }
-            
-        } else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) {
-            [self beginDDExecution:aChar];
-        } else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {
-            
-            int16_t targetDataToWrite = 0x1;
-            NSData *targetData = [NSData dataWithBytes:&targetDataToWrite length:sizeof(targetDataToWrite)];
-            
-            [self.peripheral writeValue:targetData forCharacteristic:aChar type:self.writeType];
-            
-            // Discover Display Busy again
-            [self.peripheral discoverCharacteristics:self.displayBusyCharArray forService:self.displayService];
         }
     }
     
@@ -337,8 +345,10 @@
 
 - (void)executionComplete
 {
+    NSLog(@"Finished!");
     [self.executingIndicator stopAnimating];
     [self.nowExecutingLabel setText:@"COMPLETE!"];
+    [self.nowExecutingLabel setTintColor:[UIColor greenColor]];
     [self.nowExecutingLabel setTintColor:[UIColor greenColor]];
 }
 
