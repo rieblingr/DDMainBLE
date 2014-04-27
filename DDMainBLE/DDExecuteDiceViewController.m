@@ -54,7 +54,7 @@
     [self getServerState];
     
     // Third load images and select first image to transmit based on server state value
-    [self prepareAndLoadImages: YES testData:NO];
+    [self prepareAndLoadImages: YES testData:YES];
     //[self setSelectedImageByteArray];
     
     // Finally, initiate BLE connection then begin execution
@@ -123,12 +123,12 @@
     }
     
     if (test) {
-        [self.image1 setImage:[UIImage imageNamed:@"testing.png"]];
-        [self.image2 setImage:[UIImage imageNamed:@"testing.png"]];
-        [self.image3 setImage:[UIImage imageNamed:@"testing.png"]];
-        [self.image4 setImage:[UIImage imageNamed:@"testing.png"]];
-        [self.image5 setImage:[UIImage imageNamed:@"testing.png"]];
-        [self.image6 setImage:[UIImage imageNamed:@"testing.png"]];
+        [self.image1 setImage:[UIImage imageNamed:@"test"]];
+        [self.image2 setImage:[UIImage imageNamed:@"test"]];
+        [self.image3 setImage:[UIImage imageNamed:@"test"]];
+        [self.image4 setImage:[UIImage imageNamed:@"test"]];
+        [self.image5 setImage:[UIImage imageNamed:@"test"]];
+        [self.image6 setImage:[UIImage imageNamed:@"test"]];
         [self.loadingImagesProgress setProgress:30 animated:YES];
     }
     
@@ -273,8 +273,8 @@
             NSLog(@"Char UUID: %@", charact.UUIDString);
             if ([charact.UUIDString isEqualToString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]) {
                 // Initialize data to write;
-                NSData *writeValue = UIImagePNGRepresentation(self.image1.image);
-                NSLog(@"NSdata image size: %lu", (unsigned long)writeValue.length);
+                
+                NSData *writeValue;
                 NSLog(@"Writing value to Display Data in hex %@", [writeValue description]);
                 [charact writeValue:writeValue completion:^(NSError *error) {
                     if (error) {

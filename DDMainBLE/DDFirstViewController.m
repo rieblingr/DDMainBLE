@@ -23,9 +23,9 @@
     [self.initializeBLEBtn.layer setBorderColor:[[UIColor cyanColor] CGColor]];
     [self.initializeBLEBtn.layer setCornerRadius:15];
     
-    [self.initiateExecutionBtn setEnabled:NO];
-    [self.initiateExecutionBtn setAlpha:0.4F];
-    [self.initiateExecutionBtn setTintColor:[UIColor redColor]];
+    [self.initiateExecutionBtn setEnabled:YES];
+    [self.initiateExecutionBtn setAlpha:1.0F];
+    [self.initiateExecutionBtn setTintColor:[UIColor blueColor]];
     
     NSError* error;
     NSDictionary* json = [NSJSONSerialization
