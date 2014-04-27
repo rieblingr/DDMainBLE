@@ -17,22 +17,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xjI-ma-fBW">
-                                <rect key="frame" x="181" y="113" width="407" height="117"/>
-                                <string key="text">This is the DynamiDice Interface Application. Please connect to the DynamiDice Hardware Module with BLE 
-
-
+                                <rect key="frame" x="182" y="142" width="407" height="170"/>
+                                <string key="text">Select either Manual mode or Gyroscope mode.
+Manual Mode: User can select the image to send to the Dice
+Gyroscope Mode: The image set changes based on gyroscope reading 
 </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KUM-V8-cHX">
-                                <rect key="frame" x="236" y="26" width="296" height="63"/>
+                                <rect key="frame" x="182" y="20" width="404" height="114"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment content="DICE">
                                         <attributes>
                                             <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <font key="NSFont" size="36" name="HelveticaNeue-UltraLight"/>
+                                            <font key="NSFont" size="64" name="HelveticaNeue-UltraLight"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
@@ -40,66 +40,15 @@
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAa-Ub-YIf">
-                                <rect key="frame" x="321" y="249" width="126" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Check BLE">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Ypg-iu-W5o" kind="modal" identifier="connectBLE" id="AIa-bx-Mp3"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg6-kX-op8">
-                                <rect key="frame" x="213" y="563" width="311" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Status: Not Connected">
-                                        <attributes>
-                                            <color key="NSColor" red="1" green="0.047118742969354588" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="HelveticaNeue-BoldItalic"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guT-jR-Enm">
-                                <rect key="frame" x="213" y="616" width="311" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Server: ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="HelveticaNeue-BoldItalic"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAE-Ob-NUJ">
-                                <rect key="frame" x="213" y="496" width="311" height="59"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="Device: No Connection">
-                                        <attributes>
-                                            <color key="NSColor" red="0.082530526068052779" green="0.56570986311476634" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="HelveticaNeue-BoldItalic"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jRY-ga-AZF">
-                                <rect key="frame" x="323" y="847" width="122" height="43"/>
+                                <rect key="frame" x="168" y="818" width="432" height="78"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
-                                        <fragment content="Get Started!">
+                                        <fragment content="Gyroscope Mode">
                                             <attributes>
-                                                <font key="NSFont" size="24" name="HelveticaNeue-UltraLight"/>
+                                                <font key="NSFont" size="48" name="HelveticaNeue-UltraLight"/>
+                                                <font key="NSOriginalFont" size="48" name="HelveticaNeue-UltraLight"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -108,23 +57,27 @@
                                     <segue destination="cev-Bd-PTd" kind="modal" identifier="startExecution" id="98K-Xh-Sb5"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" text="You must create a set of images to begin using the Dice program. Please select the Image Tab" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yVQ-cf-I1T">
-                                <rect key="frame" x="168" y="756" width="432" height="73"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3z-BG-whe">
+                                <rect key="frame" x="220" y="467" width="329" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                                <attributedString key="attributedText">
+                                    <fragment content="Manual Mode">
+                                        <attributes>
+                                            <color key="NSColor" red="0.00077509377360851506" green="0.71357982103581552" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="48" name="HelveticaNeue-UltraLight"/>
+                                            <font key="NSOriginalFont" size="48" name="HelveticaNeue-UltraLight"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="DynamiDice" image="130-dice.png" id="meG-UT-fHc"/>
                     <connections>
-                        <outlet property="connectionStatus" destination="Tg6-kX-op8" id="xho-bb-Xdj"/>
-                        <outlet property="deviceConnection" destination="IAE-Ob-NUJ" id="E8s-ir-puO"/>
-                        <outlet property="initializeBLEBtn" destination="vAa-Ub-YIf" id="smd-S2-CZn"/>
                         <outlet property="initiateExecutionBtn" destination="jRY-ga-AZF" id="mYe-WZ-TZt"/>
-                        <outlet property="serverStatus" destination="guT-jR-Enm" id="TAd-9s-58H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLG-Or-ZZD" sceneMemberID="firstResponder"/>
@@ -261,40 +214,6 @@
             </objects>
             <point key="canvasLocation" x="1784" y="-590"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="n7n-xa-JeI">
-            <objects>
-                <viewController id="zka-Yb-XhB" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7ns-1J-grr"/>
-                        <viewControllerLayoutGuide type="bottom" id="gLj-nS-8Ij"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ysE-Sy-w8g">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ebT-rm-7Tx">
-                                <rect key="frame" x="0.0" y="12" width="768" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Create An Image Set" id="aun-hw-nY3">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="65a-Xx-Dn1"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cFH-IW-kW0"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="DpQ-ZZ-H8h"/>
-                    </toolbarItems>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2ni-98-E4A" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1883" y="935"/>
-        </scene>
         <!--Create Image View Controller-->
         <scene sceneID="p7o-vk-XM6">
             <objects>
@@ -326,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgw-yc-TOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2920" y="935"/>
+            <point key="canvasLocation" x="5208" y="1827"/>
         </scene>
         <!--Image Upload View Controller - Image Sets-->
         <scene sceneID="7Il-RM-1tn">
@@ -361,7 +280,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nBP-qB-i1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3335" y="3467"/>
+            <point key="canvasLocation" x="2919" y="1827"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KG6-bP-H2i">
@@ -376,7 +295,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTh-rh-8wa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1728" y="3451"/>
+            <point key="canvasLocation" x="1808" y="1827"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="AeQ-ve-aLX">
@@ -468,7 +387,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XJt-xc-rK4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1784" y="-1820"/>
+            <point key="canvasLocation" x="1816" y="-2180"/>
         </scene>
         <!--Second View Controller - Second-->
         <scene sceneID="E4u-YL-uel">
@@ -531,14 +450,7 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
-                                <connections>
-                                    <segue destination="zka-Yb-XhB" kind="modal" identifier="createImage" id="RRj-zU-R01"/>
-                                </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Osh-3B-NjX">
-                                <rect key="frame" x="368" y="346" width="32" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -546,7 +458,6 @@
                     <connections>
                         <outlet property="configureImages" destination="IMU-Tv-cPs" id="ete-HW-EnC"/>
                         <outlet property="createImage" destination="aFY-oS-FDB" id="b8F-8i-rN9"/>
-                        <outlet property="createdImage" destination="Osh-3B-NjX" id="r5P-o8-RMk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t2e-77-wlh" sceneMemberID="firstResponder"/>
