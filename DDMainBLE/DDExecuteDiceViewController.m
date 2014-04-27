@@ -33,11 +33,6 @@
     [self.nowExecutingLabel setHidden:YES];
     [self.executingIndicator setHidden:YES];
     
-    self.count = 0;
-    
-    self.displayBusyValueRead = [NSNumber numberWithInt:0];
-    self.gyroDataValueRead = [NSNumber numberWithInt:0];
-    
     // First initialize a Timer and set it in a run loop
     // Fire every second and keep deviceTimeStamp updated in case need to set server state
     NSDate *fireDate = [NSDate dateWithTimeIntervalSince1970:1.0];
@@ -57,11 +52,11 @@
     [self prepareAndLoadImages: YES testData:YES];
     //[self setSelectedImageByteArray];
     
+    //Set write type
+    self.writeType = CBCharacteristicWriteWithoutResponse;
+    
     // Finally, initiate BLE connection then begin execution
     [self initializeBLE];
-    
-    [self.executingIndicator stopAnimating];
-    [self.executingIndicator setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -158,7 +153,8 @@
 
 - (void)initializeBLE
 {
-    self.lgCentralManager = [LGCentralManager sharedInstance];
+    //set is initial
+    self.isInitial = YES;
     
     self.ddServices = @[[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID],[ CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]];
     self.displayBusyCharArray = @[[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]];
@@ -166,39 +162,144 @@
     self.displayTargetCharsArray = @[[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]];
     self.gyroDataCharsArray = @[[CBUUID UUIDWithString:DD_GYRO_DATA_CHARACTERISTIC_UUID]];
     
-    [self startDDProgram];
+    
+    CBCentralManager *centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    self.centralManager = centralManager;
+    
+    [self.centralManager scanForPeripheralsWithServices:self.ddServices options:nil];
+}
+
+# pragma mark - CBCentralManagerDelegate
+
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+{
+    // Determine the state of the peripheral
+    if ([central state] == CBCentralManagerStatePoweredOff) {
+        NSLog(@"CoreBluetooth BLE hardware is powered off");
+    }
+    else if ([central state] == CBCentralManagerStatePoweredOn) {
+        NSLog(@"CoreBluetooth BLE hardware is powered on and ready");
+    }
+    else if ([central state] == CBCentralManagerStateUnauthorized) {
+        NSLog(@"CoreBluetooth BLE state is unauthorized");
+    }
+    else if ([central state] == CBCentralManagerStateUnknown) {
+        NSLog(@"CoreBluetooth BLE state is unknown");
+    }
+    else if ([central state] == CBCentralManagerStateUnsupported) {
+        NSLog(@"CoreBluetooth BLE hardware is unsupported on this platform");
+    }
+}
+
+// CBCentralManagerDelegate - This is called with the CBPeripheral class as its main input parameter. This contains most of the information there is to know about a BLE peripheral.
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+{
+    NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
+    if ([localName length] > 0) {
+        NSLog(@"Found the DD Service: %@", localName);
+        [self.centralManager stopScan];
+        self.peripheral = peripheral;
+        peripheral.delegate = self;
+        // Connect to peripheral and read/write data
+        [self.centralManager connectPeripheral:peripheral options:nil];
+    }
+}
+
+// method called whenever you have successfully connected to the BLE peripheral
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+{
+    
+    [peripheral setDelegate:self];
+    [peripheral discoverServices:nil];
+}
+
+
+#pragma mark - CBPeripheralDelegate
+
+// CBPeripheralDelegate - Invoked when you discover the peripheral's available services.
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
+{
+    for (CBService *service in peripheral.services) {
+        if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]]) {
+            self.displayService = service;
+            [peripheral discoverCharacteristics:self.displayBusyCharArray forService:service];
+        }
+        if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]]) {
+            self.gyroService = service;
+            
+        }
+    }
+}
+
+// Invoked when you discover the characteristics of a specified service.
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
+{
+    if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID]])  {
+        for (CBCharacteristic *aChar in service.characteristics)
+        {
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {
+                
+                if(self.isInitial) {
+                    self.isInitial = NO;
+                    [self.peripheral readValueForCharacteristic:aChar];
+                    NSLog(@"Reading a Display Busy characteristic");
+                } else {
+                    // write to busy
+                    int16_t busyDataToWrite = 0x1;
+                    NSData *busyData = [NSData dataWithBytes:&busyDataToWrite length:sizeof(busyDataToWrite)];
+                    [self.peripheral writeValue:busyData forCharacteristic:aChar type:self.writeType];
+                    [self executionComplete];
+                }
+                
+            }
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) {
+                [self beginDDExecution:aChar];
+            }
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {
+                
+                int16_t targetDataToWrite = 0x1;
+                NSData *targetData = [NSData dataWithBytes:&targetDataToWrite length:sizeof(targetDataToWrite)];
+                
+                [self.peripheral writeValue:targetData forCharacteristic:aChar type:self.writeType];
+                
+                // Discover Display Busy again
+                [self.peripheral discoverCharacteristics:self.displayBusyCharArray forService:self.displayService];
+            }
+        }
+    }
+    
+    if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]])  {
+    }
+    
+}
+
+// Invoked when you retrieve a specified characteristic's value, or when the peripheral device notifies your app that the characteristic's value has changed.
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]]) {
+        NSLog(@"Executing Callback Data Busy Read");
+        uint8_t *busyData = (uint8_t *) [characteristic.value bytes];
+        NSLog(@"Display Busy: %s", busyData);
+        
+        if (*busyData == DISPLAY_IS_BUSY) {
+            NSLog(@"Display is Busy, Do Nothing");
+        } else {
+            NSLog(@"Display is Not Busy, writing to Display");
+            [peripheral discoverCharacteristics:self.displayDataCharsArray forService:self.displayService];
+        }
+    }
+    
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didModifyServices:(NSArray *)invalidatedServices
+{
+    NSLog(@"Peripheral Did Invalidate Services invoked.");
+    
 }
 
 #pragma mark - DD Program Execution Logic
 
-- (void)startDDProgram
-{
-    
-    [self.lgCentralManager scanForPeripheralsByInterval:4 services:self.ddServices options:nil completion:^(NSArray *peripherals) {
-        
-        [self.initializeBLELabel setTintColor:[UIColor greenColor]];
-        [self.connectingBLEProgress setProgress:100 animated:YES];
-        [self findAndConnectToDDPeripheral:peripherals[0]];
-    }];
-}
-
-- (void)findAndConnectToDDPeripheral:(LGPeripheral *)peripheral
-{
-    NSLog(@"Connecting to: %@", peripheral);
-    self.lgPeripheral = peripheral;
-    [peripheral connectWithCompletion:^(NSError *error) {
-        if (error) {
-            NSLog(@"Error connecting: %@", (error));
-            [self alertUserWithUIWarning:error];
-        }
-        NSLog(@"Finished connecting to: %@", peripheral);
-        NSLog(@"Now Searching for Display Services...");
-        
-        [self beginDDExecution: peripheral];
-    }];
-}
-
-- (void)beginDDExecution:(LGPeripheral *)peripheral
+- (void)beginDDExecution:(CBCharacteristic *)characteristic
 {
     [self.executingIndicator setHidesWhenStopped:YES];
     [self.nowExecutingLabel setHidden:NO];
@@ -207,135 +308,38 @@
     [self.executingIndicator setHidden:NO];
     [self.executingIndicator startAnimating];
     
-    NSLog(@"Beginning Execution of DD Program");
-    [self.lgPeripheral discoverServices:self.ddServices completion:^(NSArray *services, NSError *error) {
-        if (error) {
-            NSLog(@"Error discovering Display Services: %@", (error));
-        }
-        for (LGService *service in services) {
-            if ([service.UUIDString isEqualToString:DD_DISPLAY_SERVICE_UUID]) {
-                NSLog(@"Display Service Found, %@", service.UUIDString);
-                [self checkDisplayBusy:service];
-            }
-        }
-        for (LGService *service in services) {
-            if ([service.UUIDString isEqualToString:DD_GYRO_SERVICE_UUID]) {
-                NSLog(@"Gyro Service Found, %@", service.UUIDString);
-                
-                
-            }
-        }
-    }];
+    DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
+    self.imageArray = myAppDel.imageArray;
     
-    NSLog(@"Reached END");
+    // Write to Data Display
+    [self.peripheral writeValue:self.imageArray forCharacteristic:characteristic type:self.writeType];
+    
+    // Discover Target Characteristic
+    [self.peripheral discoverCharacteristics:self.displayTargetCharsArray forService:self.displayService];
 }
 
-- (void)checkDisplayBusy:(LGService *)service
+- (void)checkDisplayBusy:(CBService *)service
 {
     NSLog(@"Checking Display Busy Char");
-    [service discoverCharacteristicsWithUUIDs:self.displayBusyCharArray completion:^(NSArray *characteristics, NSError *error) {
-        if (error) {
-            NSLog(@"Error discovering Display Characts: %@", (error) ? error : @"No Error");
-        }
-        NSLog(@"Display Busy Char Found, %@", characteristics);
-        for (LGCharacteristic *charact in characteristics) {
-            if ([charact.UUIDString isEqualToString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]) {
-                [charact readValueWithBlock:^(NSData *data, NSError *error) {
-                    if (error) {
-                        NSLog(@"Error reading Display Busy: %@", (error) ? error : @"No Error");
-                    }
-                    uint8_t *busyData = (uint8_t *) [data bytes];
-                    NSLog(@"Display Busy: %s", busyData);
-                    
-                    if (*busyData == DISPLAY_IS_BUSY) {
-                        NSLog(@"Display is Busy, Do Nothing");
-                        //disconnect?
-                    } else {
-                        NSLog(@"Display is Not Busy, writing to Display");
-                        [self writeToDisplayData:service];
-                    }
-                }];
-            }
-        }
-    }];
-}
-
-- (void)writeToDisplayData:(LGService *)service
-{
-    NSLog(@"Finding Display Data Write Characteristics");
-    [service discoverCharacteristicsWithUUIDs:self.displayDataCharsArray completion:^(NSArray *characteristics, NSError *error) {
-        if (error) {
-            NSLog(@"Error finding Display Write Characts: %@", (error) ? error : @"No Error");
-        }
-        NSLog(@"Found Display Data Characts: %@", characteristics);
-        for (LGCharacteristic *charact in characteristics) {
-            NSLog(@"Char: %@", charact);
-            NSLog(@"Char UUID: %@", charact.UUIDString);
-            if ([charact.UUIDString isEqualToString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]) {
-                // Initialize data to write;
-                DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
-                NSData *writeValue = myAppDel.imageArray;
-                NSLog(@"Writing value to Display Data in hex %@", [writeValue description]);
-                CBCharacteristic *dataWriteCharact = [charact cbCharacteristic];
-                CBPeripheral *ddPeripheral = [self.lgPeripheral cbPeripheral];
-                [ddPeripheral writeValue:writeValue forCharacteristic:dataWriteCharact type:CBCharacteristicWriteWithoutResponse];
-                [self writeToDisplayTarget:service];
-                
-            }
-            
-        }
-    }];
-}
-
-- (void)writeToDisplayTarget:(LGService *)service
-{
-    NSLog(@"Finding Display Target Write Characteristics");
-    [service discoverCharacteristicsWithUUIDs:self.displayTargetCharsArray completion:^(NSArray *characteristics, NSError *error) {
-        if (error) {
-            NSLog(@"Error finding Display Write Characts: %@", (error) ? error : @"No Error");
-        }
-        NSLog(@"Found Display Target Charact: %@", characteristics);
-        for (LGCharacteristic *charact in characteristics) {
-            NSLog(@"Char: %@", charact);
-            NSLog(@"Char UUID: %@", charact.UUIDString);
-            if ([charact.UUIDString isEqualToString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]) {
-                // Initialize target data to write
-                uint8_t test = 0x02;
-                NSData *targetValue = [NSData dataWithBytes:&test length:sizeof(test)];
-                NSLog(@"Writing value to Display Target %@", targetValue);
-                CBCharacteristic *targetCharact = [charact cbCharacteristic];
-                CBPeripheral *ddPeripheral = [self.lgPeripheral cbPeripheral];
-                [ddPeripheral writeValue:targetValue forCharacteristic:targetCharact type:CBCharacteristicWriteWithoutResponse];
-                [self writeToDisplayBusy:service];
-            }
-        }
-    }];
     
 }
 
-- (void)writeToDisplayBusy:(LGService *)service
+- (void)writeToDisplayData:(CBService *)service
+{
+    NSLog(@"Finding Display Data Write Characteristics");
+    
+}
+
+- (void)writeToDisplayTarget:(CBService *)service
+{
+    NSLog(@"Finding Display Target Write Characteristics");
+    
+}
+
+- (void)writeToDisplayBusy:(CBService *)service
 {
     NSLog(@"Finding Display Busy Write Characteristics");
-    [service discoverCharacteristicsWithUUIDs:self.displayBusyCharArray completion:^(NSArray *characteristics, NSError *error) {
-        if (error) {
-            NSLog(@"Error finding Display Busy Characts: %@", (error) ? error : @"No Error");
-        }
-        NSLog(@"Found Display Busy Characts: %@", characteristics);
-        for (LGCharacteristic *charact in characteristics) {
-            NSLog(@"Char: %@", charact);
-            NSLog(@"Char UUID: %@", charact.UUIDString);
-            if ([charact.UUIDString isEqualToString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]) {
-                // Initialize data to write
-                NSLog(@"Setting Display to Busy = 1");
-                uint8_t test = 0x01;
-                NSData *busyVal = [NSData dataWithBytes:&test length:sizeof(test)];
-                CBCharacteristic *busyCharact = [charact cbCharacteristic];
-                CBPeripheral *ddPeripheral = [self.lgPeripheral cbPeripheral];
-                [ddPeripheral writeValue:busyVal forCharacteristic:busyCharact type:CBCharacteristicWriteWithoutResponse];
-                [self executionComplete];                
-            }
-        }
-    }];
+    
 }
 
 - (void)executionComplete
@@ -372,11 +376,9 @@
             
             break;
     }
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:128];
     
     
     // self.displayDataValueToWrite = @[data];
-    NSLog(@"ByteArrayImage to write is now %@", self.displayDataValueToWrite);
     
 }
 

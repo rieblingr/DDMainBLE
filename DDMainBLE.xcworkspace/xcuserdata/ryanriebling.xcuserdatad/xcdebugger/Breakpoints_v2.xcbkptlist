@@ -9,44 +9,30 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DDMainBLE/DDExecuteDiceViewController.h"
-            timestampString = "420245657.838353"
+            filePath = "DDMainBLE/DDExecuteDiceViewController.m"
+            timestampString = "420323364.223852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "displayBusyFound"
-            landmarkType = "19">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DDExecuteDiceViewController displayBusyFound]"
-                  moduleName = "DDMainBLE"
-                  urlString = "file://localhost/Users/ryanriebling/Development/xProjects/DDMainBLE/DDMainBLE/DDExecuteDiceViewController.h"
-                  timestampString = "420240298.709047"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DDExecuteDiceViewController setDisplayBusyFound:]"
-                  moduleName = "DDMainBLE"
-                  urlString = "file://localhost/Users/ryanriebling/Development/xProjects/DDMainBLE/DDMainBLE/DDExecuteDiceViewController.h"
-                  timestampString = "420240298.709513"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "-peripheral:didUpdateValueForCharacteristic:error:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DDMainBLE/DDExecuteDiceViewController.m"
+            timestampString = "420324909.713239"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
+            landmarkName = "-checkDisplayBusy:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

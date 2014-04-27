@@ -23,9 +23,9 @@
 // Constants
 static const uint8_t DISPLAY_IS_BUSY = 0x1;
 
-@interface DDExecuteDiceViewController : UIViewController<UIAlertViewDelegate, DDSecondViewControllerDelegate>
+@interface DDExecuteDiceViewController : UIViewController<UIAlertViewDelegate, DDSecondViewControllerDelegate, CBCentralManagerDelegate, CBPeripheralDelegate>
 
-@property(nonatomic, strong) NSMutableArray *imageArray;
+@property(nonatomic, strong) NSData *imageArray;
 
 // Services on DD hardware
 #define DD_DEVICE_INFO_SERVICE_UUID @"1800"
@@ -44,9 +44,11 @@ static const uint8_t DISPLAY_IS_BUSY = 0x1;
 
 @property (strong, nonatomic) CBCentralManager *centralManager;
 @property (nonatomic, strong) CBPeripheral *peripheral;
+@property (nonatomic, strong) CBService *displayService;
+@property (nonatomic, strong) CBService *gyroService;
 
-@property (nonatomic, strong) LGCentralManager *lgCentralManager;
-@property (nonatomic, strong) LGPeripheral *lgPeripheral;
+@property CBCharacteristicWriteType writeType;
+
 
 // Bluetooth Service and Characteristic Arrays
 @property (strong, nonatomic) NSArray *ddServices;
@@ -98,22 +100,8 @@ static const uint8_t DISPLAY_IS_BUSY = 0x1;
 @property (assign, nonatomic) NSData *image5DataBytes;
 @property (assign, nonatomic) NSData *image6DataBytes;
 
-
-
-// Properties to hold data characteristics for the peripheral device
-@property (nonatomic, strong) NSString *connected;
-@property (nonatomic, strong) NSString *displayTargetFound;
-@property (nonatomic, strong) NSString *gyroDataFound;
-@property (nonatomic, strong) NSString *displayDataFound;
-@property (nonatomic, strong) NSString *displayBusyFound;
-@property (nonatomic, strong) NSString *dynamidiceDeviceData;
-
-@property (nonatomic, assign) uint8_t displayBusyValueToWrite;
-@property (nonatomic, assign) uint8_t displayTargetValueToWrite;
-@property (nonatomic, assign) NSArray * displayDataValueToWrite;
-@property (nonatomic, assign) NSNumber *gyroDataValueRead;
-@property (nonatomic, assign) NSNumber *displayBusyValueRead;
-@property (nonatomic, assign) int count;
+//bool to figure out where in the busy state we're at
+@property BOOL isInitial;
 
 // Timer for setting server state
 @property (strong, nonatomic) NSTimer *timer;
