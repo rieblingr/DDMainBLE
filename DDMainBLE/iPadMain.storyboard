@@ -53,6 +53,9 @@ Gyroscope Mode: The image set changes based on gyroscope reading
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <segue destination="T3m-gu-92t" kind="modal" identifier="gyroMode" id="N74-9r-act"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cbw-CS-sBr">
                                 <rect key="frame" x="168" y="529" width="432" height="64"/>
@@ -82,6 +85,24 @@ Gyroscope Mode: The image set changes based on gyroscope reading
             </objects>
             <point key="canvasLocation" x="677" y="-722"/>
         </scene>
+        <!--Gryo Mode View Controller-->
+        <scene sceneID="Mhq-Km-Yka">
+            <objects>
+                <viewController id="T3m-gu-92t" customClass="DDGryoModeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MYJ-Ns-n9Y"/>
+                        <viewControllerLayoutGuide type="bottom" id="DQ2-rd-Fnd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cg9-ge-Qal">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TTV-LG-lZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2823" y="-693"/>
+        </scene>
         <!--Manual Image View Controller-->
         <scene sceneID="uty-1b-JWd">
             <objects>
@@ -107,7 +128,7 @@ Gyroscope Mode: The image set changes based on gyroscope reading
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHj-Kl-IGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1693" y="-1814"/>
+            <point key="canvasLocation" x="2745" y="-2362"/>
         </scene>
         <!--Execute Dice View Controller-->
         <scene sceneID="F08-tn-n01">
@@ -270,24 +291,48 @@ Gyroscope Mode: The image set changes based on gyroscope reading
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgw-yc-TOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5208" y="1827"/>
+            <point key="canvasLocation" x="4944" y="879"/>
         </scene>
-        <!--Table View Controller - Image Sets-->
+        <!--State Select View Controller - Image Sets-->
         <scene sceneID="7Il-RM-1tn">
             <objects>
-                <tableViewController id="7nD-wh-Xlo" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HwV-T6-mBr">
+                <tableViewController id="7nD-wh-Xlo" customClass="DDStateSelectViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" sectionHeaderHeight="22" sectionFooterHeight="22" id="HwV-T6-mBr">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hpp-lq-HR0">
-                                <rect key="frame" x="0.0" y="86" width="768" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="130" id="hpp-lq-HR0">
+                                <rect key="frame" x="0.0" y="86" width="768" height="130"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hpp-lq-HR0" id="x4R-h7-mM3">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="129"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaN-Ur-mVX">
+                                            <rect key="frame" x="20" y="37" width="260" height="55"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <attributedString key="attributedText">
+                                                <fragment content="Server State Image Set">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.53475348293564728" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="24" name="HelveticaNeue-UltraLight"/>
+                                                        <font key="NSOriginalFont" size="17" name="HelveticaNeue-UltraLight"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="187-pencil.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ppe-DG-X4i">
+                                            <rect key="frame" x="706" y="54" width="26" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="fnT-2T-Bv8" kind="modal" identifier="viewStateSetImages" id="KSa-cH-e1S"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -306,6 +351,151 @@ Gyroscope Mode: The image set changes based on gyroscope reading
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nBP-qB-i1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2823" y="879"/>
+        </scene>
+        <!--State Image Select View Controller-->
+        <scene sceneID="uXi-xC-fqy">
+            <objects>
+                <viewController id="fnT-2T-Bv8" customClass="DDStateImageSelectViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="14C-rI-jRf"/>
+                        <viewControllerLayoutGuide type="bottom" id="UHX-yV-DR7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ecs-PU-jyt">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rlI-hZ-2Ex">
+                                <rect key="frame" x="0.0" y="9" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Image Set View" id="6Yy-nc-hYs">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="7l5-38-eoB"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KiQ-PN-Faf">
+                                <rect key="frame" x="101" y="322" width="161" height="113"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="1">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="1">
+                                            <attributes>
+                                                <font key="NSFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                                <font key="NSOriginalFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <segue destination="NEy-fO-VJn" kind="modal" identifier="setImage1" id="C6Y-86-wKy"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xio-z0-EPL">
+                                <rect key="frame" x="101" y="75" width="567" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Image Set for Server State: ">
+                                        <attributes>
+                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="48" name="HelveticaNeue-UltraLight"/>
+                                            <font key="NSOriginalFont" size="48" name="HelveticaNeue-UltraLight"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZRs-hg-dEz">
+                                <rect key="frame" x="308" y="322" width="152" height="110"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="2">
+                                            <attributes>
+                                                <font key="NSFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <segue destination="NEy-fO-VJn" kind="modal" identifier="setImage2" id="RCZ-44-vWw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HBb-Vl-7Jf">
+                                <rect key="frame" x="515" y="317" width="153" height="115"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="3">
+                                            <attributes>
+                                                <font key="NSFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                                <font key="NSOriginalFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <segue destination="NEy-fO-VJn" kind="modal" identifier="setImage3" id="mI7-ct-e0N"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kCX-og-59E">
+                                <rect key="frame" x="110" y="499" width="143" height="139"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="4">
+                                            <attributes>
+                                                <font key="NSFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                                <font key="NSOriginalFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <segue destination="NEy-fO-VJn" kind="modal" identifier="setImage4" id="cqc-0X-Jmw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lgs-gT-Shl">
+                                <rect key="frame" x="308" y="499" width="152" height="138"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="5">
+                                            <attributes>
+                                                <font key="NSFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                                <font key="NSOriginalFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <segue destination="NEy-fO-VJn" kind="modal" identifier="setImage5" id="W4b-RU-n10"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9u4-Qc-AmC">
+                                <rect key="frame" x="532" y="515" width="118" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="6">
+                                            <attributes>
+                                                <font key="NSFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                                <font key="NSOriginalFont" size="64" name="HelveticaNeue-CondensedBold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <segue destination="NEy-fO-VJn" kind="modal" identifier="setImage5" id="kkL-I8-zwG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4v0-TL-mg7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3887" y="879"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KG6-bP-H2i">
@@ -462,7 +652,7 @@ Gyroscope Mode: The image set changes based on gyroscope reading
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <segue destination="XY8-if-Mqw" kind="modal" id="KZd-1M-EzA"/>
+                                    <segue destination="XY8-if-Mqw" kind="modal" identifier="viewImageSets" id="KZd-1M-EzA"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9y-Ty-hn6">
@@ -511,10 +701,14 @@ Gyroscope Mode: The image set changes based on gyroscope reading
     <resources>
         <image name="130-dice.png" width="35" height="28"/>
         <image name="168-upload-photo-2.png" width="22" height="25"/>
+        <image name="187-pencil.png" width="23" height="23"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="kkL-I8-zwG"/>
+    </inferredMetricsTieBreakers>
 </document>

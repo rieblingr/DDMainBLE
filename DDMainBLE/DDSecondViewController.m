@@ -31,33 +31,24 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	if ([segue.identifier isEqualToString:@"configureImages"])
+	if ([segue.identifier isEqualToString:@"viewImageSets"])
 	{
         UINavigationController *navigationController =
         segue.destinationViewController;
-		DDImageUploadViewController *ddImageUploadVC =
+		DDStateSelectViewController *stateSelectVC =
         [[navigationController viewControllers]
          objectAtIndex:0];
-        ddImageUploadVC.delegate = self;
-        NSLog(@"The prepareForSegue configureImages executed in DDSecondVC");
-	}
-    
-    if ([segue.identifier isEqualToString:@"createImage"])
-	{
-		DDCreateImageSetViewController *ddCreateImageSetVC =
-        segue.destinationViewController;
-        ddCreateImageSetVC.delegate = self;
-        NSLog(@"The prepareForSegue createImage executed in DDSecondVC");
+        stateSelectVC.delegate = self;
+        NSLog(@"The prepareForSegue viewImageSets executed in DDSecondVC");
 	}
 }
 
-- (void) ddImageUploadVCDidCancel:(DDImageUploadViewController *)controller
+- (void) didCancelStateSelect:(DDStateSelectViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 //create image view controller delegate functions
-
 - (void) ddCreateImageVCDidCancel:(DDCreateImageViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:NULL];

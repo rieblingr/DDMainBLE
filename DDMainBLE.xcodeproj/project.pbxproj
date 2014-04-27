@@ -28,9 +28,9 @@
 		A1109E581905E89D00C0088B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1109E561905E89D00C0088B /* InfoPlist.strings */; };
 		A1109E5A1905E89D00C0088B /* DDMainBLETests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1109E591905E89D00C0088B /* DDMainBLETests.m */; };
 		A15EEA5819070B8A00B3C28D /* DDBLEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A15EEA5719070B8A00B3C28D /* DDBLEViewController.m */; };
-		A17D55B719077095008DD792 /* DDImageUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17D55B619077095008DD792 /* DDImageUploadViewController.m */; };
+		A17D55B719077095008DD792 /* DDStateSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17D55B619077095008DD792 /* DDStateSelectViewController.m */; };
 		A1890FC2190D8D3B000383FC /* iPadMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1890FC1190D8D3B000383FC /* iPadMain.storyboard */; };
-		A1890FC9190DBAE1000383FC /* DDStateImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FC8190DBAE1000383FC /* DDStateImageViewController.m */; };
+		A1890FC9190DBAE1000383FC /* DDStateImageSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FC8190DBAE1000383FC /* DDStateImageSelectViewController.m */; };
 		A1890FCC190DBAF4000383FC /* DDGryoModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FCB190DBAF4000383FC /* DDGryoModeViewController.m */; };
 		A1890FCF190DBB19000383FC /* DDManualImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FCE190DBB19000383FC /* DDManualImageViewController.m */; };
 		A1890FD2190DBB5B000383FC /* DDManualModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */; };
@@ -289,11 +289,11 @@
 		A1109E591905E89D00C0088B /* DDMainBLETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDMainBLETests.m; sourceTree = "<group>"; };
 		A15EEA5619070B8A00B3C28D /* DDBLEViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDBLEViewController.h; sourceTree = "<group>"; };
 		A15EEA5719070B8A00B3C28D /* DDBLEViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDBLEViewController.m; sourceTree = "<group>"; };
-		A17D55B519077095008DD792 /* DDImageUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDImageUploadViewController.h; sourceTree = "<group>"; };
-		A17D55B619077095008DD792 /* DDImageUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDImageUploadViewController.m; sourceTree = "<group>"; };
+		A17D55B519077095008DD792 /* DDStateSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStateSelectViewController.h; sourceTree = "<group>"; };
+		A17D55B619077095008DD792 /* DDStateSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStateSelectViewController.m; sourceTree = "<group>"; };
 		A1890FC1190D8D3B000383FC /* iPadMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPadMain.storyboard; sourceTree = "<group>"; };
-		A1890FC7190DBAE1000383FC /* DDStateImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStateImageViewController.h; sourceTree = "<group>"; };
-		A1890FC8190DBAE1000383FC /* DDStateImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStateImageViewController.m; sourceTree = "<group>"; };
+		A1890FC7190DBAE1000383FC /* DDStateImageSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStateImageSelectViewController.h; sourceTree = "<group>"; };
+		A1890FC8190DBAE1000383FC /* DDStateImageSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStateImageSelectViewController.m; sourceTree = "<group>"; };
 		A1890FCA190DBAF4000383FC /* DDGryoModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGryoModeViewController.h; sourceTree = "<group>"; };
 		A1890FCB190DBAF4000383FC /* DDGryoModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGryoModeViewController.m; sourceTree = "<group>"; };
 		A1890FCD190DBB19000383FC /* DDManualImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDManualImageViewController.h; sourceTree = "<group>"; };
@@ -582,8 +582,8 @@
 				A1890FCE190DBB19000383FC /* DDManualImageViewController.m */,
 				A1890FCA190DBAF4000383FC /* DDGryoModeViewController.h */,
 				A1890FCB190DBAF4000383FC /* DDGryoModeViewController.m */,
-				A1890FC7190DBAE1000383FC /* DDStateImageViewController.h */,
-				A1890FC8190DBAE1000383FC /* DDStateImageViewController.m */,
+				A1890FC7190DBAE1000383FC /* DDStateImageSelectViewController.h */,
+				A1890FC8190DBAE1000383FC /* DDStateImageSelectViewController.m */,
 				A1890FC3190D8E64000383FC /* iPad */,
 				A1109E3A1905E89D00C0088B /* DDAppDelegate.h */,
 				A1109E3B1905E89D00C0088B /* DDAppDelegate.m */,
@@ -596,8 +596,8 @@
 				A1109E321905E89D00C0088B /* Supporting Files */,
 				A15EEA5619070B8A00B3C28D /* DDBLEViewController.h */,
 				A15EEA5719070B8A00B3C28D /* DDBLEViewController.m */,
-				A17D55B519077095008DD792 /* DDImageUploadViewController.h */,
-				A17D55B619077095008DD792 /* DDImageUploadViewController.m */,
+				A17D55B519077095008DD792 /* DDStateSelectViewController.h */,
+				A17D55B619077095008DD792 /* DDStateSelectViewController.m */,
 				9F1A490E19084F500049049B /* Server.h */,
 				9F1A490F19084F500049049B /* Server.m */,
 				A1D7FD841909845C00293268 /* DDImageSet.h */,
@@ -1210,14 +1210,14 @@
 				9F8ED2E7190ADA0600CE7655 /* DDCreateImageView.m in Sources */,
 				A1D7FD911909D99B00293268 /* DDTimerController.m in Sources */,
 				A1109E3C1905E89D00C0088B /* DDAppDelegate.m in Sources */,
-				A17D55B719077095008DD792 /* DDImageUploadViewController.m in Sources */,
+				A17D55B719077095008DD792 /* DDStateSelectViewController.m in Sources */,
 				A1109E451905E89D00C0088B /* DDSecondViewController.m in Sources */,
 				A1109E381905E89D00C0088B /* main.m in Sources */,
 				A1D7FD861909845C00293268 /* DDImageSet.m in Sources */,
 				9F28FE23190AEBCD00E51640 /* DDButtonCreateImage.m in Sources */,
 				A1890FD2190DBB5B000383FC /* DDManualModeViewController.m in Sources */,
 				9F1A491019084F500049049B /* Server.m in Sources */,
-				A1890FC9190DBAE1000383FC /* DDStateImageViewController.m in Sources */,
+				A1890FC9190DBAE1000383FC /* DDStateImageSelectViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

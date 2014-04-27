@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DDImageUploadViewController.h"
+#import "DDStateSelectViewController.h"
 #import "DDCreateImageSetViewController.h"
 #import "DDAppDelegate.h"
 
@@ -18,7 +18,7 @@
 - (void) receiveImageSetArrays:(NSArray *)sets;
 @end
 
-@interface DDSecondViewController : UIViewController <DDImageUploadViewControllerDelegate, DDCreateImageSetViewControllerDelegate>
+@interface DDSecondViewController : UIViewController <DDStateSelectDelegate, DDCreateImageSetViewControllerDelegate>
 
 
 @property (nonatomic, strong) IBOutlet UIButton *configureImages;

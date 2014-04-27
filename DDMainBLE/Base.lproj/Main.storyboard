@@ -287,10 +287,10 @@
             </objects>
             <point key="canvasLocation" x="1323" y="606"/>
         </scene>
-        <!--Image Upload View Controller - Image Sets-->
+        <!--State Select View Controller - Image Sets-->
         <scene sceneID="YLS-81-Q7L">
             <objects>
-                <tableViewController id="SZp-8U-prM" customClass="DDImageUploadViewController" sceneMemberID="viewController">
+                <tableViewController id="SZp-8U-prM" customClass="DDStateSelectViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vqr-0C-Ufm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

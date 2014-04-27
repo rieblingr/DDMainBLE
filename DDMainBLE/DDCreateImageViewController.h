@@ -25,6 +25,10 @@
 
 @property (nonatomic, strong) DDCreateImageView *createView;
 
+// Values passed from Segue
+@property (nonatomic, assign) int state;
+@property (nonatomic, assign) int imageSelected;
+
 - (IBAction)cancel:(id)sender;
 
 
