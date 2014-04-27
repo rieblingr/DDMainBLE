@@ -8,6 +8,7 @@
 
 #import "DDSecondViewController.h"
 #import "DDExecuteDiceViewController.h"
+#import "DDCreateImageSetViewController.h"
 
 @interface DDSecondViewController ()
 
@@ -43,9 +44,9 @@
     
     if ([segue.identifier isEqualToString:@"createImage"])
 	{
-		DDCreateImageViewController *ddCreateImageVC =
+		DDCreateImageSetViewController *ddCreateImageSetVC =
         segue.destinationViewController;
-        ddCreateImageVC.delegate = self;
+        ddCreateImageSetVC.delegate = self;
         NSLog(@"The prepareForSegue createImage executed in DDSecondVC");
 	}
 }
@@ -60,16 +61,6 @@
 - (void) ddCreateImageVCDidCancel:(DDCreateImageViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (void) ddCreateImageVC:(NSData*)data {
-    //here is array from created image
-    [self dismissViewControllerAnimated:YES completion:NULL];
-    DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
-    [self.createdImage setImage:[UIImage imageWithData:data]];
-    NSLog(@"Array image: %@", self.createdImage.image);
-    myAppDel.imageArray = data;
-    
 }
 
 

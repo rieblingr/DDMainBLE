@@ -17,16 +17,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xjI-ma-fBW">
-                                <rect key="frame" x="244" y="114" width="280" height="117"/>
+                                <rect key="frame" x="181" y="113" width="407" height="117"/>
                                 <string key="text">This is the DynamiDice Interface Application. Please connect to the DynamiDice Hardware Module with BLE 
 
 
 </string>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KUM-V8-cHX">
-                                <rect key="frame" x="244" y="49" width="280" height="42"/>
+                                <rect key="frame" x="236" y="26" width="296" height="63"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment content="DICE">
@@ -41,7 +41,7 @@
                                 <color key="shadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAa-Ub-YIf">
-                                <rect key="frame" x="321" y="334" width="126" height="36"/>
+                                <rect key="frame" x="321" y="249" width="126" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Check BLE">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,7 +51,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg6-kX-op8">
-                                <rect key="frame" x="244" y="579" width="280" height="29"/>
+                                <rect key="frame" x="213" y="563" width="311" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Status: Not Connected">
@@ -65,7 +65,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guT-jR-Enm">
-                                <rect key="frame" x="244" y="616" width="280" height="29"/>
+                                <rect key="frame" x="213" y="616" width="311" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Server: ">
@@ -79,7 +79,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAE-Ob-NUJ">
-                                <rect key="frame" x="244" y="546" width="280" height="25"/>
+                                <rect key="frame" x="213" y="496" width="311" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Device: No Connection">
@@ -108,6 +108,13 @@
                                     <segue destination="cev-Bd-PTd" kind="modal" identifier="startExecution" id="98K-Xh-Sb5"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" text="You must create a set of images to begin using the Dice program. Please select the Image Tab" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yVQ-cf-I1T">
+                                <rect key="frame" x="168" y="756" width="432" height="73"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -254,6 +261,40 @@
             </objects>
             <point key="canvasLocation" x="1784" y="-590"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="n7n-xa-JeI">
+            <objects>
+                <viewController id="zka-Yb-XhB" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7ns-1J-grr"/>
+                        <viewControllerLayoutGuide type="bottom" id="gLj-nS-8Ij"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ysE-Sy-w8g">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ebT-rm-7Tx">
+                                <rect key="frame" x="0.0" y="12" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Create An Image Set" id="aun-hw-nY3">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="65a-Xx-Dn1"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cFH-IW-kW0"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="DpQ-ZZ-H8h"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ni-98-E4A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1883" y="935"/>
+        </scene>
         <!--Create Image View Controller-->
         <scene sceneID="p7o-vk-XM6">
             <objects>
@@ -285,7 +326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgw-yc-TOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1784" y="774"/>
+            <point key="canvasLocation" x="2920" y="935"/>
         </scene>
         <!--Image Upload View Controller - Image Sets-->
         <scene sceneID="7Il-RM-1tn">
@@ -320,7 +361,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nBP-qB-i1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2775" y="2035"/>
+            <point key="canvasLocation" x="3335" y="3467"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="KG6-bP-H2i">
@@ -335,7 +376,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTh-rh-8wa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1784" y="2035"/>
+            <point key="canvasLocation" x="1728" y="3451"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="AeQ-ve-aLX">
@@ -457,12 +498,12 @@
                                 <color key="shadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" editable="NO" text="Control the images or numbers that are sent to the dice hardware. Choose from the default sets or compile your own" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xbX-Ew-sM5">
-                                <rect key="frame" x="244" y="157" width="280" height="99"/>
-                                <fontDescription key="fontDescription" type="system" size="system"/>
+                                <rect key="frame" x="123" y="134" width="523" height="99"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMU-Tv-cPs">
-                                <rect key="frame" x="281" y="485" width="206" height="32"/>
+                                <rect key="frame" x="281" y="777" width="206" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="36-toolbox.png">
                                     <attributedString key="attributedTitle">
@@ -478,7 +519,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aFY-oS-FDB">
-                                <rect key="frame" x="281" y="424" width="206" height="22"/>
+                                <rect key="frame" x="281" y="551" width="206" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="123-id-card.png">
                                     <attributedString key="attributedTitle">
@@ -491,7 +532,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <segue destination="NEy-fO-VJn" kind="modal" identifier="createImage" id="ZCS-hP-GrR"/>
+                                    <segue destination="zka-Yb-XhB" kind="modal" identifier="createImage" id="RRj-zU-R01"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Osh-3B-NjX">
@@ -510,7 +551,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t2e-77-wlh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="401" y="954"/>
+            <point key="canvasLocation" x="667" y="995"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WbC-pH-yQT">
