@@ -273,8 +273,8 @@
             NSLog(@"Char UUID: %@", charact.UUIDString);
             if ([charact.UUIDString isEqualToString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]) {
                 // Initialize data to write;
-                
-                NSData *writeValue;
+                 DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
+                NSData *writeValue = myAppDel.imageArray;
                 NSLog(@"Writing value to Display Data in hex %@", [writeValue description]);
                 [charact writeValue:writeValue completion:^(NSError *error) {
                     if (error) {

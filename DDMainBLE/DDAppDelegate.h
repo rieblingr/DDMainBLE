@@ -12,6 +12,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) NSMutableArray *imageArray;
+@property (strong, nonatomic) NSData *imageArray;
 
 @end

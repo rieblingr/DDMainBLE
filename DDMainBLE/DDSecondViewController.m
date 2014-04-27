@@ -62,12 +62,11 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void) ddCreateImageVC:(NSMutableArray *)array {
-    
-    NSLog(@"Created Image: %@", array);
+- (void) ddCreateImageVC:(NSData*)data {
+    //here is array from created image
     [self dismissViewControllerAnimated:YES completion:NULL];
     DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
-    myAppDel.imageArray = array;
+    myAppDel.imageArray = data;
     
 }
 
