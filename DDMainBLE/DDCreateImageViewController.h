@@ -15,7 +15,7 @@
 
 - (void) ddCreateImageVCDidCancel: (DDCreateImageViewController *)controller;
 
-- (void) ddCreateImageVC : (NSMutableArray *) array;
+- (void) ddCreateImageVC : (NSData *) data;
 
 @end
 

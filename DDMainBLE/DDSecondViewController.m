@@ -62,7 +62,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void) ddCreateImageVC:(NSMutableArray *)array {
+- (void) ddCreateImageVC:(NSData*)data {
     //here is array from created image
     [self dismissViewControllerAnimated:YES completion:NULL];
     

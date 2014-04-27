@@ -19,7 +19,7 @@
 
 @protocol DDCreateImageViewDelegate <NSObject>
 
-- (void) ddCreateImage : (NSMutableArray*) array;
+- (void) ddCreateImage : (NSData*) data;
 
 @end
 

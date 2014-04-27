@@ -203,19 +203,14 @@
         }
     }
     
-    //now print out array and see if done correctly
-    for(int i = 0; i < 128; i++) {
-        NSData *data = [array objectAtIndex:i];
-        
-        //convert to byte
-        unsigned char* tempChar = (unsigned char*) [data bytes];
-        
-        int charVal = [[NSNumber numberWithUnsignedChar:*tempChar] intValue];
-        
-        NSLog(@"Index: %i Char: %i", i, charVal);
+    NSMutableData *mutData = [(NSData*)[array objectAtIndex:0] mutableCopy];
+    
+    for(int i = 1; i < 128; i++) {
+        [mutData appendData:(NSData*)[array objectAtIndex:i]];
     }
     
-    [delegate ddCreateImage:array];
+    
+    [delegate ddCreateImage:mutData];
 }
 
 /*

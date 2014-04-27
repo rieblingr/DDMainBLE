@@ -26,9 +26,9 @@
 }
 
 //delegate function
-- (void) ddCreateImage:(NSMutableArray *)array {
+- (void) ddCreateImage:(NSData *)data {
     //send to the next delegate
-    [delegate ddCreateImageVC:array];
+    [delegate ddCreateImageVC:data];
 }
 
 - (void)viewDidLoad
