@@ -168,7 +168,7 @@
                 self.displayTargetFound = [NSString stringWithFormat:@"Display Target: %i", targetDataToWrite];
                 self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayTargetFound]];
             }
-            else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) { // 2
+            else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]]) {
                 [self.cbPeripheral writeValue:displayData forCharacteristic: aChar type:CBCharacteristicWriteWithoutResponse];                NSLog(@"Found Display Data characteristic and wrote value %i", displayDataToWrite);
                 self.displayDataFound = [NSString stringWithFormat:@"Display Data: %i", displayDataToWrite];
                 self.deviceInfo.text = [self.deviceInfo.text stringByAppendingString:[NSString stringWithFormat:@"%@\n",self.displayDataFound]];

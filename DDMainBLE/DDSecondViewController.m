@@ -66,6 +66,8 @@
     //here is array from created image
     [self dismissViewControllerAnimated:YES completion:NULL];
     DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [self.createdImage setImage:[UIImage imageWithData:data]];
+    NSLog(@"Array image: %@", self.createdImage.image);
     myAppDel.imageArray = data;
     
 }

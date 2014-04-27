@@ -200,7 +200,9 @@
 
 - (void)beginDDExecution:(LGPeripheral *)peripheral
 {
+    [self.executingIndicator setHidesWhenStopped:YES];
     [self.nowExecutingLabel setHidden:NO];
+    [self.initializeBLELabel setTintColor:[UIColor greenColor]];
     [self.nowExecutingLabel setTintColor:[UIColor greenColor]];
     [self.executingIndicator setHidden:NO];
     [self.executingIndicator startAnimating];
@@ -236,7 +238,6 @@
             NSLog(@"Error discovering Display Characts: %@", (error) ? error : @"No Error");
         }
         NSLog(@"Display Busy Char Found, %@", characteristics);
-        __block int i = 0;
         for (LGCharacteristic *charact in characteristics) {
             if ([charact.UUIDString isEqualToString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]) {
                 [charact readValueWithBlock:^(NSData *data, NSError *error) {
@@ -245,7 +246,6 @@
                     }
                     uint8_t *busyData = (uint8_t *) [data bytes];
                     NSLog(@"Display Busy: %s", busyData);
-                    NSLog(@"DISPLAY IS BUSY CONST: %d", DISPLAY_IS_BUSY);
                     
                     if (*busyData == DISPLAY_IS_BUSY) {
                         NSLog(@"Display is Busy, Do Nothing");
@@ -273,16 +273,14 @@
             NSLog(@"Char UUID: %@", charact.UUIDString);
             if ([charact.UUIDString isEqualToString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]) {
                 // Initialize data to write;
-                 DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
+                DDAppDelegate *myAppDel = (DDAppDelegate*)[[UIApplication sharedApplication] delegate];
                 NSData *writeValue = myAppDel.imageArray;
                 NSLog(@"Writing value to Display Data in hex %@", [writeValue description]);
-                [charact writeValue:writeValue completion:^(NSError *error) {
-                    if (error) {
-                        NSLog(@"Error writing Display Data: %@", (error) ? error : @"No Error");
-                    }
-                    [self writeToDisplayTarget:service];
-                    
-                }];
+                CBCharacteristic *dataWriteCharact = [charact cbCharacteristic];
+                CBPeripheral *ddPeripheral = [self.lgPeripheral cbPeripheral];
+                [ddPeripheral writeValue:writeValue forCharacteristic:dataWriteCharact type:CBCharacteristicWriteWithoutResponse];
+                [self writeToDisplayTarget:service];
+                
             }
             
         }
@@ -305,12 +303,10 @@
                 uint8_t test = 0x02;
                 NSData *targetValue = [NSData dataWithBytes:&test length:sizeof(test)];
                 NSLog(@"Writing value to Display Target %@", targetValue);
-                [charact writeValue:targetValue completion:^(NSError *error) {
-                    if (error) {
-                        NSLog(@"Error writing to Target Display: %@", (error) ? error : @"No Error");
-                    }
-                    [self writeToDisplayBusy:service];
-                }];
+                CBCharacteristic *targetCharact = [charact cbCharacteristic];
+                CBPeripheral *ddPeripheral = [self.lgPeripheral cbPeripheral];
+                [ddPeripheral writeValue:targetValue forCharacteristic:targetCharact type:CBCharacteristicWriteWithoutResponse];
+                [self writeToDisplayBusy:service];
             }
         }
     }];
@@ -333,15 +329,20 @@
                 NSLog(@"Setting Display to Busy = 1");
                 uint8_t test = 0x01;
                 NSData *busyVal = [NSData dataWithBytes:&test length:sizeof(test)];
-                [charact writeValue:busyVal completion:^(NSError *error) {
-                    if (error) {
-                        NSLog(@"Error reading Display Busy: %@", (error) ? error : @"No Error");
-                    }
-                }];
-                
+                CBCharacteristic *busyCharact = [charact cbCharacteristic];
+                CBPeripheral *ddPeripheral = [self.lgPeripheral cbPeripheral];
+                [ddPeripheral writeValue:busyVal forCharacteristic:busyCharact type:CBCharacteristicWriteWithoutResponse];
+                [self executionComplete];                
             }
         }
     }];
+}
+
+- (void)executionComplete
+{
+    [self.executingIndicator stopAnimating];
+    [self.nowExecutingLabel setText:@"COMPLETE!"];
+    [self.nowExecutingLabel setTintColor:[UIColor greenColor]];
 }
 
 - (void)setSelectedImageByteArray
@@ -462,132 +463,6 @@
     return bytes;
 }
 
-- (uint8_t *) imageToByteArray:(UIImage *) image
-{
-    NSData *data = UIImagePNGRepresentation(image);
-    NSLog(@"Image: %@", image);
-    NSUInteger len = data.length;
-    NSLog(@"Image to Byte Length: %lu", (unsigned long)len);
-    uint8_t *bytes = (uint8_t *)[data bytes];
-    NSMutableString *result = [NSMutableString stringWithCapacity:len * 3];
-    [result appendString:@"["];
-    for (NSUInteger i = 0; i < len; i++) {
-        if (i) {
-            [result appendString:@","];
-        }
-        int charVal = [[NSNumber numberWithUnsignedChar:bytes[i]] intValue];
-        [result appendFormat:@"%hhu", bytes[i]];
-        NSLog(@"Byte %lu : Char :%i", (unsigned long)i, charVal);
-    }
-    [result appendString:@"]"];
-    NSLog(@"%@", result);
-    return bytes;
-}
-
-- (NSArray *)imageToDataAray:(UIImage *)image
-{
-    if (image.size.width > 32 || image.size.height > 32) {
-        [self alertUserWithUIWarning:nil];
-    }
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:128];
-    
-    for (int i = 0; i < 32; i++) {
-        for (int j = 0; j < 32; j++) {
-            [self getRGBAsFromImage:image atX:i andY:j count:4];
-        }
-    }
-    
-    
-    //    //i represents the page it is currently on
-    //    for(int i = 0; i < 4; i++) {
-    //        //for each column
-    //        for(int j = 0; j < image.size.width; j++) {
-    //            int count[8];
-    //            int index = 0;
-    //            //this is the starting from the bottom of the column
-    //            for(int k = (i * 7) + 7; k >= (i * 7); k--) {
-    //
-    //            }
-    //
-    //            //make the count into NSData and add
-    //
-    //            //now make the NSData using the information
-    //            int tempNum = 0;
-    //
-    //            for(int i = 0; i < 8; i++) {
-    //                tempNum += (count[i] * pow(2, (7 - i)));
-    //            }
-    //
-    //            char* byte = (char*) &tempNum;
-    //
-    //            //now that we have a byte, intiailize nsdata with it
-    //            NSData *data = [NSData dataWithBytes:(const void*)byte length:sizeof(char*)];
-    //
-    //            [array addObject:data];
-    //
-    //        }
-    //    }
-    //
-    //    //now print out array and see if done correctly
-    //    for(int i = 0; i < 128; i++) {
-    //        NSData *data = [array objectAtIndex:i];
-    //
-    //        //convert to byte
-    //        unsigned char* tempChar = (unsigned char*) [data bytes];
-    //
-    //        int charVal = [[NSNumber numberWithUnsignedChar:*tempChar] intValue];
-    //
-    //        NSLog(@"Index: %i Char: %i", i, charVal);
-    //    }
-    
-    return nil;
-}
-
-- (NSArray*)getRGBAsFromImage:(UIImage*)image atX:(int)xx andY:(int)yy count:(int)count
-{
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];
-    
-    // First get the image into your data buffer
-    CGImageRef imageRef = [image CGImage];
-    NSUInteger width = CGImageGetWidth(imageRef);
-    NSUInteger height = CGImageGetHeight(imageRef);
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    unsigned char *rawData = (unsigned char*) calloc(height * width * 4, sizeof(unsigned char));
-    NSUInteger bytesPerPixel = 4;
-    NSUInteger bytesPerRow = bytesPerPixel * width;
-    NSUInteger bitsPerComponent = 8;
-    CGContextRef context = CGBitmapContextCreate(rawData, width, height,
-                                                 bitsPerComponent, bytesPerRow, colorSpace,
-                                                 kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-    CGColorSpaceRelease(colorSpace);
-    
-    CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
-    CGContextRelease(context);
-    
-    // Now your rawData contains the image data in the RGBA8888 pixel format.
-    int byteIndex = (bytesPerRow * yy) + xx * bytesPerPixel;
-    for (int ii = 0 ; ii < count ; ++ii)
-    {
-        CGFloat red   = (rawData[byteIndex]     * 1.0) / 255.0;
-        CGFloat green = (rawData[byteIndex + 1] * 1.0) / 255.0;
-        CGFloat blue  = (rawData[byteIndex + 2] * 1.0) / 255.0;
-        CGFloat alpha = (rawData[byteIndex + 3] * 1.0) / 255.0;
-        byteIndex += 4;
-        
-        UIColor *acolor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-        [result addObject:acolor];
-        
-        NSLog(@"RGBA Floats: %f %f %f %f", red, green, blue, alpha);
-    }
-    
-    NSLog(@"RGBA Result: %@", result);
-    
-    
-    
-    free(rawData);
-    
-    return result;
-}
 
 #pragma mark - Alerts
 
