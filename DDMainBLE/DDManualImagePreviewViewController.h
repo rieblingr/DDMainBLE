@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DDSingletonArray.h"
+#import "DDManualImageView.h"
 
 @class DDManualImagePreviewViewController;
 
@@ -16,7 +18,7 @@
 
 @end
 
-@interface DDManualImagePreviewViewController : UIViewController
+@interface DDManualImagePreviewViewController : UIViewController <DDManualImageViewDelegate>
 
 @property (nonatomic, assign) int state;
 @property (nonatomic, assign) int imageSelected;
