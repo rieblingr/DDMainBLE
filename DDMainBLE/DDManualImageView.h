@@ -21,11 +21,12 @@
 
 @protocol DDManualImageViewDelegate <NSObject>
 
--(void) sendPicture;
+-(void) sendBegin;
+-(void) sendEnd;
 
 @end
 
-@interface DDManualImageView : UIView
+@interface DDManualImageView : UIView <DDSingletonBluetoothDelegate>
 
 - (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray*) buttons;
 

@@ -189,7 +189,7 @@
         
     }
     
-    //sleep to ensure this works
+    //sleep to ensure this works (magic number 0.4)
     [NSThread sleepForTimeInterval:0.4f];
     
     //now that we wrote, write 1 to busy signal
@@ -204,6 +204,14 @@
     }
     
     NSLog(@"DONE");
+    [self.delegate finishedSending];
+}
+
+- (void) disconnect {
+    if(self.centralManager != nil) {
+        [self.centralManager cancelPeripheralConnection:self.peripheral];
+        self.centralManager = nil;
+    }
 }
 
 
