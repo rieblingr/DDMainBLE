@@ -81,12 +81,6 @@
     
 }
 
-- (void) ddCreateImageVC:(NSData*)data {
-    //here is array from created image
-    
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
 - (void)ddCreateImageVCDidCancel:(DDCreateImageViewController *)controller
 {
      [self dismissViewControllerAnimated:YES completion:NULL];
