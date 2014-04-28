@@ -61,8 +61,6 @@
     //the array to return
     NSMutableArray *returnedArray = [[NSMutableArray alloc] init];
     
-    int indexFuck = 0;
-    
     //i represents the page it is currently on
     for(int i = 0; i < 4; i++) {
         //for each column
@@ -104,8 +102,6 @@
                 
                 [returnedArray addObject:tempData];
             }
-            
-            indexFuck++;
         }
     }
     

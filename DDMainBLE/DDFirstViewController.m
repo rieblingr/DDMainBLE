@@ -78,13 +78,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if ([segue.identifier isEqualToString:@"startExecution"])
-	{
-        DDExecuteDiceViewController *ddExecuteDiceVC = segue.destinationViewController;
-        ddExecuteDiceVC.delegate = self;
-        
-    }
-    
     if([segue.identifier isEqualToString:@"manualStateImageSelect"])
     {
         DDManualImageViewController *ddManualImageVC = segue.destinationViewController;
@@ -97,12 +90,6 @@
         //ddGryoModeVC.delegate = self;
     }
 
-}
-
-- (void) ddExecuteDiceVCDidStop:(DDExecuteDiceViewController *)controller
-{
-    [self updateServerLabel];
-    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)didCancelManualMode:(DDManualImageViewController *)controller

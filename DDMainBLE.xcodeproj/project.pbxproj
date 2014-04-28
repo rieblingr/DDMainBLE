@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F049875190EF3C100C29965 /* DDSingletonBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F049874190EF3C100C29965 /* DDSingletonBluetooth.m */; };
 		9F1A491019084F500049049B /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1A490F19084F500049049B /* Server.m */; };
 		9F28FE23190AEBCD00E51640 /* DDButtonCreateImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F28FE22190AEBCD00E51640 /* DDButtonCreateImage.m */; };
 		9F8ED2E7190ADA0600CE7655 /* DDCreateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8ED2E6190ADA0600CE7655 /* DDCreateImageView.m */; };
@@ -34,7 +35,6 @@
 		A1890FD2190DBB5B000383FC /* DDManualModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */; };
 		A1890FD8190DF05F000383FC /* DDManualImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD7190DF05F000383FC /* DDManualImageView.m */; };
 		A1D7FD861909845C00293268 /* DDStateSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD851909845C00293268 /* DDStateSetCell.m */; };
-		A1D7FD8919098A2700293268 /* DDExecuteDiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD8819098A2700293268 /* DDExecuteDiceViewController.m */; };
 		A1D7FD8B1909A8CE00293268 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */; };
 		A1D7FD8E1909BBCD00293268 /* DDCreateImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD8D1909BBCD00293268 /* DDCreateImageViewController.m */; };
 		A1D7FE9F190C544200293268 /* 01-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FDD6190C542800293268 /* 01-refresh.png */; };
@@ -252,6 +252,8 @@
 
 /* Begin PBXFileReference section */
 		43E03666A4AF4AAC9A72EFA1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F049873190EF3C100C29965 /* DDSingletonBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDSingletonBluetooth.h; sourceTree = "<group>"; };
+		9F049874190EF3C100C29965 /* DDSingletonBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDSingletonBluetooth.m; sourceTree = "<group>"; };
 		9F1A490E19084F500049049B /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		9F1A490F19084F500049049B /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		9F28FE21190AEBCD00E51640 /* DDButtonCreateImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDButtonCreateImage.h; sourceTree = "<group>"; };
@@ -296,8 +298,6 @@
 		A1890FD7190DF05F000383FC /* DDManualImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDManualImageView.m; sourceTree = "<group>"; };
 		A1D7FD841909845C00293268 /* DDStateSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStateSetCell.h; sourceTree = "<group>"; };
 		A1D7FD851909845C00293268 /* DDStateSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStateSetCell.m; sourceTree = "<group>"; };
-		A1D7FD8719098A2700293268 /* DDExecuteDiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDExecuteDiceViewController.h; sourceTree = "<group>"; };
-		A1D7FD8819098A2700293268 /* DDExecuteDiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDExecuteDiceViewController.m; sourceTree = "<group>"; };
 		A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A1D7FD8C1909BBCD00293268 /* DDCreateImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCreateImageViewController.h; sourceTree = "<group>"; };
 		A1D7FD8D1909BBCD00293268 /* DDCreateImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDCreateImageViewController.m; sourceTree = "<group>"; };
@@ -588,8 +588,6 @@
 				9F1A490F19084F500049049B /* Server.m */,
 				A1D7FD841909845C00293268 /* DDStateSetCell.h */,
 				A1D7FD851909845C00293268 /* DDStateSetCell.m */,
-				A1D7FD8719098A2700293268 /* DDExecuteDiceViewController.h */,
-				A1D7FD8819098A2700293268 /* DDExecuteDiceViewController.m */,
 				A1D7FD8C1909BBCD00293268 /* DDCreateImageViewController.h */,
 				A1D7FD8D1909BBCD00293268 /* DDCreateImageViewController.m */,
 				9F8ED2E5190ADA0600CE7655 /* DDCreateImageView.h */,
@@ -601,6 +599,8 @@
 				9FB6B1EA190DBBFF00FD1BFA /* DDSingletonArray.m */,
 				A1890FD6190DF05F000383FC /* DDManualImageView.h */,
 				A1890FD7190DF05F000383FC /* DDManualImageView.m */,
+				9F049873190EF3C100C29965 /* DDSingletonBluetooth.h */,
+				9F049874190EF3C100C29965 /* DDSingletonBluetooth.m */,
 			);
 			path = DDMainBLE;
 			sourceTree = "<group>";
@@ -1154,8 +1154,8 @@
 				A1890FCC190DBAF4000383FC /* DDGryoModeViewController.m in Sources */,
 				A1109E421905E89D00C0088B /* DDFirstViewController.m in Sources */,
 				9FB6B1EB190DBBFF00FD1BFA /* DDSingletonArray.m in Sources */,
+				9F049875190EF3C100C29965 /* DDSingletonBluetooth.m in Sources */,
 				A1890FCF190DBB19000383FC /* DDManualImageViewController.m in Sources */,
-				A1D7FD8919098A2700293268 /* DDExecuteDiceViewController.m in Sources */,
 				9F8ED2E7190ADA0600CE7655 /* DDCreateImageView.m in Sources */,
 				A1109E3C1905E89D00C0088B /* DDAppDelegate.m in Sources */,
 				A17D55B719077095008DD792 /* DDStateSelectViewController.m in Sources */,
