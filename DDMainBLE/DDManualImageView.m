@@ -54,11 +54,9 @@
 }
 
 - (IBAction)sendImage {
-    NSMutableArray *dataArray = [DDSingletonArray makeData:self.table];
+    self.data = [DDSingletonArray makeData:self.table];
     
-    NSLog(@"array count: %lu", (unsigned long)[dataArray count]);
-    
-    [self startTransferWithArray:dataArray withBitmask:0];
+    [self startTransferWithArray:self.data withBitmask:0];
 }
 
 //bluetooth delegate function
@@ -70,7 +68,6 @@
 //all the bluetooth things
 - (void) startTransferWithArray:(NSMutableArray*)array withBitmask:(int)dispBitmask {
     NSLog(@"HELLO");
-    self.data = array;
     self.dispBitMask = dispBitmask;
     [self initBluetooth];
 }
@@ -177,31 +174,48 @@
 - (void) sendData {
     NSLog(@"Sending Data");
     
-    for(int i = 0; i < [self.data count]; i++) {
+    self.data = [DDSingletonArray makeData:self.table];
+    for(char i = 0; i < [self.data count]; i++) {
         NSData *tempData = [self.data objectAtIndex:i];
-        char *test = (char*)[tempData bytes];
+        unsigned char* readData = (unsigned char*) [tempData bytes];
         
-        NSLog(@"Index: %i Data: %i", i, *test);
         //send index
-        for(CBCharacteristic *aChar in self.displayService.characteristics) {
-            
-            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_INDEX_CHARACTERISTIC_UUID]]) {
+        if(i != 0) {
+            for(CBCharacteristic *aChar in self.displayService.characteristics) {
                 
-                NSData *tempIndexData = [NSData dataWithBytes:&i length:sizeof(i)];
-                [self.peripheral writeValue:tempIndexData forCharacteristic:aChar type:self.writeType];
+                if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_INDEX_CHARACTERISTIC_UUID]]) {
+                    
+                    NSData *tempIndexData = [NSData dataWithBytes:&i length:sizeof(i)];
+                    
+                    [self.peripheral writeValue:tempIndexData forCharacteristic:aChar type:self.writeType];
+                }
             }
         }
-        
+
+        [NSThread sleepForTimeInterval:0.4f];
+
         //send data
         for(CBCharacteristic *aChar in self.displayService.characteristics) {
-            
             if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_DATA_CHARACTERISTIC_UUID]]) {
-                [self.peripheral writeValue:tempData forCharacteristic:aChar type:self.writeType];
+                char test[4];
+                test[0] = readData[0];
+                test[1] = readData[1];
+                test[2] = readData[2];
+                test[3] = readData[3];
+                
+                NSData *sendData = [NSData dataWithBytes:test length:sizeof(test)];
+                
+                [self.peripheral writeValue:sendData forCharacteristic:aChar type:self.writeType];
+                
+                if(i == 0) {
+                    [NSThread sleepForTimeInterval:0.4f];
+                }
             }
         }
         
     }
     
+    [self.centralManager cancelPeripheralConnection:self.peripheral];
     NSLog(@"DONE");
 }
 

@@ -61,6 +61,8 @@
     //the array to return
     NSMutableArray *returnedArray = [[NSMutableArray alloc] init];
     
+    int indexFuck = 0;
+    
     //i represents the page it is currently on
     for(int i = 0; i < 4; i++) {
         //for each column
@@ -89,19 +91,21 @@
             
             //add to byte array
             bytes[byteIndex] = (char) tempNum;
+            //increase byteIndex
+            byteIndex++;
             
             //check if byteIndex is 3, if so, restart and add it to the nsdata
-            if(byteIndex == 3) {
+            if(byteIndex == 4) {
                 //reset to 0
                 byteIndex = 0;
                 
                 //make the bytes into nsdata and add to array
-                NSData *tempData = [NSData dataWithBytes:bytes length:sizeof(bytes)];
+                NSData *tempData = [NSData dataWithBytes:(const void*)bytes length:sizeof(char)*8];
+                
                 [returnedArray addObject:tempData];
             }
             
-            //increase byteIndex
-            byteIndex++;
+            indexFuck++;
         }
     }
     
