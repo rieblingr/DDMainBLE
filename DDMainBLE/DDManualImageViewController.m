@@ -83,9 +83,11 @@
     
     NSMutableArray *imagePreview = [self getDataArrayFromSingletonWith:self.state andImageNumber:imageSelected];
     
-    self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:imagePreview];
-    
+        self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:imagePreview];
+   
     [self.view addSubview:self.preview];
+     self.preview.layer.borderWidth = 3.0f;
+    self.preview.layer.borderColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0].CGColor;
 }
 
 - (IBAction)cancel:(id)sender
