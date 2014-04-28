@@ -281,30 +281,6 @@
     NSLog(@"Unimplemented Method for Device Info Helper");
 }
 
-// Helper method to get the Display data
-- (void) getDisplayData:(LGPeripheral *)peripheral error:(NSError *)error
-{
-    [LGUtils readDataFromCharactUUID:DD_DISPLAY_DATA_CHARACTERISTIC_UUID
-                         serviceUUID:DD_DISPLAY_SERVICE_UUID
-                          peripheral:peripheral
-                          completion:^(NSData *data, NSError *error){
-                              NSLog(@"Data : %s Error : %@", (char *)[data bytes], error);
-                              self.displayData = data;
-                          }];
-    
-}
-
-// Helper method to write the Display data
-- (void) writeDisplayData:(LGPeripheral *)peripheral dataInBytes:(int32_t)dataToWrite error:(NSError *)error
-{
-    [LGUtils writeData:[NSData dataWithBytes:&dataToWrite length:sizeof(dataToWrite)]
-           charactUUID:DD_DISPLAY_DATA_CHARACTERISTIC_UUID
-           serviceUUID:DD_DISPLAY_SERVICE_UUID
-            peripheral:peripheral completion:^(NSError *error) {
-                NSLog(@"Error : %@", error);
-            }];
-}
-
 #pragma - Navigation
 
 - (IBAction)cancel:(id)sender

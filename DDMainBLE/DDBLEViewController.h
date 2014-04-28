@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LGBluetooth.h"
 @import QuartzCore;
 @import CoreBluetooth;
 
@@ -34,9 +33,6 @@
 #define DD_DISPLAY_BUSY_CHARACTERISTIC_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af03"
 
 #define DD_GYRO_DATA_CHARACTERISTIC_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af11"
-
-@property (nonatomic, strong) LGCentralManager *lgCentralManager;
-@property (nonatomic, strong) LGPeripheral *lgPeripheral;
 
 @property (nonatomic, strong) CBCentralManager *centralManager;
 @property (nonatomic, strong) CBPeripheral *cbPeripheral;
