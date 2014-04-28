@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="Hgh-kU-2Zc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="Hgh-kU-2Zc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -202,7 +202,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <action selector="testImagePreview:" destination="c1r-iV-gTH" eventType="touchUpInside" id="lbw-o3-HmV"/>
+                                    <action selector="showImagePreview:" destination="c1r-iV-gTH" eventType="touchUpInside" id="pBZ-f4-Pld"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="elE-Ui-N5g">
@@ -217,6 +217,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="showImagePreview:" destination="c1r-iV-gTH" eventType="touchUpInside" id="uAH-FV-3z9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gob-2M-dlg">
                                 <rect key="frame" x="515" y="235" width="153" height="115"/>
@@ -231,6 +234,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="showImagePreview:" destination="c1r-iV-gTH" eventType="touchUpInside" id="See-mE-e64"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t1i-0x-IFI">
                                 <rect key="frame" x="110" y="417" width="143" height="139"/>
@@ -245,6 +251,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="showImagePreview:" destination="c1r-iV-gTH" eventType="touchUpInside" id="QOl-p3-1Bq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZL-RB-1lH">
                                 <rect key="frame" x="308" y="417" width="152" height="138"/>
@@ -259,6 +268,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="showImagePreview:" destination="c1r-iV-gTH" eventType="touchUpInside" id="sKI-ZI-drM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fGA-EP-Lkz">
                                 <rect key="frame" x="532" y="433" width="118" height="108"/>
@@ -273,6 +285,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="showImagePreview:" destination="c1r-iV-gTH" eventType="touchUpInside" id="MIg-sv-efs"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FTY-IM-MIz" customClass="DDManualImageView">
                                 <rect key="frame" x="217" y="570" width="335" height="434"/>
@@ -290,39 +305,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHj-Kl-IGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2931" y="-1884"/>
-        </scene>
-        <!--Manual Image Preview View Controller-->
-        <scene sceneID="uJ8-IA-jXK">
-            <objects>
-                <viewController id="QuB-x4-lyR" customClass="DDManualImagePreviewViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="3vd-4U-DSW"/>
-                        <viewControllerLayoutGuide type="bottom" id="Z0z-80-jl2"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="jvr-ur-36Y">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jlX-ks-i9c">
-                                <rect key="frame" x="0.0" y="11" width="768" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Manual Image Preview" id="DYq-bf-nrq">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="F8i-zq-ZBv">
-                                            <connections>
-                                                <action selector="cancel:" destination="QuB-x4-lyR" id="UJl-Mx-Y8K"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LPp-EC-M3i" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3933" y="-1884"/>
         </scene>
         <!--Execute Dice View Controller-->
         <scene sceneID="F08-tn-n01">

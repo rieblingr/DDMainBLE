@@ -58,18 +58,32 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-
+    
 }
 
-- (IBAction)testImagePreview:(id)sender
+- (NSMutableArray *)getDataArrayFromSingletonWith:(int) state andImageNumber:(int)imageSelected
 {
     DDSingletonArray *singleton = [DDSingletonArray singleton];
     
-    NSMutableArray *imageArray = [singleton.array objectAtIndex:4];
+    NSMutableArray *imageArray = [singleton.array objectAtIndex:(state - 1)];
     
-    NSMutableArray *buttons = [imageArray objectAtIndex:0];
+    NSMutableArray *buttons = [imageArray objectAtIndex:(imageSelected - 1)];
     
-    self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:buttons];
+    return buttons;
+}
+
+- (IBAction)showImagePreview:(id)sender
+{
+    if (![sender isKindOfClass:[UIButton class]])
+        return;
+    NSString *buttonNumber = [[(UIButton *)sender titleLabel] text];
+    NSLog(@"Button %@", buttonNumber);
+    int imageSelected = [buttonNumber intValue];
+    NSLog(@"Button %i clicked", imageSelected);
+    
+    NSMutableArray *imagePreview = [self getDataArrayFromSingletonWith:self.state andImageNumber:imageSelected];
+    
+    self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:imagePreview];
     
     [self.view addSubview:self.preview];
 }
