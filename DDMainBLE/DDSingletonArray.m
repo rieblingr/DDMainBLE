@@ -54,19 +54,21 @@
     return returnArray;
 }
 
-+ (NSData*) makeData:(NSMutableArray*)table {
-    char bytes[128];
++ (NSMutableArray*) makeData:(NSMutableArray*)table {
+    char bytes[4];
     
-    int countByteIndex = 0;
+    //the array to return
+    NSMutableArray *returnedArray = [[NSMutableArray alloc] init];
     
     //i represents the page it is currently on
     for(int i = 0; i < 4; i++) {
         //for each column
         for(int j = 0; j < IMAGE_WIDTH; j++) {
             int count[8];
+            int byteIndex = 0;
             int index = 0;
             //this is the starting from the bottom of the column
-            for(int k = (i * 7) + 7; k >= (i * 7); k--) {
+            for(int k = (i * 7); k <= (i * 7) + 7; k++) {
                 NSMutableArray *tempArr = [table objectAtIndex:k];
                 DDButtonCreateImage *button = [tempArr objectAtIndex:j];
                 
@@ -78,8 +80,6 @@
                 index++;
             }
             
-            //make the count into NSData and add
-            
             //now make the NSData using the information
             int tempNum = 0;
             
@@ -88,15 +88,24 @@
             }
             
             //add to byte array
-            bytes[countByteIndex] = (char) tempNum;
+            bytes[byteIndex] = (char) tempNum;
             
-            countByteIndex++;
+            //check if byteIndex is 3, if so, restart and add it to the nsdata
+            if(byteIndex == 3) {
+                //reset to 0
+                byteIndex = 0;
+                
+                //make the bytes into nsdata and add to array
+                NSData *tempData = [NSData dataWithBytes:bytes length:sizeof(bytes)];
+                [returnedArray addObject:tempData];
+            }
+            
+            //increase byteIndex
+            byteIndex++;
         }
     }
     
-    NSData *data = [NSData dataWithBytes:bytes length:sizeof(bytes)];
-    
-    return data;
+    return returnedArray;
 }
 
 @end
