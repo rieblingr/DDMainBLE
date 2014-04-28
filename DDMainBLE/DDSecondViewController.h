@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "DDStateSelectViewController.h"
-#import "DDCreateImageSetViewController.h"
 #import "DDAppDelegate.h"
 
 @class DDSecondViewController;

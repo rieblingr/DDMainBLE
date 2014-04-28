@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DDSingletonArray.h"
-#import "DDManualImagePreviewViewController.h"
 #import "Server.h"
+#import "DDManualImageView.h"
 #import "DDSingletonArray.h"
 
 @class DDManualImageViewController;
@@ -20,7 +20,7 @@
 
 @end
 
-@interface DDManualImageViewController : UIViewController<DDManualImagePreviewDelegate>
+@interface DDManualImageViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet DDManualImageView *preview;
 
