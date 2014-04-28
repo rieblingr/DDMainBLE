@@ -152,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTV-LG-lZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2917" y="-518"/>
+            <point key="canvasLocation" x="2357" y="-518"/>
         </scene>
         <!--Manual Image View Controller-->
         <scene sceneID="uty-1b-JWd">
@@ -305,7 +305,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epm-5W-8ob">
-                                        <rect key="frame" x="126" y="377" width="82" height="33"/>
+                                        <rect key="frame" x="126" y="366" width="82" height="33"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Done2">
@@ -356,7 +356,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHj-Kl-IGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3111" y="-1844"/>
+            <point key="canvasLocation" x="2383" y="-1884"/>
         </scene>
         <!--Execute Dice View Controller-->
         <scene sceneID="F08-tn-n01">
@@ -486,7 +486,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O94-a6-xQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3917" y="-518"/>
+            <point key="canvasLocation" x="3533" y="-518"/>
         </scene>
         <!--Create Image View Controller-->
         <scene sceneID="p7o-vk-XM6">
@@ -496,7 +496,7 @@
                         <viewControllerLayoutGuide type="top" id="bI9-gw-cGP"/>
                         <viewControllerLayoutGuide type="bottom" id="t31-QZ-oQT"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zFP-pN-Lof">
+                    <view key="view" contentMode="scaleToFill" id="zFP-pN-Lof" customClass="DDCreateImageView">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -519,7 +519,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgw-yc-TOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4878" y="879"/>
+            <point key="canvasLocation" x="4858" y="879"/>
         </scene>
         <!--State Select View Controller - Image Sets-->
         <scene sceneID="7Il-RM-1tn">
