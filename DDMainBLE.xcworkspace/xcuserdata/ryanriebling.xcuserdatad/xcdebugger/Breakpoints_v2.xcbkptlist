@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DDMainBLE/DDManualImageViewController.m"
-            timestampString = "420345021.358254"
+            timestampString = "420403154.715815"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "-cancel:"
             landmarkType = "5">
          </BreakpointContent>

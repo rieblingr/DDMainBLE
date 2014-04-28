@@ -109,6 +109,19 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (IBAction)testImagePreview:(id)sender
+{
+    DDSingletonArray *singleton = [DDSingletonArray singleton];
+    
+    NSMutableArray *imageArray = [singleton.array objectAtIndex:4];
+    
+    NSMutableArray *buttons = [imageArray objectAtIndex:0];
+    
+    self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:buttons];
+    
+    [self.view addSubview:self.preview];
+}
+
 - (IBAction)cancel:(id)sender
 {
     [self.delegate didCancelManualMode:self];

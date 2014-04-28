@@ -10,6 +10,7 @@
 #import "DDSingletonArray.h"
 #import "DDManualImagePreviewViewController.h"
 #import "Server.h"
+#import "DDSingletonArray.h"
 
 @class DDManualImageViewController;
 
@@ -20,6 +21,8 @@
 @end
 
 @interface DDManualImageViewController : UIViewController<DDManualImagePreviewDelegate>
+
+@property (nonatomic, strong) IBOutlet DDManualImageView *preview;
 
 @property (nonatomic, weak) id <DDManualImageDelegate> delegate;
 @property (nonatomic, assign) int state;

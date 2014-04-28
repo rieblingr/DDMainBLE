@@ -183,13 +183,13 @@
                                 <color key="highlightedColor" red="0.00077509377359999995" green="0.71357982099999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Image to Preview before Sending to Dice:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPI-WF-Rg8">
-                                <rect key="frame" x="171" y="351" width="426" height="21"/>
+                                <rect key="frame" x="171" y="206" width="426" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQ0-eg-2Sm">
-                                <rect key="frame" x="101" y="385" width="161" height="113"/>
+                                <rect key="frame" x="101" y="240" width="161" height="113"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="1">
                                     <attributedString key="attributedTitle">
@@ -202,11 +202,11 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <segue destination="QuB-x4-lyR" kind="modal" identifier="previewImage1" id="4Kw-dn-WmH"/>
+                                    <action selector="testImagePreview:" destination="c1r-iV-gTH" eventType="touchUpInside" id="lbw-o3-HmV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="elE-Ui-N5g">
-                                <rect key="frame" x="308" y="385" width="152" height="110"/>
+                                <rect key="frame" x="308" y="240" width="152" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -222,7 +222,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gob-2M-dlg">
-                                <rect key="frame" x="515" y="380" width="153" height="115"/>
+                                <rect key="frame" x="515" y="235" width="153" height="115"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -239,7 +239,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t1i-0x-IFI">
-                                <rect key="frame" x="110" y="562" width="143" height="139"/>
+                                <rect key="frame" x="110" y="417" width="143" height="139"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -256,7 +256,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZL-RB-1lH">
-                                <rect key="frame" x="308" y="562" width="152" height="138"/>
+                                <rect key="frame" x="308" y="417" width="152" height="138"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -273,7 +273,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fGA-EP-Lkz">
-                                <rect key="frame" x="532" y="578" width="118" height="108"/>
+                                <rect key="frame" x="532" y="433" width="118" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -289,16 +289,22 @@
                                     <segue destination="QuB-x4-lyR" kind="modal" identifier="previewImage6" id="eDq-6q-s77"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FTY-IM-MIz" customClass="DDManualImageView">
+                                <rect key="frame" x="217" y="570" width="335" height="434"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="preview" destination="FTY-IM-MIz" id="fKp-m8-nwA"/>
                         <outlet property="serverStateLabel" destination="qoE-YZ-eIt" id="XvI-hZ-IyY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHj-Kl-IGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2917" y="-1856"/>
+            <point key="canvasLocation" x="2931" y="-1884"/>
         </scene>
         <!--Manual Image Preview View Controller-->
         <scene sceneID="uJ8-IA-jXK">
@@ -982,7 +988,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="eDq-6q-s77"/>
+        <segue reference="McR-u4-oy1"/>
         <segue reference="mI7-ct-e0N"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,26 +10,43 @@
 
 @implementation DDManualImageView
 
+@synthesize BUTTON_SIZE;
+
 - (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray *)buttons
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         //button size is size of screen divided by the pixels of image
-        self.BUTTON_SIZE = (CGFloat) ([[UIScreen mainScreen] bounds].size.width / IMAGE_WIDTH);
+        self.BUTTON_SIZE = (CGFloat) (frame.size.width / IMAGE_WIDTH);
         
         //set draw to true (start state is in drawing state)
         
         //initialize array
-        self.table = buttons;
+        self.table = [[NSMutableArray alloc] init];
         
         //now add all the buttons in subview
         for(int i = 0; i < IMAGE_HEIGHT; i++) {
             NSMutableArray *array = [buttons objectAtIndex:i];
+            NSMutableArray *tempArr = [[NSMutableArray alloc] init];
             for(int j = 0; j < IMAGE_WIDTH; j++) {
                 DDButtonCreateImage *button = [array objectAtIndex:j];
-                [self addSubview:button];
+                
+                DDButtonCreateImage *buttonCopy = [[DDButtonCreateImage alloc] initWithFrame:CGRectMake(j * BUTTON_SIZE, (i * BUTTON_SIZE) + BUTTON_HEIGHT_OFFSET, BUTTON_SIZE,BUTTON_SIZE)];
+                
+                if([button isPressed]) {
+                    [buttonCopy buttonDraw];
+                } else {
+                    [buttonCopy buttonErase];
+                }
+                
+                [tempArr addObject:buttonCopy];
+                
+                [self addSubview:buttonCopy];
             }
+            
+            //now add to table
+            [self.table addObject:tempArr];
         }
         
         
@@ -43,7 +60,7 @@
         CGFloat height = [button frame].origin.y + [button frame].size.height;
         
         //done button
-        [self.sendButton setFrame:CGRectMake(([self frame].size.width / 2) - (CONTROL_WIDTH / 2), height + CONTROL_HEIGHT_OFFSET * 3, CONTROL_WIDTH, CONTROL_HEIGHT)];
+        [self.sendButton setFrame:CGRectMake(([self frame].size.width / 2) - (CONTROL_WIDTH / 2), height + CONTROL_HEIGHT_DIFF_OFFSET * 3, CONTROL_WIDTH, CONTROL_HEIGHT)];
         [self.sendButton setTitle:@"Done" forState:UIControlStateNormal];
         [self addSubview:self.sendButton];
         
