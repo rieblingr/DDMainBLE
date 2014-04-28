@@ -19,6 +19,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.sendingDataLabel setHidden:YES];
+    [self.sendingDataIndicator setHidden:YES];
+    [self.sendingDataProgress setHidden:YES];
+    
     [self updateServerLabel];
 }
 
