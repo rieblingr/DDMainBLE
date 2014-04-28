@@ -90,6 +90,12 @@
         ddExecuteDiceVC.delegate = self;
         
     }
+    
+    if([segue.identifier isEqualToString:@"manualStateImageSelect"])
+    {
+        DDManualImageViewController *ddManualImageVC = segue.destinationViewController;
+        ddManualImageVC.delegate = self;
+    }
 }
 
 

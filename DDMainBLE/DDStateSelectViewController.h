@@ -24,6 +24,6 @@
 
 @property (nonatomic, weak) id <DDStateSelectDelegate> delegate;
 
-- (IBAction)cancel:(id)sender;
+- (IBAction)done:(id)sender;
 
 @end

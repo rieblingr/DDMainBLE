@@ -34,6 +34,8 @@
 		A1890FCC190DBAF4000383FC /* DDGryoModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FCB190DBAF4000383FC /* DDGryoModeViewController.m */; };
 		A1890FCF190DBB19000383FC /* DDManualImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FCE190DBB19000383FC /* DDManualImageViewController.m */; };
 		A1890FD2190DBB5B000383FC /* DDManualModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */; };
+		A1890FD5190DF040000383FC /* DDManualImagePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD4190DF040000383FC /* DDManualImagePreviewViewController.m */; };
+		A1890FD8190DF05F000383FC /* DDManualImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD7190DF05F000383FC /* DDManualImageView.m */; };
 		A1D7FD861909845C00293268 /* DDStateSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD851909845C00293268 /* DDStateSetCell.m */; };
 		A1D7FD8919098A2700293268 /* DDExecuteDiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD8819098A2700293268 /* DDExecuteDiceViewController.m */; };
 		A1D7FD8B1909A8CE00293268 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */; };
@@ -300,6 +302,10 @@
 		A1890FCE190DBB19000383FC /* DDManualImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDManualImageViewController.m; sourceTree = "<group>"; };
 		A1890FD0190DBB5B000383FC /* DDManualModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDManualModeViewController.h; sourceTree = "<group>"; };
 		A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDManualModeViewController.m; sourceTree = "<group>"; };
+		A1890FD3190DF040000383FC /* DDManualImagePreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDManualImagePreviewViewController.h; sourceTree = "<group>"; };
+		A1890FD4190DF040000383FC /* DDManualImagePreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDManualImagePreviewViewController.m; sourceTree = "<group>"; };
+		A1890FD6190DF05F000383FC /* DDManualImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDManualImageView.h; sourceTree = "<group>"; };
+		A1890FD7190DF05F000383FC /* DDManualImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDManualImageView.m; sourceTree = "<group>"; };
 		A1D7FD841909845C00293268 /* DDStateSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStateSetCell.h; sourceTree = "<group>"; };
 		A1D7FD851909845C00293268 /* DDStateSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStateSetCell.m; sourceTree = "<group>"; };
 		A1D7FD8719098A2700293268 /* DDExecuteDiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDExecuteDiceViewController.h; sourceTree = "<group>"; };
@@ -615,6 +621,10 @@
 				A1890FC1190D8D3B000383FC /* iPadMain.storyboard */,
 				9FB6B1E9190DBBFF00FD1BFA /* DDSingletonArray.h */,
 				9FB6B1EA190DBBFF00FD1BFA /* DDSingletonArray.m */,
+				A1890FD3190DF040000383FC /* DDManualImagePreviewViewController.h */,
+				A1890FD4190DF040000383FC /* DDManualImagePreviewViewController.m */,
+				A1890FD6190DF05F000383FC /* DDManualImageView.h */,
+				A1890FD7190DF05F000383FC /* DDManualImageView.m */,
 			);
 			path = DDMainBLE;
 			sourceTree = "<group>";
@@ -1208,6 +1218,7 @@
 				A1890FCF190DBB19000383FC /* DDManualImageViewController.m in Sources */,
 				A1D7FD8919098A2700293268 /* DDExecuteDiceViewController.m in Sources */,
 				9F8ED2E7190ADA0600CE7655 /* DDCreateImageView.m in Sources */,
+				A1890FD5190DF040000383FC /* DDManualImagePreviewViewController.m in Sources */,
 				A1D7FD911909D99B00293268 /* DDTimerController.m in Sources */,
 				A1109E3C1905E89D00C0088B /* DDAppDelegate.m in Sources */,
 				A17D55B719077095008DD792 /* DDStateSelectViewController.m in Sources */,
@@ -1218,6 +1229,7 @@
 				A1890FD2190DBB5B000383FC /* DDManualModeViewController.m in Sources */,
 				9F1A491019084F500049049B /* Server.m in Sources */,
 				A1890FC9190DBAE1000383FC /* DDStateImageSelectViewController.m in Sources */,
+				A1890FD8190DF05F000383FC /* DDManualImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

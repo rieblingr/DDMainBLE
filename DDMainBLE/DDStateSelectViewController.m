@@ -92,7 +92,7 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (IBAction)cancel:(id)sender
+- (IBAction)done:(id)sender
 {
     [self.delegate didCancelStateSelect:self];
 }

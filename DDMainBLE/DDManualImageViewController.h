@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DDSingletonArray.h"
+#import "DDManualImagePreviewViewController.h"
+#import "Server.h"
 
 @class DDManualImageViewController;
 
@@ -16,9 +19,11 @@
 
 @end
 
-@interface DDManualImageViewController : UIViewController
+@interface DDManualImageViewController : UIViewController<DDManualImagePreviewDelegate>
 
 @property (nonatomic, weak) id <DDManualImageDelegate> delegate;
+@property (nonatomic, assign) int state;
+@property (strong, nonatomic) IBOutlet UILabel *serverStateLabel;
 
 -(IBAction)cancel:(id)sender;
 
