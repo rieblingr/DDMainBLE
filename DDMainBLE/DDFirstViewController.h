@@ -10,6 +10,7 @@
 #import "DDBLEViewController.h"
 #import "DDExecuteDiceViewController.h"
 #import "DDManualImageViewController.h"
+#import "DDGryoModeViewController.h"
 #import "Server.h"
 
 @interface DDFirstViewController : UIViewController<DDManualImageDelegate, DDBLEViewControllerDelegate, DDExecuteDiceViewControllerDelegate>

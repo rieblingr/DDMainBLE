@@ -96,6 +96,13 @@
         DDManualImageViewController *ddManualImageVC = segue.destinationViewController;
         ddManualImageVC.delegate = self;
     }
+    
+    if([segue.identifier isEqualToString:@"gryoModeSelect"])
+    {
+        DDGryoModeViewController *ddGryoModeVC = segue.destinationViewController;
+        //ddGryoModeVC.delegate = self;
+    }
+
 }
 
 

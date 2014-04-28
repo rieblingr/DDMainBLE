@@ -52,7 +52,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <segue destination="T3m-gu-92t" kind="modal" identifier="gyroMode" id="N74-9r-act"/>
+                                    <segue destination="T3m-gu-92t" kind="modal" identifier="gyroModeSelect" id="6ng-2Z-G0R"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cbw-CS-sBr">
@@ -461,7 +461,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O94-a6-xQC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2224" y="-3792"/>
+            <point key="canvasLocation" x="3917" y="-518"/>
         </scene>
         <!--Create Image View Controller-->
         <scene sceneID="p7o-vk-XM6">
