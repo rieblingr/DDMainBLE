@@ -84,14 +84,13 @@
 
 //all the bluetooth things
 - (void) startTransferWithArray:(NSMutableArray*)array withBitmask:(int)dispBitmask {
-    NSLog(@"HELLO");
     self.dispBitMask = dispBitmask;
     [self initBluetooth];
 }
 
 - (void) initBluetooth {
     // Setup services
-    self.ddServices = @[[CBUUID UUIDWithString:DISPLAY_SERVICE_UUID],[ CBUUID UUIDWithString:GYRO_SERVICE_UUID]];
+    self.ddServices = @[[CBUUID UUIDWithString:DISPLAY_DATA_SERVICE_UUID], [CBUUID UUIDWithString:DISPLAY_INFO_SERVICE_UUID],[ CBUUID UUIDWithString:GYRO_SERVICE_UUID]];
     
     //set write type
     self.writeType = CBCharacteristicWriteWithoutResponse;
@@ -154,14 +153,10 @@
 {
     NSLog(@"Services discovered");
     for (CBService *service in peripheral.services) {
-        if ([service.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_SERVICE_UUID]]) {
-            NSLog(@"Found display service");
-            self.displayService = service;
+        NSLog(@"Service: %@", service.UUID);
+        if([service.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_INFO_SERVICE_UUID]]) {
+            NSLog(@"Found Info Service");
             [self.peripheral discoverCharacteristics:nil forService:service];
-        }
-        if ([service.UUID isEqual:[CBUUID UUIDWithString:GYRO_SERVICE_UUID]]) {
-            self.gyroService = service;
-            
         }
     }
 }
@@ -169,21 +164,38 @@
 // Invoked when you discover the characteristics of a specified service.
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    NSLog(@"Received characteristics");
-    self.displayService = service;
     
-    for (CBCharacteristic *aChar in service.characteristics)
-    {
-        if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_TARGET_CHARACTERISTIC_UUID]]) {
-            NSLog(@"Setting Bitmask");
-            int tempInt = self.dispBitMask;
-            NSData *tempData = [NSData dataWithBytes:&tempInt length:sizeof(tempInt)];
-            [self.peripheral writeValue:tempData forCharacteristic:aChar type:self.writeType];
-            
-            //after calling that, now send data
-            [self sendData];
-        }
+    if ([service.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_INFO_SERVICE_UUID]]) {
+        NSLog(@"Discovered info service");
+        self.dispInfoService = service;
         
+        //run through characteristics
+        for (CBCharacteristic *aChar in service.characteristics)
+        {
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_INFO_TARGET_CHARACTERISTIC_UUID]]) {
+                NSLog(@"Setting Bitmask");
+                char tempInt = self.dispBitMask;
+                NSData *tempData = [NSData dataWithBytes:&tempInt length:sizeof(tempInt)];
+                [self.peripheral writeValue:tempData forCharacteristic:aChar type:self.writeType];
+                
+                for(CBService *dataService in self.peripheral.services) {
+                    if ([dataService.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_DATA_SERVICE_UUID]]) {
+                        NSLog(@"Found display service");
+                        [self.peripheral discoverCharacteristics:nil forService:dataService];
+                    }
+                }
+            }
+            
+        }
+    }
+
+    
+    if([service.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_DATA_SERVICE_UUID]]) {
+        NSLog(@"Discovered data service");
+        self.dispDataService = service;
+        
+        //after calling that, now send data
+        [self sendData];
     }
     
 }
@@ -196,24 +208,14 @@
         NSData *tempData = [self.data objectAtIndex:i];
         unsigned char* readData = (unsigned char*) [tempData bytes];
         
-        //send index
-        if(i != 0) {
-            for(CBCharacteristic *aChar in self.displayService.characteristics) {
-                
-                if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_INDEX_CHARACTERISTIC_UUID]]) {
-                    
-                    NSData *tempIndexData = [NSData dataWithBytes:&i length:sizeof(i)];
-                    
-                    [self.peripheral writeValue:tempIndexData forCharacteristic:aChar type:self.writeType];
-                }
-            }
-        }
-
-        [NSThread sleepForTimeInterval:0.4f];
-
+        //make a new string based off of i
+        NSString *currChar = [NSString stringWithFormat:@"%@%02x", DISPLAY_DATA_BASE_CHARACTERISTIC_UUID, i+1];
+        
+        NSLog(@"Using Char: %@", currChar);
+        
         //send data
-        for(CBCharacteristic *aChar in self.displayService.characteristics) {
-            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_DATA_CHARACTERISTIC_UUID]]) {
+        for(CBCharacteristic *aChar in self.dispDataService.characteristics) {
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:currChar]]) {
                 char test[4];
                 test[0] = readData[0];
                 test[1] = readData[1];
@@ -222,14 +224,24 @@
                 
                 NSData *sendData = [NSData dataWithBytes:test length:sizeof(test)];
                 
+                NSLog(@"Writing index: %i", i);
                 [self.peripheral writeValue:sendData forCharacteristic:aChar type:self.writeType];
-                
-                if(i == 0) {
-                    [NSThread sleepForTimeInterval:0.4f];
-                }
             }
         }
         
+    }
+    
+    [NSThread sleepForTimeInterval:0.4f];
+    
+    //now that we wrote, write 1 to busy signal
+    for(CBCharacteristic *aChar in self.dispInfoService.characteristics) {
+        if([aChar.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_INFO_BUSY_CHARACTERISTIC_UUID]]) {
+            
+            char busy = 1;
+            
+            NSData *sendData = [NSData dataWithBytes:&busy length:sizeof(busy)];
+            [self.peripheral writeValue:sendData forCharacteristic:aChar type:self.writeType];
+        }
     }
     
     [self.centralManager cancelPeripheralConnection:self.peripheral];

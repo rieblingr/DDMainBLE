@@ -33,7 +33,6 @@
 		A1890FCF190DBB19000383FC /* DDManualImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FCE190DBB19000383FC /* DDManualImageViewController.m */; };
 		A1890FD2190DBB5B000383FC /* DDManualModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */; };
 		A1890FD8190DF05F000383FC /* DDManualImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD7190DF05F000383FC /* DDManualImageView.m */; };
-		A1890FDB190DFCFE000383FC /* DDBluetoothExecute.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FDA190DFCFE000383FC /* DDBluetoothExecute.m */; };
 		A1D7FD861909845C00293268 /* DDStateSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD851909845C00293268 /* DDStateSetCell.m */; };
 		A1D7FD8919098A2700293268 /* DDExecuteDiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD8819098A2700293268 /* DDExecuteDiceViewController.m */; };
 		A1D7FD8B1909A8CE00293268 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */; };
@@ -295,8 +294,6 @@
 		A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDManualModeViewController.m; sourceTree = "<group>"; };
 		A1890FD6190DF05F000383FC /* DDManualImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDManualImageView.h; sourceTree = "<group>"; };
 		A1890FD7190DF05F000383FC /* DDManualImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDManualImageView.m; sourceTree = "<group>"; };
-		A1890FD9190DFCFE000383FC /* DDBluetoothExecute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDBluetoothExecute.h; sourceTree = "<group>"; };
-		A1890FDA190DFCFE000383FC /* DDBluetoothExecute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDBluetoothExecute.m; sourceTree = "<group>"; };
 		A1D7FD841909845C00293268 /* DDStateSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStateSetCell.h; sourceTree = "<group>"; };
 		A1D7FD851909845C00293268 /* DDStateSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStateSetCell.m; sourceTree = "<group>"; };
 		A1D7FD8719098A2700293268 /* DDExecuteDiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDExecuteDiceViewController.h; sourceTree = "<group>"; };
@@ -604,8 +601,6 @@
 				9FB6B1EA190DBBFF00FD1BFA /* DDSingletonArray.m */,
 				A1890FD6190DF05F000383FC /* DDManualImageView.h */,
 				A1890FD7190DF05F000383FC /* DDManualImageView.m */,
-				A1890FD9190DFCFE000383FC /* DDBluetoothExecute.h */,
-				A1890FDA190DFCFE000383FC /* DDBluetoothExecute.m */,
 			);
 			path = DDMainBLE;
 			sourceTree = "<group>";
@@ -1157,7 +1152,6 @@
 			files = (
 				A1D7FD8E1909BBCD00293268 /* DDCreateImageViewController.m in Sources */,
 				A1890FCC190DBAF4000383FC /* DDGryoModeViewController.m in Sources */,
-				A1890FDB190DFCFE000383FC /* DDBluetoothExecute.m in Sources */,
 				A1109E421905E89D00C0088B /* DDFirstViewController.m in Sources */,
 				9FB6B1EB190DBBFF00FD1BFA /* DDSingletonArray.m in Sources */,
 				A1890FCF190DBB19000383FC /* DDManualImageViewController.m in Sources */,

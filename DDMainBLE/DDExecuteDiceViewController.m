@@ -154,7 +154,7 @@
     self.isFinishWritingTarget = NO;
     self.isFinishWritingBusy = NO;
     
-    self.ddServices = @[[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID],[ CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]];
+    self.ddServices = @[[CBUUID UUIDWithString:DD_DISPLAY_SERVICE_UUID],[ CBUUID UUIDWithString:DD_GYRO_OLD_SERVICE_UUID]];
     self.displayBusyCharArray = @[[CBUUID UUIDWithString:DD_DISPLAY_BUSY_CHARACTERISTIC_UUID]];
     self.displayDataCharsArray = @[[CBUUID UUIDWithString:DD_DISPLAY_DATA_CHARACTERISTIC_UUID]];
     self.displayTargetCharsArray = @[[CBUUID UUIDWithString:DD_DISPLAY_TARGET_CHARACTERISTIC_UUID]];
@@ -221,7 +221,7 @@
             self.displayService = service;
             [self.peripheral discoverCharacteristics:self.displayBusyCharArray forService:service];
         }
-        if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_SERVICE_UUID]]) {
+        if ([service.UUID isEqual:[CBUUID UUIDWithString:DD_GYRO_OLD_SERVICE_UUID]]) {
             self.gyroService = service;
             
         }
