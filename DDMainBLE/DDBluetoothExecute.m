@@ -1,73 +1,25 @@
 //
-//  DDManualImageView.m
+//  DDBluetoothExecute.m
 //  DDMainBLE
 //
 //  Created by Ryan Riebling on 4/27/14.
 //  Copyright (c) 2014 Ryan Riebling. All rights reserved.
 //
 
-#import "DDManualImageView.h"
+#import "DDBluetoothExecute.h"
 
-@implementation DDManualImageView
+@implementation DDBluetoothExecute
 
-- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray *)buttons
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        //button size is size of screen divided by the pixels of image
-        self.BUTTON_SIZE = (CGFloat) ([[UIScreen mainScreen] bounds].size.width / IMAGE_WIDTH);
-        
-        //set draw to true (start state is in drawing state)
-        
-        //initialize array
-        self.table = buttons;
-        
-        //now add all the buttons in subview
-        for(int i = 0; i < IMAGE_HEIGHT; i++) {
-            NSMutableArray *array = [buttons objectAtIndex:i];
-            for(int j = 0; j < IMAGE_WIDTH; j++) {
-                DDButtonCreateImage *button = [array objectAtIndex:j];
-                [self addSubview:button];
-            }
-        }
-        
-        
-        //make the buttons on the bottom
-        self.sendButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        
-        //get the height of the last button
-        NSMutableArray *arr = [self.table objectAtIndex:[self.table count] - 1];
-        UIButton *button = [arr objectAtIndex:0];
-        
-        CGFloat height = [button frame].origin.y + [button frame].size.height;
-        
-        //done button
-        [self.sendButton setFrame:CGRectMake(([self frame].size.width / 2) - (CONTROL_WIDTH / 2), height + CONTROL_HEIGHT_OFFSET * 3, CONTROL_WIDTH, CONTROL_HEIGHT)];
-        [self.sendButton setTitle:@"Done" forState:UIControlStateNormal];
-        [self addSubview:self.sendButton];
-        
-        //now set the targets to here
-        [self.sendButton addTarget:self action:@selector(sendImage) forControlEvents:UIControlEventTouchDown];
+-(id) init {
+    self = [super init];
+    
+    if(self) {
+        NSLog(@"Created Bluetooth Object");
     }
+    
     return self;
 }
 
-- (IBAction)sendImage {
-    NSMutableArray *dataArray = [DDSingletonArray makeData:self.table];
-    
-    NSLog(@"array count: %lu", (unsigned long)[dataArray count]);
-    
-    [self startTransferWithArray:dataArray withBitmask:0];
-}
-
-//bluetooth delegate function
-- (void) finishedTransfer {
-    NSLog(@"FINISH");
-}
-
-
-//all the bluetooth things
 - (void) startTransferWithArray:(NSMutableArray*)array withBitmask:(int)dispBitmask {
     NSLog(@"HELLO");
     self.data = array;
@@ -92,6 +44,7 @@
 # pragma mark - CBCentralManagerDelegate
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
+    NSLog(@"HITS HERE");
     // Determine the state of the peripheral
     if ([central state] == CBCentralManagerStatePoweredOff) {
         NSLog(@"CoreBluetooth BLE hardware is powered off");
@@ -113,6 +66,8 @@
 // CBCentralManagerDelegate - This is called with the CBPeripheral class as its main input parameter. This contains most of the information there is to know about a BLE peripheral.
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    NSLog(@"HITS HERE 2");
+    
     NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
     if ([localName length] > 0) {
         NSLog(@"Found the DD Service: %@", localName);
@@ -138,10 +93,8 @@
 // CBPeripheralDelegate - Invoked when you discover the peripheral's available services.
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
-    NSLog(@"Services discovered");
     for (CBService *service in peripheral.services) {
         if ([service.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_SERVICE_UUID]]) {
-            NSLog(@"Found display service");
             self.displayService = service;
             [self.peripheral discoverCharacteristics:nil forService:service];
         }
@@ -155,7 +108,6 @@
 // Invoked when you discover the characteristics of a specified service.
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    NSLog(@"Received characteristics");
     self.displayService = service;
     
     for (CBCharacteristic *aChar in service.characteristics)
@@ -179,9 +131,7 @@
     
     for(int i = 0; i < [self.data count]; i++) {
         NSData *tempData = [self.data objectAtIndex:i];
-        char *test = (char*)[tempData bytes];
         
-        NSLog(@"Index: %i Data: %i", i, *test);
         //send index
         for(CBCharacteristic *aChar in self.displayService.characteristics) {
             
@@ -202,17 +152,8 @@
         
     }
     
-    NSLog(@"DONE");
+    [self.delegate finishedTransfer];
 }
 
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

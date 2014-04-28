@@ -56,6 +56,7 @@
 
 + (NSMutableArray*) makeData:(NSMutableArray*)table {
     char bytes[4];
+    int byteIndex = 0;
     
     //the array to return
     NSMutableArray *returnedArray = [[NSMutableArray alloc] init];
@@ -65,7 +66,6 @@
         //for each column
         for(int j = 0; j < IMAGE_WIDTH; j++) {
             int count[8];
-            int byteIndex = 0;
             int index = 0;
             //this is the starting from the bottom of the column
             for(int k = (i * 7); k <= (i * 7) + 7; k++) {

@@ -18,5 +18,6 @@
 @property NSMutableArray *array;
 
 +(id)singleton;
++ (NSMutableArray*) makeData:(NSMutableArray*)table;
 
 @end
