@@ -29,6 +29,23 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //grab array
+    
+    NSMutableArray *array = ((DDSingletonArray*)[DDSingletonArray singleton]).array;
+    
+    //now using state and imageSelected
+    NSMutableArray *imageArrayForSet = [array objectAtIndex:self.state - 1];
+    
+    //now get array for button
+    NSMutableArray *buttonForImage = [imageArrayForSet objectAtIndex:self.imageSelected - 1];
+    
+    DDManualImageView *createView =[[DDManualImageView alloc] initWithFrame:CGRectMake(0, 44, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 64) withArray:buttonForImage];
+    
+    createView.state = self.state;
+    createView.delegate = self;
+    createView.imageSelected = self.imageSelected;
+    [self.view addSubview:createView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +67,11 @@
 
 - (IBAction)cancel:(id)sender
 {
+    [self.delegate didCancel:self];
+}
+
+//delegate for manual image view
+-(void) sendPicture {
     [self.delegate didCancel:self];
 }
 
