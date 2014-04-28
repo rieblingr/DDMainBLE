@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DDExecuteDiceViewController.h"
 #import "DDManualImageViewController.h"
 #import "DDGryoModeViewController.h"
 #import "Server.h"
 
-@interface DDFirstViewController : UIViewController<DDManualImageDelegate, DDExecuteDiceViewControllerDelegate>
+@interface DDFirstViewController : UIViewController<DDManualImageDelegate>
 
 
 @property (nonatomic, strong) NSMutableArray *services;
