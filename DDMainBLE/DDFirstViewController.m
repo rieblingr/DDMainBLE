@@ -119,4 +119,9 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (void)didCancelManualMode:(DDManualImageViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 @end

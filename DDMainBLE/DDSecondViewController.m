@@ -9,6 +9,7 @@
 #import "DDSecondViewController.h"
 #import "DDExecuteDiceViewController.h"
 #import "DDCreateImageSetViewController.h"
+#import "Server.h"
 
 @interface DDSecondViewController ()
 
@@ -20,6 +21,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view
+    [self updateServerLabel];
     
 }
 
@@ -28,6 +30,29 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Server
+
+- (void)updateServerLabel
+{
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:[Server getState]
+                          
+                          options:kNilOptions
+                          error:&error];
+    
+    NSArray* dataState = [json objectForKey:@"state"];
+    
+    NSLog(@"Json: %@", json);
+    
+    [self.serverStateLabel setText:[NSString stringWithFormat:@"Current Server State: %@", dataState]];
+    
+    NSLog(@"ServerState: %@", dataState);
+    
+}
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -47,12 +72,5 @@
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
-
-//create image view controller delegate functions
-- (void) ddCreateImageVCDidCancel:(DDCreateImageViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
 
 @end

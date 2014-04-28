@@ -46,4 +46,9 @@
 }
 */
 
+- (IBAction)cancel:(id)sender
+{
+    [self.delegate didCancelManualMode:self];
+}
+
 @end

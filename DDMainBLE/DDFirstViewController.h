@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "DDBLEViewController.h"
 #import "DDExecuteDiceViewController.h"
+#import "DDManualImageViewController.h"
 #import "Server.h"
 
-@interface DDFirstViewController : UIViewController<DDBLEViewControllerDelegate, DDExecuteDiceViewControllerDelegate>
+@interface DDFirstViewController : UIViewController<DDManualImageDelegate, DDBLEViewControllerDelegate, DDExecuteDiceViewControllerDelegate>
 
 
 @property (nonatomic, strong) NSMutableArray *services;

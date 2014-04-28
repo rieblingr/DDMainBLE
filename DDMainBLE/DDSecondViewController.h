@@ -14,18 +14,17 @@
 @class DDSecondViewController;
 
 @protocol DDSecondViewControllerDelegate <NSObject>
-- (void) receiveImageArray:(NSArray *)array;
-- (void) receiveImageSetArrays:(NSArray *)sets;
+
 @end
 
-@interface DDSecondViewController : UIViewController <DDStateSelectDelegate, DDCreateImageSetViewControllerDelegate>
+@interface DDSecondViewController : UIViewController <DDStateSelectDelegate>
 
 
 @property (nonatomic, strong) IBOutlet UIButton *configureImages;
-@property (nonatomic, strong) IBOutlet UIButton *viewImageSets;
-@property (strong, nonatomic) IBOutlet UIButton *createImage;
+@property (strong, nonatomic) IBOutlet UILabel *serverStateLabel;
 
-@property (strong, nonatomic) IBOutlet UIImageView *createdImage;
+
+
 
 @property (nonatomic, weak) id <DDSecondViewControllerDelegate> delegate;
 

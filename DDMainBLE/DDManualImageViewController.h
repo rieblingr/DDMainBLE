@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class DDManualImageViewController;
+
+@protocol DDManualImageDelegate <NSObject>
+
+- (void)didCancelManualMode:(DDManualImageViewController *)controller;
+
+@end
+
 @interface DDManualImageViewController : UIViewController
+
+@property (nonatomic, weak) id <DDManualImageDelegate> delegate;
+
+-(IBAction)cancel:(id)sender;
 
 @end

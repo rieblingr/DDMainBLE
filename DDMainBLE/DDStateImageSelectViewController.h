@@ -20,7 +20,12 @@
 
 @interface DDStateImageSelectViewController : UIViewController<DDCreateImageViewControllerDelegate>
 
+@property (strong, nonatomic) IBOutlet UILabel *imageSetLabel;
+
 @property (nonatomic, weak) id <DDStateImageSelectDelegate> delegate;
 @property (nonatomic, assign) int state;
+
+- (IBAction)cancel:(id)sender;
+- (IBAction)done:(id)sender;
 
 @end

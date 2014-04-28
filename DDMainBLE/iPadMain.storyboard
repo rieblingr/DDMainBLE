@@ -101,7 +101,7 @@ Gyroscope Mode: The image set changes based on gyroscope reading
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TTV-LG-lZQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2823" y="-693"/>
+            <point key="canvasLocation" x="2731" y="-722"/>
         </scene>
         <!--Manual Image View Controller-->
         <scene sceneID="uty-1b-JWd">
@@ -119,16 +119,36 @@ Gyroscope Mode: The image set changes based on gyroscope reading
                                 <rect key="frame" x="0.0" y="18" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Title" id="GrX-Fr-fde"/>
+                                    <navigationItem title="Manual Mode Image Select" id="GrX-Fr-fde">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="x6M-Jg-bXb">
+                                            <connections>
+                                                <action selector="cancel:" destination="c1r-iV-gTH" id="hD5-g8-KLg"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoE-YZ-eIt">
+                                <rect key="frame" x="106" y="97" width="556" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="State:">
+                                        <attributes>
+                                            <color key="NSColor" red="0.00019371711026661131" green="0.4747321523054473" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="48" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <color key="highlightedColor" red="0.00077509377359999995" green="0.71357982099999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHj-Kl-IGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2745" y="-2362"/>
+            <point key="canvasLocation" x="2731" y="-2154"/>
         </scene>
         <!--Execute Dice View Controller-->
         <scene sceneID="F08-tn-n01">
@@ -316,7 +336,7 @@ Gyroscope Mode: The image set changes based on gyroscope reading
                                                 <fragment content="Server State Image Set">
                                                     <attributes>
                                                         <color key="NSColor" red="0.0" green="0.53475348293564728" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" size="24" name="HelveticaNeue-UltraLight"/>
+                                                        <font key="NSFont" size="24" name="HelveticaNeue-Light"/>
                                                         <font key="NSOriginalFont" size="17" name="HelveticaNeue-UltraLight"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                     </attributes>
@@ -494,9 +514,42 @@ Gyroscope Mode: The image set changes based on gyroscope reading
                                     <segue destination="NEy-fO-VJn" kind="modal" identifier="setImage5" id="kkL-I8-zwG"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cD-CW-FAH">
+                                <rect key="frame" x="132" y="238" width="504" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Select which Image you would like to change:">
+                                        <attributes>
+                                            <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sRJ-FZ-yBM">
+                                <rect key="frame" x="305" y="719" width="159" height="103"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Done">
+                                            <attributes>
+                                                <font key="NSFont" size="36" name="HelveticaNeue-Light"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="done:" destination="fnT-2T-Bv8" eventType="touchUpInside" id="6dY-wN-bO9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="imageSetLabel" destination="Xio-z0-EPL" id="dwL-3b-wsb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4v0-TL-mg7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -678,6 +731,9 @@ Gyroscope Mode: The image set changes based on gyroscope reading
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Images" image="168-upload-photo-2.png" id="AEb-xv-acT"/>
+                    <connections>
+                        <outlet property="serverStateLabel" destination="d9y-Ty-hn6" id="rPb-dX-E0y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t2e-77-wlh" sceneMemberID="firstResponder"/>
             </objects>
@@ -714,6 +770,6 @@ Gyroscope Mode: The image set changes based on gyroscope reading
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="kkL-I8-zwG"/>
+        <segue reference="mI7-ct-e0N"/>
     </inferredMetricsTieBreakers>
 </document>

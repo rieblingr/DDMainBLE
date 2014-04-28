@@ -19,7 +19,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSLog(@"Setting Label to server state: %i", self.state);
+    NSLog(@"Setting Label to server state: %i", self.state + 1);
+    self.imageSetLabel.text = [self.imageSetLabel.text stringByAppendingString:[NSString stringWithFormat:@"%i", self.state + 1]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,6 +94,11 @@
 }
 
 - (IBAction)cancel:(id)sender
+{
+    [self.delegate didCancelStateImageSelect:self];
+}
+
+- (IBAction)done:(id)sender
 {
     [self.delegate didCancelStateImageSelect:self];
 }
