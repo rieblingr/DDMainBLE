@@ -12,12 +12,21 @@
 @import QuartzCore;
 @import CoreBluetooth;
 
+@protocol DDSingletonBluetoothDelegate <NSObject>
+
+-(void) finishedSending;
+
+@end
+
 @interface DDSingletonBluetooth : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
 
 //bluetooth
 @property (strong, nonatomic) NSMutableArray *table;
 @property (strong, nonatomic) NSMutableArray *data;
 @property int dispBitMask;
+
+//delegate
+@property (weak, nonatomic) id<DDSingletonBluetoothDelegate> delegate;
 
 // Services on DD hardware
 #define DD_DEVICE_INFO_SERVICE_UUID @"1800"
@@ -45,6 +54,8 @@
 
 //functions
 - (void) startTransferWithArray:(NSMutableArray*)array withBitmask:(int)dispBitmask;
+
+- (void) disconnect;
 
 //singleton functions
 +(id) singleton;

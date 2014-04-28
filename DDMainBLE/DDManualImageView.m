@@ -73,9 +73,21 @@
 }
 
 - (IBAction)sendImage {
-    DDSingletonBluetooth *bluetooth = [DDSingletonBluetooth singleton];
     
+    //initialize bluetooth and set delegate to self
+    DDSingletonBluetooth *bluetooth = [DDSingletonBluetooth singleton];
+    bluetooth.delegate = self;
+    
+    //send the view's delegate that it began sending
+    [self.delegate sendBegin];
+    
+    //begin tranfser of the bluetooth
     [bluetooth startTransferWithArray:self.table withBitmask:0];
+}
+
+-(void) finishedSending {
+    //when the bluetooth is done sending, send the view's delegate that it has finished
+    [self.delegate sendEnd];
 }
 
 /*
