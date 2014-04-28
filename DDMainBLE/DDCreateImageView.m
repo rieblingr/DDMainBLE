@@ -76,6 +76,7 @@
         //done button
         [doneButton setFrame:CGRectMake(([self frame].size.width / 2) - (CONTROL_WIDTH / 2), height + CONTROL_HEIGHT_OFFSET * 3, CONTROL_WIDTH, CONTROL_HEIGHT)];
         [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+        [[doneButton titleLabel] setFont:[UIFont systemFontOfSize:32.0]];
         [self addSubview:doneButton];
         
         //now set the targets to here
