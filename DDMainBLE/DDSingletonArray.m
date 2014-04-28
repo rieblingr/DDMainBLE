@@ -54,4 +54,49 @@
     return returnArray;
 }
 
++ (NSData*) makeData:(NSMutableArray*)table {
+    char bytes[128];
+    
+    int countByteIndex = 0;
+    
+    //i represents the page it is currently on
+    for(int i = 0; i < 4; i++) {
+        //for each column
+        for(int j = 0; j < IMAGE_WIDTH; j++) {
+            int count[8];
+            int index = 0;
+            //this is the starting from the bottom of the column
+            for(int k = (i * 7) + 7; k >= (i * 7); k--) {
+                NSMutableArray *tempArr = [table objectAtIndex:k];
+                DDButtonCreateImage *button = [tempArr objectAtIndex:j];
+                
+                if([button isPressed]) {
+                    count[index] = 1;
+                } else {
+                    count[index] = 0;
+                }
+                index++;
+            }
+            
+            //make the count into NSData and add
+            
+            //now make the NSData using the information
+            int tempNum = 0;
+            
+            for(int i = 0; i < 8; i++) {
+                tempNum += (count[i] * pow(2, (7 - i)));
+            }
+            
+            //add to byte array
+            bytes[countByteIndex] = (char) tempNum;
+            
+            countByteIndex++;
+        }
+    }
+    
+    NSData *data = [NSData dataWithBytes:bytes length:sizeof(bytes)];
+    
+    return data;
+}
+
 @end

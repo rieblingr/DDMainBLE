@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DDCreateImageView.h"
+#import "DDSingletonArray.h"
 
 @class DDCreateImageViewController;
 
@@ -15,15 +16,13 @@
 
 - (void) ddCreateImageVCDidCancel: (DDCreateImageViewController *)controller;
 
-- (void) ddCreateImageVC : (NSData *) data;
-
 @end
 
-@interface DDCreateImageViewController : UIViewController <DDCreateImageViewDelegate>
-
-@property (nonatomic, weak) id <DDCreateImageViewControllerDelegate> delegate;
+@interface DDCreateImageViewController : UIViewController<DDCreateImageViewDelegate>
 
 @property (nonatomic, strong) DDCreateImageView *createView;
+
+@property (nonatomic, strong) id<DDCreateImageViewControllerDelegate> delegate;
 
 // Values passed from Segue
 @property (nonatomic, assign) int state;

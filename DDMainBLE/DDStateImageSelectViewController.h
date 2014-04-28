@@ -13,7 +13,6 @@
 
 @protocol DDStateImageSelectDelegate <NSObject>
 
-- (void) didCreateImageArray:(NSData *)data;
 - (void) didCancelStateImageSelect: (DDStateImageSelectViewController *)controller;
 
 @end

@@ -12,7 +12,7 @@
 
 @synthesize table, BUTTON_SIZE, pan, isDraw, drawButton, eraseButton, eraseAllButton, doneButton, delegate;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray*) buttons
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -25,8 +25,16 @@
         isDraw = YES;
         
         //initialize array
-        table = [[NSMutableArray alloc] init];
-        [self makeButtons];
+        table = buttons;
+        
+        //now add all the buttons in subview
+        for(int i = 0; i < IMAGE_HEIGHT; i++) {
+            NSMutableArray *array = [buttons objectAtIndex:i];
+            for(int j = 0; j < IMAGE_WIDTH; j++) {
+                DDButtonCreateImage *button = [array objectAtIndex:j];
+                [self addSubview:button];
+            }
+        }
         
         //pan recognizer
         pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panRec:)];
@@ -163,48 +171,19 @@
 }
 
 - (IBAction) makeArray {
-    char bytes[128];
+    //save image into singleton
+    DDSingletonArray *singleton = [DDSingletonArray singleton];
     
-    int countByteIndex = 0;
+    //now add it to the particular array
+    NSMutableArray *imagesArray = [singleton.array objectAtIndex:self.state - 1];
     
-    //i represents the page it is currently on
-    for(int i = 0; i < 4; i++) {
-        //for each column
-        for(int j = 0; j < IMAGE_WIDTH; j++) {
-            int count[8];
-            int index = 0;
-            //this is the starting from the bottom of the column
-            for(int k = (i * 7) + 7; k >= (i * 7); k--) {
-                NSMutableArray *tempArr = [table objectAtIndex:k];
-                DDButtonCreateImage *button = [tempArr objectAtIndex:j];
-                
-                if([button isPressed]) {
-                    count[index] = 1;
-                } else {
-                    count[index] = 0;
-                }
-                index++;
-            }
-            
-            //make the count into NSData and add
-            
-            //now make the NSData using the information
-            int tempNum = 0;
-            
-            for(int i = 0; i < 8; i++) {
-                tempNum += (count[i] * pow(2, (7 - i)));
-            }
-            
-            //add to byte array
-            bytes[countByteIndex] = (char) tempNum;
-            
-            countByteIndex++;
-        }
-    }
+    //add it
+    [imagesArray removeObjectAtIndex:self.imageSelected - 1];
+    [imagesArray insertObject:table atIndex:self.imageSelected - 1];
     
-    NSData *data = [NSData dataWithBytes:bytes length:sizeof(bytes)];
+    //call delegate
+    [delegate doneWithImage];
     
-    [delegate ddCreateImage:data];
 }
 
 /*

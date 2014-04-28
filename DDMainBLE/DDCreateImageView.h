@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DDButtonCreateImage.h"
+#import "DDSingletonArray.h"
 
 #define IMAGE_WIDTH 32
 #define IMAGE_HEIGHT 32
@@ -19,7 +20,7 @@
 
 @protocol DDCreateImageViewDelegate <NSObject>
 
-- (void) ddCreateImage : (NSData*) data;
+-(void) doneWithImage;
 
 @end
 
@@ -43,6 +44,12 @@
 
 @property (strong, nonatomic) UIButton *doneButton;
 
-@property (nonatomic, weak) id <DDCreateImageViewDelegate> delegate;
+//delegate object
+@property (strong, nonatomic) id<DDCreateImageViewDelegate> delegate;
+
+@property int state;
+@property int imageSelected;
+
+- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray*) buttons;
 
 @end

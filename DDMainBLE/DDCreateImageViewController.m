@@ -25,18 +25,30 @@
     return self;
 }
 
-//delegate function
-- (void) ddCreateImage:(NSData *)data {
-    //send to the next delegate
-    [delegate ddCreateImageVC:data];
+-(void) doneWithImage {
+    NSLog(@"Finished Image");
+    [self.delegate ddCreateImageVCDidCancel:self];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    createView =[[DDCreateImageView alloc] initWithFrame:CGRectMake(0, 44, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 64)];
-    createView.delegate = self;
+    
+    //grab array
+    
+    NSMutableArray *array = ((DDSingletonArray*)[DDSingletonArray singleton]).array;
+    
+    //now using state and imageSelected
+    NSMutableArray *imageArrayForSet = [array objectAtIndex:self.state - 1];
+    
+    //now get array for button
+    NSMutableArray *buttonForImage = [array objectAtIndex:self.imageSelected - 1];
+    
+    createView =[[DDCreateImageView alloc] initWithFrame:CGRectMake(0, 44, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height - 64) withArray:buttonForImage];
+    
+    createView.state = self.state;
+    createView.imageSelected = self.imageSelected;
     [self.view addSubview:createView];
 
 
