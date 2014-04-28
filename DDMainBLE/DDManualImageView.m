@@ -59,9 +59,11 @@
         
         CGFloat height = [button frame].origin.y + [button frame].size.height;
         
-        //done button
+        //send button
         [self.sendButton setFrame:CGRectMake(([self frame].size.width / 2) - (CONTROL_WIDTH / 2), height + CONTROL_HEIGHT_DIFF_OFFSET * 3, CONTROL_WIDTH, CONTROL_HEIGHT)];
-        [self.sendButton setTitle:@"Done" forState:UIControlStateNormal];
+        [self.sendButton setTitle:@"Send" forState:UIControlStateNormal];
+        [[self.sendButton titleLabel] setFont:[UIFont systemFontOfSize:32.0]];
+        
         [self addSubview:self.sendButton];
         
         //now set the targets to here

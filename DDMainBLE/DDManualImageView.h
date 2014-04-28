@@ -16,8 +16,8 @@
 #define BUTTON_HEIGHT_OFFSET 0
 #define CONTROL_WIDTH_OFFSET 15
 #define CONTROL_HEIGHT_DIFF_OFFSET 5
-#define CONTROL_WIDTH 50
-#define CONTROL_HEIGHT 20
+#define CONTROL_WIDTH 100
+#define CONTROL_HEIGHT 100
 
 @protocol DDManualImageViewDelegate <NSObject>
 
