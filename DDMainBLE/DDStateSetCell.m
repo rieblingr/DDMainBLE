@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Ryan Riebling. All rights reserved.
 //
 
-#import "DDImageSet.h"
+#import "DDStateSetCell.h"
 
-@implementation DDImageSet
+@implementation DDStateSetCell
 
 - (void)awakeFromNib
 {

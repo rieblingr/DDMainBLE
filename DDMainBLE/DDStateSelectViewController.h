@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DDStateImageSelectViewController.h"
+#import "DDStateSetCell.h"
 
 @class DDStateSelectViewController;
 

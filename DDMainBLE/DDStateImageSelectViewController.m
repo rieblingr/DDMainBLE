@@ -40,36 +40,42 @@
         DDCreateImageViewController *ddCreateImageVC = segue.destinationViewController;
         ddCreateImageVC.state = self.state;
         ddCreateImageVC.imageSelected = 1;
+        ddCreateImageVC.delegate = self;
          NSLog(@"Segue to image: %i", 1);
     }
     if ([segue.identifier isEqualToString:@"setImage2"])  {
         DDCreateImageViewController *ddCreateImageVC = segue.destinationViewController;
         ddCreateImageVC.state = self.state;
         ddCreateImageVC.imageSelected = 2;
+        ddCreateImageVC.delegate = self;
         NSLog(@"Segue to image: %i", 2);
     }
     if ([segue.identifier isEqualToString:@"setImage3"])  {
         DDCreateImageViewController *ddCreateImageVC = segue.destinationViewController;
         ddCreateImageVC.state = self.state;
         ddCreateImageVC.imageSelected = 3;
+        ddCreateImageVC.delegate = self;
         NSLog(@"Segue to image: %i", 3);
     }
     if ([segue.identifier isEqualToString:@"setImage4"])  {
         DDCreateImageViewController *ddCreateImageVC = segue.destinationViewController;
         ddCreateImageVC.state = self.state;
         ddCreateImageVC.imageSelected = 4;
+        ddCreateImageVC.delegate = self;
         NSLog(@"Segue to image: %i", 4);
     }
     if ([segue.identifier isEqualToString:@"setImage5"])  {
         DDCreateImageViewController *ddCreateImageVC = segue.destinationViewController;
         ddCreateImageVC.state = self.state;
         ddCreateImageVC.imageSelected = 5;
+        ddCreateImageVC.delegate = self;
         NSLog(@"Segue to image: %i", 5);
     }
     if ([segue.identifier isEqualToString:@"setImage6"])  {
         DDCreateImageViewController *ddCreateImageVC = segue.destinationViewController;
         ddCreateImageVC.state = self.state;
         ddCreateImageVC.imageSelected = 6;
+        ddCreateImageVC.delegate = self;
         NSLog(@"Segue to image: %i", 6);
     }
     

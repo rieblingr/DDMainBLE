@@ -19,7 +19,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.states = [NSMutableArray arrayWithCapacity:6];
-
+    NSString *state1 = @"Server State Image Set 1";
+    [self.states addObject:state1];
+    NSString *state2 = @"Server State Image Set 2";
+    [self.states addObject:state2];
+    NSString *state3 = @"Server State Image Set 3";
+    [self.states addObject:state3];
+    NSString *state4 = @"Server State Image Set 4";
+    [self.states addObject:state4];
+    NSString *state5 = @"Server State Image Set 5";
+    [self.states addObject:state5];
+    NSString *state6 = @"Server State Image Set 6";
+    [self.states addObject:state6];
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,10 +41,27 @@
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+	return 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-	return [self.states count];
+    return [self.states count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"DDCell";
+    DDStateSetCell *cell = [tableView
+                             dequeueReusableCellWithIdentifier:@"DDCell"];
+    if (cell == nil) {
+        cell = (DDStateSetCell *)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    cell.imageStateValue.text = [self.states objectAtIndex:indexPath.row];
+    return cell;
 }
 
 #pragma mark - Navigation
@@ -44,7 +72,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"viewStateSetImages"])
 	{
-          NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         DDStateImageSelectViewController *stateImageSelectVC = segue.destinationViewController;
         stateImageSelectVC.delegate = self;
         stateImageSelectVC.state = (int) indexPath.row;

@@ -61,6 +61,7 @@
 
 - (IBAction)cancel:(id)sender
 {
+    NSLog(@"Cancel create image selected");
     [self.delegate ddCreateImageVCDidCancel:self];
 }
 
