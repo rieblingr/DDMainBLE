@@ -20,12 +20,11 @@
 
 @end
 
-@interface DDManualImageViewController : UIViewController
+@interface DDManualImageViewController : UIViewController<DDManualImageViewDelegate>
 
 @property (nonatomic, strong) IBOutlet DDManualImageView *preview;
 @property (strong, nonatomic) IBOutlet UILabel *sendingDataLabel;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *sendingDataIndicator;
-@property (strong, nonatomic) IBOutlet UIProgressView *sendingDataProgress;
 
 @property (nonatomic, weak) id <DDManualImageDelegate> delegate;
 @property (nonatomic, assign) int state;

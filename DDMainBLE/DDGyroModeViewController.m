@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Ryan Riebling. All rights reserved.
 //
 
-#import "DDGryoModeViewController.h"
+#import "DDGyroModeViewController.h"
 
-@interface DDGryoModeViewController ()
+@interface DDGyroModeViewController ()
 
 @end
 
-@implementation DDGryoModeViewController
+@implementation DDGyroModeViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,5 +45,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)cancel:(id)sender
+{
+    [self.delegate didCancelMode:self];
+}
 
 @end

@@ -125,10 +125,10 @@
             </objects>
             <point key="canvasLocation" x="677" y="-722"/>
         </scene>
-        <!--Gryo Mode View Controller-->
+        <!--Gyro Mode View Controller-->
         <scene sceneID="Mhq-Km-Yka">
             <objects>
-                <viewController id="T3m-gu-92t" customClass="DDGryoModeViewController" sceneMemberID="viewController">
+                <viewController id="T3m-gu-92t" customClass="DDGyroModeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MYJ-Ns-n9Y"/>
                         <viewControllerLayoutGuide type="bottom" id="DQ2-rd-Fnd"/>
@@ -195,7 +195,7 @@
                                 </items>
                             </navigationBar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoE-YZ-eIt">
-                                <rect key="frame" x="106" y="54" width="556" height="56"/>
+                                <rect key="frame" x="106" y="71" width="556" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="State:">
@@ -327,27 +327,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUR-QF-Ydh">
-                                <rect key="frame" x="106" y="971" width="174" height="33"/>
+                                <rect key="frame" x="263" y="971" width="243" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Now Sending Data...">
                                         <attributes>
                                             <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <font key="NSFont" size="19" name="HelveticaNeue-LightItalic"/>
+                                            <font key="NSFont" size="22" name="HelveticaNeue-LightItalic"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Y23-IM-MoK">
-                                <rect key="frame" x="308" y="978" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Y23-IM-MoK">
+                                <rect key="frame" x="469" y="971" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.082530526069999999" green="0.56570986310000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X0w-oW-zDQ">
-                                <rect key="frame" x="377" y="987" width="300" height="2"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -355,13 +352,12 @@
                         <outlet property="preview" destination="FTY-IM-MIz" id="fKp-m8-nwA"/>
                         <outlet property="sendingDataIndicator" destination="Y23-IM-MoK" id="yC8-rz-pMH"/>
                         <outlet property="sendingDataLabel" destination="IUR-QF-Ydh" id="tJo-Rf-afP"/>
-                        <outlet property="sendingDataProgress" destination="X0w-oW-zDQ" id="RcX-cv-V7t"/>
                         <outlet property="serverStateLabel" destination="qoE-YZ-eIt" id="XvI-hZ-IyY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHj-Kl-IGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2383" y="-1884"/>
+            <point key="canvasLocation" x="2357" y="-1760"/>
         </scene>
         <!--Execute Dice View Controller-->
         <scene sceneID="F08-tn-n01">

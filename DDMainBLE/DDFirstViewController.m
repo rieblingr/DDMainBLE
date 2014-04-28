@@ -86,13 +86,18 @@
     
     if([segue.identifier isEqualToString:@"gryoModeSelect"])
     {
-        DDGryoModeViewController *ddGryoModeVC = segue.destinationViewController;
-        //ddGryoModeVC.delegate = self;
+        DDGyroModeViewController *ddGryoModeVC = segue.destinationViewController;
+        ddGryoModeVC.delegate = self;
     }
 
 }
 
 - (void)didCancelManualMode:(DDManualImageViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)didCancelGyroMode:(DDGyroModeViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }

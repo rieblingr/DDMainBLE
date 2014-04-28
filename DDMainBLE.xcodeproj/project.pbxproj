@@ -30,7 +30,7 @@
 		A17D55B719077095008DD792 /* DDStateSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17D55B619077095008DD792 /* DDStateSelectViewController.m */; };
 		A1890FC2190D8D3B000383FC /* iPadMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1890FC1190D8D3B000383FC /* iPadMain.storyboard */; };
 		A1890FC9190DBAE1000383FC /* DDStateImageSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FC8190DBAE1000383FC /* DDStateImageSelectViewController.m */; };
-		A1890FCC190DBAF4000383FC /* DDGryoModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FCB190DBAF4000383FC /* DDGryoModeViewController.m */; };
+		A1890FCC190DBAF4000383FC /* DDGyroModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FCB190DBAF4000383FC /* DDGyroModeViewController.m */; };
 		A1890FCF190DBB19000383FC /* DDManualImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FCE190DBB19000383FC /* DDManualImageViewController.m */; };
 		A1890FD2190DBB5B000383FC /* DDManualModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */; };
 		A1890FD8190DF05F000383FC /* DDManualImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD7190DF05F000383FC /* DDManualImageView.m */; };
@@ -288,8 +288,8 @@
 		A1890FC1190D8D3B000383FC /* iPadMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPadMain.storyboard; sourceTree = "<group>"; };
 		A1890FC7190DBAE1000383FC /* DDStateImageSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStateImageSelectViewController.h; sourceTree = "<group>"; };
 		A1890FC8190DBAE1000383FC /* DDStateImageSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStateImageSelectViewController.m; sourceTree = "<group>"; };
-		A1890FCA190DBAF4000383FC /* DDGryoModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGryoModeViewController.h; sourceTree = "<group>"; };
-		A1890FCB190DBAF4000383FC /* DDGryoModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGryoModeViewController.m; sourceTree = "<group>"; };
+		A1890FCA190DBAF4000383FC /* DDGyroModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDGyroModeViewController.h; sourceTree = "<group>"; };
+		A1890FCB190DBAF4000383FC /* DDGyroModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDGyroModeViewController.m; sourceTree = "<group>"; };
 		A1890FCD190DBB19000383FC /* DDManualImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDManualImageViewController.h; sourceTree = "<group>"; };
 		A1890FCE190DBB19000383FC /* DDManualImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDManualImageViewController.m; sourceTree = "<group>"; };
 		A1890FD0190DBB5B000383FC /* DDManualModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDManualModeViewController.h; sourceTree = "<group>"; };
@@ -568,8 +568,8 @@
 				A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */,
 				A1890FCD190DBB19000383FC /* DDManualImageViewController.h */,
 				A1890FCE190DBB19000383FC /* DDManualImageViewController.m */,
-				A1890FCA190DBAF4000383FC /* DDGryoModeViewController.h */,
-				A1890FCB190DBAF4000383FC /* DDGryoModeViewController.m */,
+				A1890FCA190DBAF4000383FC /* DDGyroModeViewController.h */,
+				A1890FCB190DBAF4000383FC /* DDGyroModeViewController.m */,
 				A1890FC7190DBAE1000383FC /* DDStateImageSelectViewController.h */,
 				A1890FC8190DBAE1000383FC /* DDStateImageSelectViewController.m */,
 				A1890FC3190D8E64000383FC /* iPad */,
@@ -1151,7 +1151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1D7FD8E1909BBCD00293268 /* DDCreateImageViewController.m in Sources */,
-				A1890FCC190DBAF4000383FC /* DDGryoModeViewController.m in Sources */,
+				A1890FCC190DBAF4000383FC /* DDGyroModeViewController.m in Sources */,
 				A1109E421905E89D00C0088B /* DDFirstViewController.m in Sources */,
 				9FB6B1EB190DBBFF00FD1BFA /* DDSingletonArray.m in Sources */,
 				9F049875190EF3C100C29965 /* DDSingletonBluetooth.m in Sources */,

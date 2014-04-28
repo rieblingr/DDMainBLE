@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DDManualImageViewController.h"
-#import "DDGryoModeViewController.h"
+#import "DDGyroModeViewController.h"
 #import "Server.h"
 
-@interface DDFirstViewController : UIViewController<DDManualImageDelegate>
+@interface DDFirstViewController : UIViewController<DDManualImageDelegate, DDGyroModeDelegate>
 
 
 @property (nonatomic, strong) NSMutableArray *services;
