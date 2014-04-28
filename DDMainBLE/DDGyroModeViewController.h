@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Server.h"
 
 @class DDGyroModeViewController;
 
@@ -19,5 +20,8 @@
 @interface DDGyroModeViewController : UIViewController
 
 @property (nonatomic, weak) id <DDGyroModeDelegate> delegate;
+@property (strong, nonatomic) IBOutlet UILabel *serverStateLabel;
+
+@property (nonatomic, assign) int state;
 
 @end

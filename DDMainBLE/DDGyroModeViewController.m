@@ -14,15 +14,6 @@
 
 @implementation DDGyroModeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -33,6 +24,29 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Server
+
+- (void)updateServerLabel
+{
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:[Server getState]
+                          
+                          options:kNilOptions
+                          error:&error];
+    
+    NSString* dataState = (NSString*)[json objectForKey:@"state"];
+    
+    NSLog(@"Json: %@", json);
+    
+    [self.serverStateLabel setText:[NSString stringWithFormat:@"Server State: %@", dataState]];
+    
+    self.state = [dataState intValue];
+    
+    NSLog(@"ServerState: %@", dataState);
+    
 }
 
 /*
@@ -48,7 +62,7 @@
 
 - (IBAction)cancel:(id)sender
 {
-    [self.delegate didCancelMode:self];
+    [self.delegate didCancelGyroMode:self];
 }
 
 @end
