@@ -243,7 +243,6 @@
 		A1D7FF65190C544200293268 /* 98-palette.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FE9C190C542800293268 /* 98-palette.png */; };
 		A1D7FF66190C544200293268 /* 99-umbrella.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FE9D190C542800293268 /* 99-umbrella.png */; };
 		A1D7FF67190C544200293268 /* ddAppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FE9E190C542800293268 /* ddAppIcon.png */; };
-		BED9CB4B0B004A84A2E28E09 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E03666A4AF4AAC9A72EFA1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,7 +256,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		13183C68D96C4B74A800FCD1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		43E03666A4AF4AAC9A72EFA1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F1A490E19084F500049049B /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
 		9F1A490F19084F500049049B /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
@@ -529,7 +527,6 @@
 				A1109E2E1905E89D00C0088B /* CoreGraphics.framework in Frameworks */,
 				A1109E301905E89D00C0088B /* UIKit.framework in Frameworks */,
 				A1109E2C1905E89D00C0088B /* Foundation.framework in Frameworks */,
-				BED9CB4B0B004A84A2E28E09 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,7 +552,6 @@
 				A1109E531905E89D00C0088B /* DDMainBLETests */,
 				A1109E2A1905E89D00C0088B /* Frameworks */,
 				A1109E291905E89D00C0088B /* Products */,
-				13183C68D96C4B74A800FCD1 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -885,11 +881,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1109E5D1905E89D00C0088B /* Build configuration list for PBXNativeTarget "DDMainBLE" */;
 			buildPhases = (
-				29876802BF0F4A5AB988AB37 /* Check Pods Manifest.lock */,
 				A1109E241905E89D00C0088B /* Sources */,
 				A1109E251905E89D00C0088B /* Frameworks */,
 				A1109E261905E89D00C0088B /* Resources */,
-				6A3F570802B247269FEE22BB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1176,39 +1170,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		29876802BF0F4A5AB988AB37 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		6A3F570802B247269FEE22BB /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		A1109E241905E89D00C0088B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1359,7 +1320,6 @@
 		};
 		A1109E5E1905E89D00C0088B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 13183C68D96C4B74A800FCD1 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DDMainBLE/DDMainBLE-Prefix.pch";
@@ -1373,7 +1333,6 @@
 		};
 		A1109E5F1905E89D00C0088B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 13183C68D96C4B74A800FCD1 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DDMainBLE/DDMainBLE-Prefix.pch";
