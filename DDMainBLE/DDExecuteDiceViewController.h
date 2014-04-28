@@ -29,7 +29,7 @@ static const uint8_t DISPLAY_IS_BUSY = 0x1;
 // Services on DD hardware
 #define DD_DEVICE_INFO_SERVICE_UUID @"1800"
 #define DD_DISPLAY_SERVICE_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af00"
-#define DD_GYRO_SERVICE_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af10"
+#define DD_GYRO_OLD_SERVICE_UUID @"0d605bad-e1db-d7cb-b79f-46b3ec27af10"
 
 // Characteristics - NEED TO CHANGE
 #define DD_NAME_CHARACTERISTIC_UUID @"2a00"
