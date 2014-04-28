@@ -77,12 +77,6 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	if ([segue.identifier isEqualToString:@"connectBLE"])
-	{
-		DDBLEViewController *ddBLEViewController =
-        segue.destinationViewController;
-        ddBLEViewController.delegate = self;
-	}
     
     if ([segue.identifier isEqualToString:@"startExecution"])
 	{
@@ -103,27 +97,6 @@
         //ddGryoModeVC.delegate = self;
     }
 
-}
-
-
-- (void) ddBLEViewControllerDidCancel:(DDBLEViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (void) ddBLEViewControllerDidConnectSuccessful:(DDBLEViewController *)controller
-{
-    NSString *deviceName = controller.deviceName.text;
-    
-    [self.connectionStatus setText:@"Status: Connection Available"];
-    [self.deviceConnection setText:deviceName];
-    [self updateServerLabel];
-    [self.initiateExecutionBtn setEnabled:YES];
-    [self.initiateExecutionBtn setTintColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
-    [self.initiateExecutionBtn setAlpha:1.0F];
-    
-    [self dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 - (void) ddExecuteDiceVCDidStop:(DDExecuteDiceViewController *)controller

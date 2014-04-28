@@ -8,7 +8,6 @@
 
 #import "DDSecondViewController.h"
 #import "DDExecuteDiceViewController.h"
-#import "DDCreateImageSetViewController.h"
 #import "Server.h"
 
 @interface DDSecondViewController ()

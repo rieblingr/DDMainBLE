@@ -7,7 +7,6 @@
 //
 
 #import "DDManualImageViewController.h"
-#import "DDManualImagePreviewViewController.h"
 
 @interface DDManualImageViewController ()
 
@@ -59,54 +58,7 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"previewImage1"])  {
-        DDManualImagePreviewViewController *ddManualImagePreviewVC = segue.destinationViewController;
-        ddManualImagePreviewVC.state = self.state;
-        ddManualImagePreviewVC.imageSelected = 1;
-        ddManualImagePreviewVC.delegate = self;
-        NSLog(@"Segue to preview image: %i", 1);
-    }
-    if ([segue.identifier isEqualToString:@"previewImage2"])  {
-        DDManualImagePreviewViewController *ddManualImagePreviewVC = segue.destinationViewController;
-        ddManualImagePreviewVC.state = self.state;
-        ddManualImagePreviewVC.imageSelected = 2;
-        ddManualImagePreviewVC.delegate = self;
-        NSLog(@"Segue to image: %i", 2);
-    }
-    if ([segue.identifier isEqualToString:@"previewImage3"])  {
-        DDManualImagePreviewViewController *ddManualImagePreviewVC = segue.destinationViewController;
-        ddManualImagePreviewVC.state = self.state;
-        ddManualImagePreviewVC.imageSelected = 3;
-        ddManualImagePreviewVC.delegate = self;
-        NSLog(@"Segue to preview image: %i", 3);
-    }
-    if ([segue.identifier isEqualToString:@"previewImage4"])  {
-        DDManualImagePreviewViewController *ddManualImagePreviewVC = segue.destinationViewController;
-        ddManualImagePreviewVC.state = self.state;
-        ddManualImagePreviewVC.imageSelected = 4;
-        ddManualImagePreviewVC.delegate = self;
-        NSLog(@"Segue to preview image: %i", 4);
-    }
-    if ([segue.identifier isEqualToString:@"previewImage5"])  {
-        DDManualImagePreviewViewController *ddManualImagePreviewVC = segue.destinationViewController;
-        ddManualImagePreviewVC.state = self.state;
-        ddManualImagePreviewVC.imageSelected = 5;
-        ddManualImagePreviewVC.delegate = self;
-        NSLog(@"Segue to preview image: %i", 5);
-    }
-    if ([segue.identifier isEqualToString:@"previewImage6"])  {
-        DDManualImagePreviewViewController *ddManualImagePreviewVC = segue.destinationViewController;
-        ddManualImagePreviewVC.state = self.state;
-        ddManualImagePreviewVC.imageSelected = 6;
-        ddManualImagePreviewVC.delegate = self;
-        NSLog(@"Segue to preview image: %i", 6);
-    }
 
-}
-
-- (void)didCancel:(DDManualImagePreviewViewController *)controller
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (IBAction)testImagePreview:(id)sender
