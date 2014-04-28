@@ -35,7 +35,7 @@
 
 +(NSMutableArray*) makeButtons {
     CGFloat BUTTON_SIZE = (CGFloat) ([[UIScreen mainScreen] bounds].size.width / IMAGE_WIDTH);
-    NSMutableArray *returnArray;
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
     for(int i = 0; i < IMAGE_HEIGHT; i++) {
         //initialize table with another array
         NSMutableArray *array = [[NSMutableArray alloc] init];
