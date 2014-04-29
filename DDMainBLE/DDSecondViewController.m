@@ -19,8 +19,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view
-    [self updateServerLabel];
     
+    //make NSTimer that updates the server periodically
+    [NSTimer scheduledTimerWithTimeInterval:2.0
+                                    target:self
+                                   selector:@selector(updateServerLabel)
+                                   userInfo:nil
+                                    repeats:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -31,7 +36,7 @@
 
 #pragma mark - Server
 
-- (void)updateServerLabel
+- (IBAction)updateServerLabel
 {
     NSError* error;
     NSDictionary* json = [NSJSONSerialization

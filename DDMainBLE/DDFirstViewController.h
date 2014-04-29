@@ -24,7 +24,4 @@
 @property (strong, nonatomic) IBOutlet UILabel *serverStatus;
 @property (strong, nonatomic) IBOutlet UIButton *initiateExecutionBtn;
 
-
-// Instance Methods
--(void) updateServerLabel;
 @end

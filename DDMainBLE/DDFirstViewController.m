@@ -42,28 +42,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Server
-
-- (void)updateServerLabel
-{
-    NSError* error;
-    NSDictionary* json = [NSJSONSerialization
-                          JSONObjectWithData:[Server getState]
-                          
-                          options:kNilOptions
-                          error:&error];
-    
-    NSArray* dataState = [json objectForKey:@"state"];
-    NSArray* timeStamp = [json objectForKey:@"time"];
-    
-    NSLog(@"Json: %@", json);
-    
-    [self.serverStatus setText:[NSString stringWithFormat:@"Server: %@ at %@", dataState, timeStamp]];
-    
-    NSLog(@"ServerState: %@", dataState);
-    
-}
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
