@@ -56,7 +56,7 @@
         self.state = [dataState intValue];
         [self showImagePreview:self.currentButton];
     }
-    
+    self.state = [dataState intValue];
 }
 
 #pragma mark - Navigation
