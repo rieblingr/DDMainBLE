@@ -24,6 +24,9 @@
     
     [self updateServerLabel];
     
+    //set char to 63 (all off since 1=off)
+    self.bitmask = 63;
+    
     [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
                                    selector:@selector(updateServerLabel)
@@ -59,15 +62,45 @@
     self.state = [dataState intValue];
 }
 
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Monitor
+-(IBAction)updateBitmask:(id)sender {
+    if(![sender isKindOfClass:[UISwitch class]]) {
+        return;
+    }
     
+    int selected = 0;
+    
+    UISwitch *temp = (UISwitch*) sender;
+    
+    //check which switches was set
+    if([temp isEqual:self.switch1]) {
+        selected = 1;
+    } else if([temp isEqual:self.switch2]) {
+        selected = 2;
+    } else if([temp isEqual:self.switch3]) {
+        selected = 3;
+    } else if([temp isEqual:self.switch4]) {
+        selected = 4;
+    } else if([temp isEqual:self.switch5]) {
+        selected = 5;
+    } else if([temp isEqual:self.switch6]) {
+        selected = 6;
+    }
+    
+    if([temp isOn]) {
+        self.bitmask -= pow(2, selected - 1);
+    } else {
+        self.bitmask += pow(2, selected - 1);
+    }
+    
+    NSLog(@"Bitmask is now: %u", self.bitmask);
+    
+    if(self.preview != nil) {
+        self.preview.bitmask = self.bitmask;
+    }
 }
+
+#pragma mark - Navigation
 
 - (NSMutableArray *)getDataArrayFromSingletonWith:(int) state andImageNumber:(int)imageSelected
 {
@@ -95,7 +128,7 @@
     
     NSMutableArray *imagePreview = [self getDataArrayFromSingletonWith:self.state andImageNumber:imageSelected];
     
-    self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:imagePreview withBitmask:0];
+    self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:imagePreview withBitmask:self.bitmask];
     
     [self.view addSubview:self.preview];
     self.preview.delegate = self;
