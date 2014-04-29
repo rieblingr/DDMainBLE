@@ -32,6 +32,17 @@
 
 @property (strong, nonatomic) UIButton *currentButton;
 
+@property (strong, nonatomic) IBOutlet UISwitch *switch1;
+@property (strong, nonatomic) IBOutlet UISwitch *switch2;
+@property (strong, nonatomic) IBOutlet UISwitch *switch3;
+@property (strong, nonatomic) IBOutlet UISwitch *switch4;
+@property (strong, nonatomic) IBOutlet UISwitch *switch5;
+@property (strong, nonatomic) IBOutlet UISwitch *switch6;
+
+@property (assign, nonatomic) char bitmask;
+
+- (IBAction)updateBitmask:(id)sender;
+
 -(IBAction)cancel:(id)sender;
 
 @end
