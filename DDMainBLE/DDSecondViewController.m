@@ -19,9 +19,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view
+    [self updateServerLabel];
     
     //make NSTimer that updates the server periodically
-    [NSTimer scheduledTimerWithTimeInterval:2.0
+    [NSTimer scheduledTimerWithTimeInterval:1.0
                                     target:self
                                    selector:@selector(updateServerLabel)
                                    userInfo:nil

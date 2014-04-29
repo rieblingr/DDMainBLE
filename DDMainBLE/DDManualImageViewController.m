@@ -22,11 +22,13 @@
     [self.sendingDataLabel setHidden:YES];
     [self.sendingDataIndicator setHidden:YES];
     
-    [NSTimer scheduledTimerWithTimeInterval:2.0
+    [self updateServerLabel];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
                                    selector:@selector(updateServerLabel)
                                    userInfo:nil
-                                    repeats:NO];
+                                    repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
