@@ -54,6 +54,10 @@
     
     [self.serverStateLabel setText:[NSString stringWithFormat:@"Server State: %@", dataState]];
     
+    if(self.state != [dataState intValue] && (self.currentButton != nil)) {
+        [self showImagePreview:self.currentButton];
+    }
+    
     self.state = [dataState intValue];
     
     NSLog(@"ServerState: %@", dataState);
@@ -86,6 +90,8 @@
     if (![sender isKindOfClass:[UIButton class]])
         return;
     [self resetSendingDataUI];
+    
+    self.currentButton = (UIButton*)sender;
     
     NSString *buttonNumber = [[(UIButton *)sender titleLabel] text];
     NSLog(@"Button %@", buttonNumber);

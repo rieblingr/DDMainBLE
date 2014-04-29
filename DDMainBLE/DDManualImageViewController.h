@@ -30,6 +30,8 @@
 @property (nonatomic, assign) int state;
 @property (strong, nonatomic) IBOutlet UILabel *serverStateLabel;
 
+@property (strong, nonatomic) UIButton *currentButton;
+
 -(IBAction)cancel:(id)sender;
 
 @end
