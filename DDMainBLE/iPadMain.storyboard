@@ -734,7 +734,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <segue destination="NEy-fO-VJn" kind="modal" identifier="setImage5" id="kkL-I8-zwG"/>
+                                    <segue destination="NEy-fO-VJn" kind="modal" identifier="setImage6" id="kkL-I8-zwG"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cD-CW-FAH">
@@ -930,6 +930,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mI7-ct-e0N"/>
+        <segue reference="W4b-RU-n10"/>
     </inferredMetricsTieBreakers>
 </document>

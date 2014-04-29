@@ -77,6 +77,7 @@
         stateImageSelectVC.delegate = self;
         stateImageSelectVC.state = (int) indexPath.row;
         NSLog(@"The prepareForSegue viewStateSetImages executed in DDStateSelectViewController, state selected: %ld", (long)indexPath.row);
+        NSLog(@"State/index row: %i", (int) indexPath.row);
 	}
 }
 
