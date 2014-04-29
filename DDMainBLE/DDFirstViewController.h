@@ -17,7 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *services;
 @property (nonatomic, strong) NSDictionary *serverStateData;
 
-@property (nonatomic, strong) IBOutlet UIButton *initializeBLEBtn;
+
 @property (nonatomic, strong) IBOutlet UILabel* connectionStatus;
 
 @property (strong, nonatomic) IBOutlet UILabel *deviceConnection;

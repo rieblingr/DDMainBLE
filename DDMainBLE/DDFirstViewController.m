@@ -17,15 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    
-    [self.initializeBLEBtn.layer setBorderWidth:1.0f];
-    [self.initializeBLEBtn.layer setBorderColor:[[UIColor cyanColor] CGColor]];
-    [self.initializeBLEBtn.layer setCornerRadius:15];
-    
-    [self.initiateExecutionBtn setEnabled:NO];
-    [self.initiateExecutionBtn setAlpha:0.4F];
-    [self.initiateExecutionBtn setTintColor:[UIColor blueColor]];
+	// Do any additional setup after loading the view, typically from a nib
     
     NSError* error;
     NSDictionary* json = [NSJSONSerialization
@@ -84,8 +76,9 @@
         ddManualImageVC.delegate = self;
     }
     
-    if([segue.identifier isEqualToString:@"gryoModeSelect"])
+    if([segue.identifier isEqualToString:@"gyroModeSelect"])
     {
+        NSLog(@"Gyro mode selected.");
         DDGyroModeViewController *ddGryoModeVC = segue.destinationViewController;
         ddGryoModeVC.delegate = self;
     }

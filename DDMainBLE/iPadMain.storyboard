@@ -142,7 +142,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Gyroscope Mode" id="Fj4-2f-egd">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Qmr-rY-s0X"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Qmr-rY-s0X">
+                                            <connections>
+                                                <action selector="cancel:" destination="T3m-gu-92t" id="9cy-rx-gSN"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
