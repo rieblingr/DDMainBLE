@@ -23,7 +23,7 @@
 //bluetooth
 @property (strong, nonatomic) NSMutableArray *table;
 @property (strong, nonatomic) NSMutableArray *data;
-@property int dispBitMask;
+@property char dispBitMask;
 
 //delegate
 @property (weak, nonatomic) id<DDSingletonBluetoothDelegate> delegate;
@@ -53,7 +53,7 @@
 @property (nonatomic, strong) NSArray *ddServices;
 
 //functions
-- (void) startTransferWithArray:(NSMutableArray*)array withBitmask:(int)dispBitmask;
+- (void)startTransferWithArray:(NSMutableArray *)array withBitmask:(char)dispBitmask;
 
 - (void) disconnect;
 

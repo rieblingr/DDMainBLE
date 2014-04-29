@@ -20,7 +20,7 @@
     return singleton;
 }
 
-- (void)startTransferWithArray:(NSMutableArray *)array withBitmask:(int)dispBitmask {
+- (void)startTransferWithArray:(NSMutableArray *)array withBitmask:(char)dispBitmask {
     self.table = array;
     self.dispBitMask = dispBitmask;
     [self initBluetooth];
@@ -44,7 +44,6 @@
     } else {
         [self sendTarget:NO];
     }
-
 }
 
 # pragma mark - CBCentralManagerDelegate

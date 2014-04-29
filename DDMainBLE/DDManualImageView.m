@@ -12,7 +12,7 @@
 
 @synthesize BUTTON_SIZE;
 
-- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray *)buttons
+- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray *)buttons withBitmask:(char) bitmask
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -20,7 +20,8 @@
         //button size is size of screen divided by the pixels of image
         self.BUTTON_SIZE = (CGFloat) (frame.size.width / IMAGE_WIDTH);
         
-        //set draw to true (start state is in drawing state)
+        //set bitmask
+        self.bitmask = bitmask;
         
         //initialize arrayd
         self.table = [[NSMutableArray alloc] init];
@@ -82,7 +83,7 @@
     [self.delegate sendBegin];
     
     //begin tranfser of the bluetooth
-    [bluetooth startTransferWithArray:self.table withBitmask:0];
+    [bluetooth startTransferWithArray:self.table withBitmask:self.bitmask];
 }
 
 -(void) finishedSending {
