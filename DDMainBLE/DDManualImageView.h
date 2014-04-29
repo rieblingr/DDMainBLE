@@ -28,7 +28,9 @@
 
 @interface DDManualImageView : UIView <DDSingletonBluetoothDelegate>
 
-- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray*) buttons;
+- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray *)buttons withBitmask:(char) bitmask;
+
+@property char bitmask;
 
 @property int state;
 @property int imageSelected;

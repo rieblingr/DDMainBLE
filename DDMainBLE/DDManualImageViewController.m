@@ -95,7 +95,7 @@
     
     NSMutableArray *imagePreview = [self getDataArrayFromSingletonWith:self.state andImageNumber:imageSelected];
     
-    self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:imagePreview];
+    self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:imagePreview withBitmask:0];
     
     [self.view addSubview:self.preview];
     self.preview.delegate = self;
