@@ -50,17 +50,12 @@
     
     NSString* dataState = (NSString*)[json objectForKey:@"state"];
     
-    NSLog(@"Json: %@", json);
-    
     [self.serverStateLabel setText:[NSString stringWithFormat:@"Server State: %@", dataState]];
     
     if(self.state != [dataState intValue] && (self.currentButton != nil)) {
+        self.state = [dataState intValue];
         [self showImagePreview:self.currentButton];
     }
-    
-    self.state = [dataState intValue];
-    
-    NSLog(@"ServerState: %@", dataState);
     
 }
 

@@ -46,14 +46,9 @@
     
     NSString* dataState = (NSString*)[json objectForKey:@"state"];
     
-    NSLog(@"Json: %@", json);
-    
     [self.serverStateLabel setText:[NSString stringWithFormat:@"Server State: %@", dataState]];
     
     self.state = [dataState intValue];
-    
-    NSLog(@"ServerState: %@", dataState);
-    
 }
 
 /*
