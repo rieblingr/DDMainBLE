@@ -17,7 +17,7 @@
 #define CONTROL_WIDTH_OFFSET 15
 #define CONTROL_HEIGHT_DIFF_OFFSET 5
 #define CONTROL_WIDTH 100
-#define CONTROL_HEIGHT 100
+#define CONTROL_HEIGHT 50
 
 @protocol DDManualImageViewDelegate <NSObject>
 
