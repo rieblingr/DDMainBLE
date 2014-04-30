@@ -282,7 +282,8 @@
         NSLog(@"XData2: %u", dataByte2);
         int xValue = [[NSString stringWithFormat:@"%c", dataByte1] intValue] + [[NSString stringWithFormat:@"%c", dataByte2] intValue];
         NSLog(@"XData int value: %i", xValue);
-        [self.gyroDataArray insertObject:xData atIndex:0];
+        NSNumber *xIntVal = [NSNumber numberWithInt:xValue];
+        [self.gyroDataArray insertObject:xIntVal atIndex:0];
     } else {
         NSLog(@"XData was null");
     }
@@ -303,7 +304,10 @@
         char dataByte2 = readYData[1];
         NSLog(@"YData1: %u", dataByte1);
         NSLog(@"YData2: %u", dataByte2);
-        [self.gyroDataArray insertObject:yData atIndex:1];
+        int yValue = [[NSString stringWithFormat:@"%c", dataByte1] intValue] + [[NSString stringWithFormat:@"%c", dataByte2] intValue];
+        NSLog(@"YData int value: %i", yValue);
+        NSNumber *yIntVal = [NSNumber numberWithInt:yValue];
+        [self.gyroDataArray insertObject:yIntVal atIndex:1];
     } else {
         NSLog(@"YData was null");
     }
@@ -324,7 +328,10 @@
         char dataByte2 = readZData[1];
         NSLog(@"zData1: %u", dataByte1);
         NSLog(@"zData2: %u", dataByte2);
-        [self.gyroDataArray insertObject:zData atIndex:2];
+        int zValue = [[NSString stringWithFormat:@"%c", dataByte1] intValue] + [[NSString stringWithFormat:@"%c", dataByte2] intValue];
+        NSLog(@"ZData int value: %i", zValue);
+        NSNumber *zIntVal = [NSNumber numberWithInt:zValue];
+        [self.gyroDataArray insertObject:zIntVal atIndex:2];
     } else {
         NSLog(@"ZData was null");
     }
