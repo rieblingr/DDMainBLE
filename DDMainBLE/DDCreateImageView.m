@@ -182,6 +182,26 @@
     [imagesArray removeObjectAtIndex:self.imageSelected - 1];
     [imagesArray insertObject:table atIndex:self.imageSelected - 1];
     
+    // Uncomment for logging image into text
+    /*
+    NSString *imageString = @"";
+    
+    for(int i = 0; i < IMAGE_HEIGHT; i++) {
+        NSMutableArray *tempArray = [table objectAtIndex:i];
+        for(int j = 0; j < IMAGE_WIDTH; j++) {
+            DDButtonCreateImage *button = [tempArray objectAtIndex:j];
+            
+            if([button isPressed]) {
+                imageString = [imageString stringByAppendingString:@"1,"];
+            } else {
+                imageString = [imageString stringByAppendingString:@"0,"];
+            }
+        }
+    }
+    
+    NSLog(@"Image to text: %@", imageString);
+     */
+    
     //call delegate
     [delegate doneWithImage];
     

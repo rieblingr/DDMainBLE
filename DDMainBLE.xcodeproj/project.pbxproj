@@ -34,6 +34,7 @@
 		A1890FCF190DBB19000383FC /* DDManualImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FCE190DBB19000383FC /* DDManualImageViewController.m */; };
 		A1890FD2190DBB5B000383FC /* DDManualModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */; };
 		A1890FD8190DF05F000383FC /* DDManualImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FD7190DF05F000383FC /* DDManualImageView.m */; };
+		A19DA7F119119FEA00ACC302 /* 6digitimage.txt in Resources */ = {isa = PBXBuildFile; fileRef = A19DA7F019119FEA00ACC302 /* 6digitimage.txt */; };
 		A1D7FD861909845C00293268 /* DDStateSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD851909845C00293268 /* DDStateSetCell.m */; };
 		A1D7FD8B1909A8CE00293268 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */; };
 		A1D7FD8E1909BBCD00293268 /* DDCreateImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7FD8D1909BBCD00293268 /* DDCreateImageViewController.m */; };
@@ -296,6 +297,7 @@
 		A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDManualModeViewController.m; sourceTree = "<group>"; };
 		A1890FD6190DF05F000383FC /* DDManualImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDManualImageView.h; sourceTree = "<group>"; };
 		A1890FD7190DF05F000383FC /* DDManualImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDManualImageView.m; sourceTree = "<group>"; };
+		A19DA7F019119FEA00ACC302 /* 6digitimage.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 6digitimage.txt; sourceTree = "<group>"; };
 		A1D7FD841909845C00293268 /* DDStateSetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStateSetCell.h; sourceTree = "<group>"; };
 		A1D7FD851909845C00293268 /* DDStateSetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStateSetCell.m; sourceTree = "<group>"; };
 		A1D7FD8A1909A8CE00293268 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 		A1109E311905E89D00C0088B /* DDMainBLE */ = {
 			isa = PBXGroup;
 			children = (
+				A19DA7F019119FEA00ACC302 /* 6digitimage.txt */,
 				A1890FD0190DBB5B000383FC /* DDManualModeViewController.h */,
 				A1890FD1190DBB5B000383FC /* DDManualModeViewController.m */,
 				A1890FCD190DBB19000383FC /* DDManualImageViewController.h */,
@@ -1094,6 +1097,7 @@
 				A1D7FF43190C544200293268 /* 64-zap.png in Resources */,
 				A1D7FF44190C544200293268 /* 65-note.png in Resources */,
 				A1D7FF45190C544200293268 /* 66-microphone.png in Resources */,
+				A19DA7F119119FEA00ACC302 /* 6digitimage.txt in Resources */,
 				A1D7FF46190C544200293268 /* 67-tshirt.png in Resources */,
 				A1D7FF47190C544200293268 /* 68-paperclip.png in Resources */,
 				A1D7FF48190C544200293268 /* 69-display.png in Resources */,
