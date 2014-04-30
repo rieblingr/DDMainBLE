@@ -13,7 +13,7 @@
 @import CoreBluetooth;
 
 @protocol DDSingletonGyroBluetoothDelegate <NSObject>
--(NSMutableArray*) gyroDataReceived;
+-(NSMutableArray*) gyroDataReceived:(NSMutableArray *)gyroDataArray;
 @end
 
 @protocol DDSingletonBluetoothDelegate <NSObject>
@@ -66,9 +66,7 @@
 @property CBCharacteristicWriteType writeType;
 @property (nonatomic, strong) NSArray *ddServices;
 
-@property (nonatomic, assign) char *xData;
-@property (nonatomic, assign) char *yData;
-@property (nonatomic, assign) char *zData;
+@property (nonatomic, strong) NSMutableArray *gyroDataArray;
 
 //functions
 - (void)startTransferWithArray:(NSMutableArray *)array withBitmask:(char)dispBitmask;

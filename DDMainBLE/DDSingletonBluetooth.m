@@ -32,6 +32,7 @@
 
 - (void) initBluetooth:(BOOL) isDisplay {
     
+    self.gyroDataArray = [[NSMutableArray alloc] initWithCapacity:3];
     if(self.centralManager == nil) {
         // Setup services
         self.ddServices = @[[CBUUID UUIDWithString:DISPLAY_DATA_SERVICE_UUID], [CBUUID UUIDWithString:DISPLAY_INFO_SERVICE_UUID],[ CBUUID UUIDWithString:GYRO_SERVICE_UUID]];
@@ -275,11 +276,17 @@
     NSLog(@"X NSdata: %@,", xData);
     
     if (readXData) {
-        char data = readXData[0];
-        NSLog(@"XData: %u", data);
+        char dataByte1 = readXData[0];
+        char dataByte2 = readXData[1];
+        NSLog(@"XData1: %u", dataByte1);
+        NSLog(@"XData2: %u", dataByte2);
+        int xValue = [[NSString stringWithFormat:@"%c", dataByte1] intValue] + [[NSString stringWithFormat:@"%c", dataByte2] intValue];
+        NSLog(@"XData int value: %i", xValue);
+        [self.gyroDataArray insertObject:xData atIndex:0];
     } else {
         NSLog(@"XData was null");
     }
+    [self.gyroDelegate gyroDataReceived:self.gyroDataArray];
 }
 
 - (void) readYAxisData:(CBCharacteristic *)characteristic error:(NSError *)error
@@ -289,14 +296,18 @@
     }
     NSData *yData = [characteristic value];
     unsigned char *readYData = (unsigned char*) [yData bytes];
-     NSLog(@"Y NSdata: %@,", yData);
+    NSLog(@"Y NSdata: %@,", yData);
     
     if (readYData) {
-        char data = readYData[0];
-        NSLog(@"YData: %u", data);
+        char dataByte1 = readYData[0];
+        char dataByte2 = readYData[1];
+        NSLog(@"YData1: %u", dataByte1);
+        NSLog(@"YData2: %u", dataByte2);
+        [self.gyroDataArray insertObject:yData atIndex:1];
     } else {
         NSLog(@"YData was null");
     }
+    [self.gyroDelegate gyroDataReceived:self.gyroDataArray];
 }
 
 - (void) readZAxisData:(CBCharacteristic *)characteristic error:(NSError *)error
@@ -306,14 +317,18 @@
     }
     NSData *zData = [characteristic value];
     unsigned char *readZData = (unsigned char*) [zData bytes];
-     NSLog(@"Z NSdata: %@,", zData);
+    NSLog(@"Z NSdata: %@,", zData);
     
     if (readZData) {
-        char data = readZData[0];
-        NSLog(@"ZData: %u", data);
+        char dataByte1 = readZData[0];
+        char dataByte2 = readZData[1];
+        NSLog(@"zData1: %u", dataByte1);
+        NSLog(@"zData2: %u", dataByte2);
+        [self.gyroDataArray insertObject:zData atIndex:2];
     } else {
         NSLog(@"ZData was null");
     }
+    [self.gyroDelegate gyroDataReceived:self.gyroDataArray];
 }
 
 
