@@ -51,6 +51,20 @@
     self.state = [dataState intValue];
 }
 
+#pragma mark - DDSingletonBluetooth
+
+- (void)finishedSending
+{
+    
+}
+
+#pragma mark - DDSingletonGyroBluetooth
+
+- (NSMutableArray *)gyroDataReceived:(NSMutableArray *)gyroDataArray
+{
+    NSLog(@"GyroDataReceived needs to be implemented");
+    return gyroDataArray;
+}
 
 - (IBAction)cancel:(id)sender
 {

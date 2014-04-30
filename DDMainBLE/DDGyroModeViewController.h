@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DDSingletonBluetooth.h"
 #import "Server.h"
 
 @class DDGyroModeViewController;
@@ -17,7 +18,7 @@
 
 @end
 
-@interface DDGyroModeViewController : UIViewController
+@interface DDGyroModeViewController : UIViewController<DDSingletonBluetoothDelegate, DDSingletonGyroBluetoothDelegate>
 
 @property (nonatomic, weak) id <DDGyroModeDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UILabel *serverStateLabel;
