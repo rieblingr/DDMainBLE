@@ -20,14 +20,17 @@
     return singleton;
 }
 
+-(void) getGyroData {
+    
+}
+
 - (void)startTransferWithArray:(NSMutableArray *)array withBitmask:(char)dispBitmask {
     self.table = array;
     self.dispBitMask = dispBitmask;
-    [self initBluetooth];
 }
 
 
-- (void) initBluetooth {
+- (void) initBluetooth:(BOOL) isDisplay {
     
     if(self.centralManager == nil) {
         // Setup services
