@@ -103,8 +103,16 @@
     self.peripheral = peripheral;
     for (CBService *service in peripheral.services) {
         NSLog(@"Service: %@", service.UUID);
+        
+        // Display services
         if([service.UUID isEqual:[CBUUID UUIDWithString:DISPLAY_INFO_SERVICE_UUID]]) {
             NSLog(@"Found Info Service");
+            [self.peripheral discoverCharacteristics:nil forService:service];
+        }
+        
+        // Gyroscope services
+        if([service.UUID isEqual:[CBUUID UUIDWithString:GYRO_SERVICE_UUID]]) {
+            NSLog(@"Found Gyroscope Service");
             [self.peripheral discoverCharacteristics:nil forService:service];
         }
     }
@@ -130,7 +138,55 @@
         [self sendData];
     }
     
+    // Gyroscope  service
+    if([service.UUID isEqual:[CBUUID UUIDWithString:GYRO_SERVICE_UUID]]) {
+        self.gyroService = service;
+        for (CBCharacteristic *aChar in service.characteristics) {
+            
+            // Gyroscope X-axis char
+            if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_X_CHARACTERISTIC_UUID]]) {
+                NSLog(@"Calling read function on X Axis char");
+                [self.peripheral readValueForCharacteristic:aChar];
+            }
+            
+            // Gyroscope Y-axis Char
+            if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_Y_CHARACTERISTIC_UUID]]) {
+                NSLog(@"Calling read function on Y Axis char");
+                [self.peripheral readValueForCharacteristic:aChar];
+            }
+            
+            // Gyroscope Z-Axis Char
+            if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_Z_CHARACTERISTIC_UUID]]) {
+                NSLog(@"Calling read function on Z Axis char");
+                [self.peripheral readValueForCharacteristic:aChar];
+            }
+        }
+    }
 }
+
+// Invoked when you retrieve a specified characteristic’s value, or when the peripheral device notifies your app that the characteristic’s value has changed.
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    NSLog(@"Receiving callback for reading Gyro Characteristics");
+    if([characteristic.UUID isEqual:[CBUUID UUIDWithString:GYRO_X_CHARACTERISTIC_UUID]]) {
+        NSLog(@"Found X Char, Reading X Axis Data");
+        [self readXAxisData:characteristic error:error];
+    }
+    
+    // Gyroscope Y-axis Service
+    if([characteristic.UUID isEqual:[CBUUID UUIDWithString:GYRO_Y_CHARACTERISTIC_UUID]]) {
+        NSLog(@"Found Y Char, Reading Y Axis Data");
+        [self readYAxisData:characteristic error:error];
+    }
+    
+    // Gyroscope Z-Axis Service
+    if([characteristic.UUID isEqual:[CBUUID UUIDWithString:GYRO_Z_CHARACTERISTIC_UUID]]) {
+        NSLog(@"Found Z Char, Reading Z Axis Data");
+        [self readZAxisData:characteristic error:error];
+    }
+}
+
+#pragma mark - Display Service Helper Methods
 
 - (void) sendTarget:(BOOL)isInitial {
     
@@ -153,11 +209,8 @@
             } else {
                 [self sendData];
             }
-            
         }
-        
     }
-    
 }
 
 - (void) sendData {
@@ -209,12 +262,66 @@
     [self.delegate finishedSending];
 }
 
+#pragma mark - Gyro Service Helper Methods
+
+- (void) readXAxisData:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if (error) {
+        NSLog(@"Error reading data: %@", error);
+    }
+    NSData *xData = [characteristic value];
+    unsigned char *readXData = (unsigned char*) [xData bytes];
+    
+    NSLog(@"X NSdata: %@,", xData);
+    
+    if (readXData) {
+        char data = readXData[0];
+        NSLog(@"XData: %u", data);
+    } else {
+        NSLog(@"XData was null");
+    }
+}
+
+- (void) readYAxisData:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if (error) {
+        NSLog(@"Error reading data: %@", error);
+    }
+    NSData *yData = [characteristic value];
+    unsigned char *readYData = (unsigned char*) [yData bytes];
+     NSLog(@"Y NSdata: %@,", yData);
+    
+    if (readYData) {
+        char data = readYData[0];
+        NSLog(@"YData: %u", data);
+    } else {
+        NSLog(@"YData was null");
+    }
+}
+
+- (void) readZAxisData:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    if (error) {
+        NSLog(@"Error reading data: %@", error);
+    }
+    NSData *zData = [characteristic value];
+    unsigned char *readZData = (unsigned char*) [zData bytes];
+     NSLog(@"Z NSdata: %@,", zData);
+    
+    if (readZData) {
+        char data = readZData[0];
+        NSLog(@"ZData: %u", data);
+    } else {
+        NSLog(@"ZData was null");
+    }
+}
+
+
 - (void) disconnect {
     if(self.centralManager != nil) {
         [self.centralManager cancelPeripheralConnection:self.peripheral];
         self.centralManager = nil;
     }
 }
-
 
 @end

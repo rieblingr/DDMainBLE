@@ -66,6 +66,10 @@
 @property CBCharacteristicWriteType writeType;
 @property (nonatomic, strong) NSArray *ddServices;
 
+@property (nonatomic, assign) char *xData;
+@property (nonatomic, assign) char *yData;
+@property (nonatomic, assign) char *zData;
+
 //functions
 - (void)startTransferWithArray:(NSMutableArray *)array withBitmask:(char)dispBitmask;
 
