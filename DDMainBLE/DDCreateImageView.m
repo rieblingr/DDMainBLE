@@ -27,9 +27,6 @@
         //initialize array
         table = buttons;
         
-        NSLog(@" IMAGE HEIGHT %d" , IMAGE_HEIGHT);
-        NSLog(@" IMAGE Width %d" , IMAGE_WIDTH);
-        
         //now add all the buttons in subview
         for(int i = 0; i < IMAGE_HEIGHT; i++) {
             NSMutableArray *array = [buttons objectAtIndex:i];
