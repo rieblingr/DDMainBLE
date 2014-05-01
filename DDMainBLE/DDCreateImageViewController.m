@@ -52,7 +52,6 @@
     createView.imageSelected = self.imageSelected;
     [self.view addSubview:createView];
 
-
 }
 
 - (void)didReceiveMemoryWarning

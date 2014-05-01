@@ -29,7 +29,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -42,7 +41,7 @@
         ddCreateImageVC.state = self.state + 1;
         ddCreateImageVC.imageSelected = 1;
         ddCreateImageVC.delegate = self;
-         NSLog(@"Segue to image: %i", 1);
+        NSLog(@"Segue to image: %i", 1);
     }
     if ([segue.identifier isEqualToString:@"setImage2"])  {
         DDCreateImageViewController *ddCreateImageVC = segue.destinationViewController;
@@ -84,7 +83,64 @@
 
 - (void)ddCreateImageVCDidCancel:(DDCreateImageViewController *)controller
 {
-     [self dismissViewControllerAnimated:YES completion:NULL];
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (IBAction)setDefaultImages:(id)sender
+{
+    // Parse the digits text file
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"6digitimage" ofType:@"txt"];
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    
+    NSLog(@"File: %@", content);
+    NSArray *images = [content componentsSeparatedByString:@"\n"];
+    NSLog(@"Images array: %@", [images description]);
+    
+    for (int i = 0; i < 6; i++) {
+       NSLog(@"Image %i: %@", i, [images objectAtIndex:i]);
+        NSString *image = [[images objectAtIndex:i] description];
+        [self setImage:image withIndex:i];
+    }
+}
+
+- (BOOL)setImage:(NSString *)image withIndex:(int)imageIndex
+{
+    //save image into singleton
+    DDSingletonArray *singleton = [DDSingletonArray singleton];
+    self.defaultImage = [[NSMutableArray alloc] init];
+    
+    // Get an array of 1's and 0's
+    NSArray *buttons = [image componentsSeparatedByString:@","];
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];;
+    
+    
+    for (int i = 0; i < [buttons count] && i < IMAGE_WIDTH * IMAGE_HEIGHT; i++) {
+        // Need new temp array every new row
+        if (i % IMAGE_HEIGHT == 0) {
+            tempArray = [[NSMutableArray alloc] init];
+        }
+        DDButtonCreateImage *button = [[DDButtonCreateImage alloc] init];
+        
+        if ([[buttons objectAtIndex:i] isEqualToString:@"1"]) {
+            [button buttonDraw];
+        } else {
+            [button buttonErase];
+        }
+        
+        [tempArray addObject:button];
+        
+        if (i > 0 && i % IMAGE_HEIGHT == 0) {
+            [self.defaultImage addObject:tempArray];
+        }
+    }
+    //now add it to the particular array
+    NSMutableArray *imagesArray = [singleton.array objectAtIndex:self.state];
+    
+    //add it
+    [imagesArray removeObjectAtIndex:imageIndex];
+    [imagesArray insertObject:self.defaultImage atIndex:imageIndex];
+    
+    return NO;
 }
 
 - (IBAction)cancel:(id)sender

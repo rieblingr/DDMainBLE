@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DDCreateImageViewController.h"
+#import "DDSingletonArray.h"
 
 @class DDStateImageSelectViewController;
 
@@ -21,9 +22,13 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *imageSetLabel;
 
+@property (strong, nonatomic) NSMutableArray *defaultImage;
+
 @property (nonatomic, weak) id <DDStateImageSelectDelegate> delegate;
 @property (nonatomic, assign) int state;
 
+
+- (IBAction)setDefaultImages:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)done:(id)sender;
 

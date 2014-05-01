@@ -849,7 +849,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sRJ-FZ-yBM">
-                                <rect key="frame" x="305" y="719" width="159" height="103"/>
+                                <rect key="frame" x="305" y="819" width="159" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -862,6 +862,23 @@
                                 </state>
                                 <connections>
                                     <action selector="done:" destination="fnT-2T-Bv8" eventType="touchUpInside" id="6dY-wN-bO9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5cJ-4p-jRM">
+                                <rect key="frame" x="215" y="682" width="339" height="67"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Use Default Images">
+                                            <attributes>
+                                                <font key="NSFont" size="36" name="HelveticaNeue-Light"/>
+                                                <font key="NSOriginalFont" size="36" name="HelveticaNeue-Light"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="setDefaultImages:" destination="fnT-2T-Bv8" eventType="touchUpInside" id="gnR-AJ-i4h"/>
                                 </connections>
                             </button>
                         </subviews>
