@@ -113,10 +113,10 @@
     NSArray *buttons = [image componentsSeparatedByString:@","];
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];;
     
-    
     for (int i = 0; i < [buttons count] && i < IMAGE_WIDTH * IMAGE_HEIGHT; i++) {
         // Need new temp array every new row
-        if (i % IMAGE_HEIGHT == 0) {
+        if (i % IMAGE_WIDTH == 0) {
+            NSLog(@"new array");
             tempArray = [[NSMutableArray alloc] init];
         }
         DDButtonCreateImage *button = [[DDButtonCreateImage alloc] init];
@@ -129,8 +129,10 @@
         
         [tempArray addObject:button];
         
-        if (i > 0 && i % IMAGE_HEIGHT == 0) {
+        if (i > 0 && i % IMAGE_WIDTH == 0) {
+            NSLog(@"Length temp: %lu", (unsigned long)[tempArray count]);
             [self.defaultImage addObject:tempArray];
+            NSLog(@"Length image: %lu", (unsigned long)[self.defaultImage count]);
         }
     }
     //now add it to the particular array

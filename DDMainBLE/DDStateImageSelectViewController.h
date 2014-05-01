@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "DDCreateImageViewController.h"
 #import "DDSingletonArray.h"
+#import "DDButtonCreateImage.h"
+
+#define IMAGE_WIDTH 32
+#define IMAGE_HEIGHT 28
 
 @class DDStateImageSelectViewController;
 
