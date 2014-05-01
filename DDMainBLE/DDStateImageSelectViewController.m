@@ -13,6 +13,7 @@
 @end
 
 @implementation DDStateImageSelectViewController
+@synthesize BUTTON_SIZE;
 
 - (void)viewDidLoad
 {
@@ -21,6 +22,8 @@
     
     NSLog(@"Setting Label to server state: %i", self.state + 1);
     self.imageSetLabel.text = [self.imageSetLabel.text stringByAppendingString:[NSString stringWithFormat:@"%i", self.state + 1]];
+    //button size is size of screen divided by the pixels of image
+    BUTTON_SIZE = (CGFloat) ([[UIScreen mainScreen] bounds].size.width / IMAGE_WIDTH);
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,7 +118,7 @@
     for(int i = 0; i < IMAGE_HEIGHT; i++) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for(int j = 0; j < IMAGE_WIDTH; j++) {
-            DDButtonCreateImage *button = [[DDButtonCreateImage alloc] init];
+            DDButtonCreateImage *button = [[DDButtonCreateImage alloc] initWithFrame:CGRectMake(j * BUTTON_SIZE, (i * BUTTON_SIZE) + BUTTON_HEIGHT_OFFSET, BUTTON_SIZE, BUTTON_SIZE)];
             
             if ([[buttons objectAtIndex:(j+(32*i))] isEqualToString:@"1"]) {
                 [button buttonDraw];

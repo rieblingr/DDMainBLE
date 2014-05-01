@@ -25,6 +25,7 @@
 @interface DDStateImageSelectViewController : UIViewController<DDCreateImageViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *imageSetLabel;
+@property CGFloat BUTTON_SIZE;
 
 @property (strong, nonatomic) NSMutableArray *defaultImage;
 
