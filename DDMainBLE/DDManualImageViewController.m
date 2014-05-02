@@ -62,44 +62,6 @@
     self.state = [dataState intValue];
 }
 
-#pragma mark - Monitor
--(IBAction)updateBitmask:(id)sender {
-    if(![sender isKindOfClass:[UISwitch class]]) {
-        return;
-    }
-    
-    int selected = 0;
-    
-    UISwitch *temp = (UISwitch*) sender;
-    
-    //check which switches was set
-    if([temp isEqual:self.switch1]) {
-        selected = 1;
-    } else if([temp isEqual:self.switch2]) {
-        selected = 2;
-    } else if([temp isEqual:self.switch3]) {
-        selected = 3;
-    } else if([temp isEqual:self.switch4]) {
-        selected = 4;
-    } else if([temp isEqual:self.switch5]) {
-        selected = 5;
-    } else if([temp isEqual:self.switch6]) {
-        selected = 6;
-    }
-    
-    if([temp isOn]) {
-        self.bitmask -= pow(2, selected - 1);
-    } else {
-        self.bitmask += pow(2, selected - 1);
-    }
-    
-    NSLog(@"Bitmask is now: %u", self.bitmask);
-    
-    if(self.preview != nil) {
-        self.preview.bitmask = self.bitmask;
-    }
-}
-
 #pragma mark - Navigation
 
 - (NSMutableArray *)getDataArrayFromSingletonWith:(int) state andImageNumber:(int)imageSelected
@@ -128,7 +90,7 @@
     
     NSMutableArray *imagePreview = [self getDataArrayFromSingletonWith:self.state andImageNumber:imageSelected];
     
-    self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:imagePreview withBitmask:self.bitmask];
+    self.preview = [[DDManualImageView alloc] initWithFrame:self.preview.frame withArray:imagePreview];
     
     [self.view addSubview:self.preview];
     self.preview.delegate = self;
@@ -152,12 +114,43 @@
 #pragma mark - DDManualImageViewDelgate
 
 // Init UI Elements for BLE transfer
-- (void)sendBegin
+- (char)sendBegin
 {
     [self.sendingDataLabel setHidden:NO];
     [self.sendingDataLabel setText:@"Now Sending Data..."];
     [self.sendingDataIndicator setHidden:NO];
     [self.sendingDataIndicator startAnimating];
+    
+    char bitmask = 63;
+    
+    //check which switches was set
+    if([self.switch1 isOn]) {
+        bitmask -= 1;
+    }
+    
+    if([self.switch2 isOn]) {
+        bitmask -= 2;
+    }
+    
+    if([self.switch3 isOn]) {
+        bitmask -= 4;
+    }
+    
+    if([self.switch4 isOn]) {
+        bitmask -= 8;
+    }
+    
+    if([self.switch5 isOn]) {
+        bitmask -= 16;
+    }
+    
+    if([self.switch6 isOn]) {
+        bitmask -= 32;
+    }
+    
+    NSLog(@"Bitmask: %i", bitmask);
+    
+    return bitmask;
 }
 
 - (void)sendEnd

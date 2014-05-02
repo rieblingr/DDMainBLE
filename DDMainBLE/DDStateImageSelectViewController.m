@@ -95,12 +95,12 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"6digitimage" ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     
-    NSLog(@"File: %@", content);
+    //NSLog(@"File: %@", content);
     NSArray *images = [content componentsSeparatedByString:@"\n"];
-    NSLog(@"Images array: %@", [images description]);
+    //NSLog(@"Images array: %@", [images description]);
     
     for (int i = 0; i < 6; i++) {
-        NSLog(@"Image %i: %@", i, [images objectAtIndex:i]);
+        //NSLog(@"Image %i: %@", i, [images objectAtIndex:i]);
         NSString *image = [[images objectAtIndex:i] description];
         [self setImage:image withIndex:i];
     }
@@ -126,12 +126,13 @@
                 [button buttonErase];
             }
             [tempArray addObject:button];
-            NSLog(@"Length temp: %lu", (unsigned long)[tempArray count]);
+         //   NSLog(@"Length temp: %lu", (unsigned long)[tempArray count]);
         }
         
         [self.defaultImage addObject:tempArray];
-        NSLog(@"Length image: %lu", (unsigned long)[self.defaultImage count]);
+       // NSLog(@"Length image: %lu", (unsigned long)[self.defaultImage count]);
     }
+    
     //now add it to the particular array
     NSMutableArray *imagesArray = [singleton.array objectAtIndex:self.state];
     

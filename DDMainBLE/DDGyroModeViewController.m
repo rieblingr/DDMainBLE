@@ -80,8 +80,11 @@
             //get image array based off that
             NSMutableArray *imageArray = [tempArray objectAtIndex:j];
             
+            char bitmask = 63;
+            bitmask -= (char)pow(2, j);
+            
             //now update cube (bitmask is based on the char we're on
-            [bluetooth startTransferWithArray:imageArray withBitmask:(char)pow(2, j)];
+            [bluetooth startTransferWithArray:imageArray withBitmask:bitmask];
         }
     }
 }

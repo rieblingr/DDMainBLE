@@ -32,7 +32,9 @@
             NSMutableArray *array = [buttons objectAtIndex:i];
             for(int j = 0; j < IMAGE_WIDTH; j++) {
                 DDButtonCreateImage *button = [array objectAtIndex:j];
-                [self addSubview:button];
+                if(i < 28) {
+                   [self addSubview:button];
+                }
             }
         }
         

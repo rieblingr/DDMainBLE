@@ -12,7 +12,7 @@
 #import "DDSingletonBluetooth.h"
 
 #define IMAGE_WIDTH 32
-#define IMAGE_HEIGHT 28
+#define IMAGE_HEIGHT 32
 #define BUTTON_HEIGHT_OFFSET 0
 #define CONTROL_WIDTH_OFFSET 15
 #define CONTROL_HEIGHT_DIFF_OFFSET 5
@@ -21,16 +21,14 @@
 
 @protocol DDManualImageViewDelegate <NSObject>
 
--(void) sendBegin;
+-(char) sendBegin;
 -(void) sendEnd;
 
 @end
 
 @interface DDManualImageView : UIView <DDSingletonBluetoothDelegate>
 
-- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray *)buttons withBitmask:(char) bitmask;
-
-@property char bitmask;
+- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray *)buttons;
 
 @property int state;
 @property int imageSelected;
