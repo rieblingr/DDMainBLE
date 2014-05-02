@@ -42,6 +42,9 @@
 #pragma mark - Gyro Data
 - (IBAction) updateGyroData {
     NSLog(@"Updating Gyro Data");
+    DDSingletonBluetooth *bluetooth =[DDSingletonBluetooth singleton];
+    
+    [bluetooth getGyroData];
 }
 
 #pragma mark - Server
