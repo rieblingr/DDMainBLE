@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "DDSingletonBluetooth.h"
 #import "Server.h"
+#import "DDManualImageView.h"
+#import "DDSingletonArray.h"
+
+#define IMAGE_WIDTH_OFFSET 8
+#define IMAGE_HEIGHT_OFFSET 300
+#define IMAGE_HEIGHT_BETWEEN_OFFSET 100
 
 @class DDGyroModeViewController;
 
@@ -28,5 +34,9 @@
 @property (nonatomic) unsigned char* xGyro;
 @property (nonatomic) unsigned char* yGyro;
 @property (nonatomic) unsigned char* zGyro;
+
+@property (nonatomic) CGFloat screenWidth;
+
+@property NSMutableArray *previewArray;
 
 @end

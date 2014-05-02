@@ -84,9 +84,7 @@
     self.currentButton = (UIButton*)sender;
     
     NSString *buttonNumber = [[(UIButton *)sender titleLabel] text];
-    NSLog(@"Button %@", buttonNumber);
     int imageSelected = [buttonNumber intValue];
-    NSLog(@"Button %i clicked", imageSelected);
     
     NSMutableArray *imagePreview = [self getDataArrayFromSingletonWith:self.state andImageNumber:imageSelected];
     
