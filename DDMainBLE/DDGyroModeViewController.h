@@ -25,4 +25,8 @@
 
 @property (nonatomic, assign) int state;
 
+@property (nonatomic) unsigned char* xGyro;
+@property (nonatomic) unsigned char* yGyro;
+@property (nonatomic) unsigned char* zGyro;
+
 @end
