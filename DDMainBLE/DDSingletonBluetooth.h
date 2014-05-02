@@ -13,7 +13,9 @@
 @import CoreBluetooth;
 
 @protocol DDSingletonGyroBluetoothDelegate <NSObject>
--(NSMutableArray*) gyroDataReceived:(NSMutableArray *)gyroDataArray;
+- (void) receivedXValue:(unsigned char*)xValue;
+- (void) receivedYValue:(unsigned char*)yValue;
+- (void) receivedZValue:(unsigned char*)zValue;
 @end
 
 @protocol DDSingletonBluetoothDelegate <NSObject>
@@ -34,6 +36,9 @@
 
 //Gryo Delegate
 @property (weak, nonatomic) id<DDSingletonGyroBluetoothDelegate> gyroDelegate;
+
+//Bool for whether or not it is display
+@property BOOL isDisplay;
 
 // Services on DD hardware
 #define DD_DEVICE_INFO_SERVICE_UUID @"1800"
@@ -65,8 +70,6 @@
 @property (nonatomic, strong) CBService *gyroService;
 @property CBCharacteristicWriteType writeType;
 @property (nonatomic, strong) NSArray *ddServices;
-
-@property (nonatomic, strong) NSMutableArray *gyroDataArray;
 
 //functions
 - (void)startTransferWithArray:(NSMutableArray *)array withBitmask:(char)dispBitmask;

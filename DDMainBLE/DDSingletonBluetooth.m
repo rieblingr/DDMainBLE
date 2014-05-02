@@ -21,17 +21,18 @@
 }
 
 -(void) getGyroData {
-    
+    [self initBluetooth:NO];
 }
 
 - (void)startTransferWithArray:(NSMutableArray *)array withBitmask:(char)dispBitmask {
     self.table = array;
     self.dispBitMask = dispBitmask;
+    [self initBluetooth:YES];
 }
 
 - (void) initBluetooth:(BOOL) isDisplay {
-    
-    self.gyroDataArray = [[NSMutableArray alloc] initWithCapacity:3];
+    self.isDisplay = isDisplay;
+
     if(self.centralManager == nil) {
         // Setup services
         self.ddServices = @[[CBUUID UUIDWithString:DISPLAY_DATA_SERVICE_UUID], [CBUUID UUIDWithString:DISPLAY_INFO_SERVICE_UUID],[ CBUUID UUIDWithString:GYRO_SERVICE_UUID]];
@@ -45,7 +46,12 @@
         
         [self.centralManager scanForPeripheralsWithServices:self.ddServices options:nil];
     } else {
-        [self sendTarget:NO];
+        if(self.isDisplay) {
+            [self sendTarget:NO];
+        } else {
+            [self requestGyroData];
+        }
+        
     }
 }
 
@@ -126,7 +132,9 @@
         NSLog(@"Discovered info service");
         self.dispInfoService = service;
         //now go to send target function
-        [self sendTarget:YES];
+        if(self.isDisplay) {
+           [self sendTarget:YES];
+        }
     }
     
     
@@ -141,24 +149,26 @@
     // Gyroscope  service
     if([service.UUID isEqual:[CBUUID UUIDWithString:GYRO_SERVICE_UUID]]) {
         self.gyroService = service;
-        for (CBCharacteristic *aChar in service.characteristics) {
-            
-            // Gyroscope X-axis char
-            if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_X_CHARACTERISTIC_UUID]]) {
-                NSLog(@"Calling read function on X Axis char");
-                //[self.peripheral readValueForCharacteristic:aChar];
-            }
-            
-            // Gyroscope Y-axis Char
-            if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_Y_CHARACTERISTIC_UUID]]) {
-                NSLog(@"Calling read function on Y Axis char");
-                //[self.peripheral readValueForCharacteristic:aChar];
-            }
-            
-            // Gyroscope Z-Axis Char
-            if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_Z_CHARACTERISTIC_UUID]]) {
-                NSLog(@"Calling read function on Z Axis char");
-                //[self.peripheral readValueForCharacteristic:aChar];
+        if(self.isDisplay == NO) {
+            for (CBCharacteristic *aChar in service.characteristics) {
+                
+                // Gyroscope X-axis char
+                if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_X_CHARACTERISTIC_UUID]]) {
+                    NSLog(@"Calling read function on X Axis char");
+                    [self.peripheral readValueForCharacteristic:aChar];
+                }
+                
+                // Gyroscope Y-axis Char
+                if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_Y_CHARACTERISTIC_UUID]]) {
+                    NSLog(@"Calling read function on Y Axis char");
+                    [self.peripheral readValueForCharacteristic:aChar];
+                }
+                
+                // Gyroscope Z-Axis Char
+                if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_Z_CHARACTERISTIC_UUID]]) {
+                    NSLog(@"Calling read function on Z Axis char");
+                    [self.peripheral readValueForCharacteristic:aChar];
+                }
             }
         }
     }
@@ -170,19 +180,19 @@
     NSLog(@"Receiving callback for reading Gyro Characteristics");
     if([characteristic.UUID isEqual:[CBUUID UUIDWithString:GYRO_X_CHARACTERISTIC_UUID]]) {
         NSLog(@"Found X Char, Reading X Axis Data");
-        [self readXAxisData:characteristic error:error];
+        [self readAxisData:characteristic error:error withValue:0];
     }
     
     // Gyroscope Y-axis Service
     if([characteristic.UUID isEqual:[CBUUID UUIDWithString:GYRO_Y_CHARACTERISTIC_UUID]]) {
         NSLog(@"Found Y Char, Reading Y Axis Data");
-        [self readYAxisData:characteristic error:error];
+        [self readAxisData:characteristic error:error withValue:1];
     }
     
     // Gyroscope Z-Axis Service
     if([characteristic.UUID isEqual:[CBUUID UUIDWithString:GYRO_Z_CHARACTERISTIC_UUID]]) {
         NSLog(@"Found Z Char, Reading Z Axis Data");
-        [self readZAxisData:characteristic error:error];
+        [self readAxisData:characteristic error:error withValue:2];
     }
 }
 
@@ -211,6 +221,10 @@
             }
         }
     }
+}
+
+- (void) requestGyroData {
+    
 }
 
 - (void) sendData {
@@ -264,77 +278,26 @@
 
 #pragma mark - Gyro Service Helper Methods
 
-- (void) readXAxisData:(CBCharacteristic *)characteristic error:(NSError *)error
-{
+- (void) readAxisData:(CBCharacteristic*)characteristic error:(NSError*)error withValue:(int)axis {
+    
     if (error) {
         NSLog(@"Error reading data: %@", error);
     }
-    NSData *xData = [characteristic value];
-    unsigned char *readXData = (unsigned char*) [xData bytes];
     
-    NSLog(@"X NSdata: %@,", xData);
+    NSData *data = [characteristic value];
     
-    if (readXData) {
-        char dataByte1 = readXData[0];
-        char dataByte2 = readXData[1];
-        NSLog(@"XData1: %u", dataByte1);
-        NSLog(@"XData2: %u", dataByte2);
-        int xValue = [[NSString stringWithFormat:@"%c", dataByte1] intValue] + [[NSString stringWithFormat:@"%c", dataByte2] intValue];
-        NSLog(@"XData int value: %i", xValue);
-        NSNumber *xIntVal = [NSNumber numberWithInt:xValue];
-        [self.gyroDataArray insertObject:xIntVal atIndex:0];
+    unsigned char *readData = (unsigned char*) [data bytes];
+    
+    if(axis == 0) {
+        NSLog(@"X Data: %@", data);
+        [self.gyroDelegate receivedXValue:readData];
+    } else if(axis == 1) {
+        NSLog(@"Y Data: %@", data);
+        [self.gyroDelegate receivedYValue:readData];
     } else {
-        NSLog(@"XData was null");
+        NSLog(@"Z Data: %@", data);
+        [self.gyroDelegate receivedZValue:readData];
     }
-    [self.gyroDelegate gyroDataReceived:self.gyroDataArray];
-}
-
-- (void) readYAxisData:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    if (error) {
-        NSLog(@"Error reading data: %@", error);
-    }
-    NSData *yData = [characteristic value];
-    unsigned char *readYData = (unsigned char*) [yData bytes];
-    NSLog(@"Y NSdata: %@,", yData);
-    
-    if (readYData) {
-        char dataByte1 = readYData[0];
-        char dataByte2 = readYData[1];
-        NSLog(@"YData1: %u", dataByte1);
-        NSLog(@"YData2: %u", dataByte2);
-        int yValue = [[NSString stringWithFormat:@"%c", dataByte1] intValue] + [[NSString stringWithFormat:@"%c", dataByte2] intValue];
-        NSLog(@"YData int value: %i", yValue);
-        NSNumber *yIntVal = [NSNumber numberWithInt:yValue];
-        [self.gyroDataArray insertObject:yIntVal atIndex:1];
-    } else {
-        NSLog(@"YData was null");
-    }
-    [self.gyroDelegate gyroDataReceived:self.gyroDataArray];
-}
-
-- (void) readZAxisData:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    if (error) {
-        NSLog(@"Error reading data: %@", error);
-    }
-    NSData *zData = [characteristic value];
-    unsigned char *readZData = (unsigned char*) [zData bytes];
-    NSLog(@"Z NSdata: %@,", zData);
-    
-    if (readZData) {
-        char dataByte1 = readZData[0];
-        char dataByte2 = readZData[1];
-        NSLog(@"zData1: %u", dataByte1);
-        NSLog(@"zData2: %u", dataByte2);
-        int zValue = [[NSString stringWithFormat:@"%c", dataByte1] intValue] + [[NSString stringWithFormat:@"%c", dataByte2] intValue];
-        NSLog(@"ZData int value: %i", zValue);
-        NSNumber *zIntVal = [NSNumber numberWithInt:zValue];
-        [self.gyroDataArray insertObject:zIntVal atIndex:2];
-    } else {
-        NSLog(@"ZData was null");
-    }
-    [self.gyroDelegate gyroDataReceived:self.gyroDataArray];
 }
 
 
