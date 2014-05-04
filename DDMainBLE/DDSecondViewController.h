@@ -16,15 +16,18 @@
 
 @end
 
-@interface DDSecondViewController : UIViewController <DDStateSelectDelegate>
+@interface DDSecondViewController : UIViewController <DDStateSelectDelegate, UIAlertViewDelegate>
 
+@property CGFloat BUTTON_SIZE;
+@property (nonatomic, assign) int state;
+@property (strong, nonatomic) NSMutableArray *defaultImage;
 
 @property (nonatomic, strong) IBOutlet UIButton *configureImages;
 @property (strong, nonatomic) IBOutlet UILabel *serverStateLabel;
-
-
-
+@property (strong, nonatomic) UIAlertView *statusAlert;
 
 @property (nonatomic, weak) id <DDSecondViewControllerDelegate> delegate;
+
+- (IBAction)setDefaultImages:(id)sender;
 
 @end
