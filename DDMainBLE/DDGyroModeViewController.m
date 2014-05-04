@@ -43,7 +43,7 @@
 - (IBAction) updateGyroData {
     NSLog(@"Updating Gyro Data");
     DDSingletonBluetooth *bluetooth =[DDSingletonBluetooth singleton];
-    
+
     [bluetooth getGyroData];
 }
 
@@ -114,6 +114,8 @@
 #pragma mark - DDSingletonGyroBluetooth
 - (void) receivedXValue:(unsigned char*)xValue {
     self.xGyro = xValue;
+    
+    
 }
 
 - (void) receivedYValue:(unsigned char*)yValue {
