@@ -177,21 +177,17 @@
 // Invoked when you retrieve a specified characteristic’s value, or when the peripheral device notifies your app that the characteristic’s value has changed.
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    NSLog(@"Receiving callback for reading Gyro Characteristics");
     if([characteristic.UUID isEqual:[CBUUID UUIDWithString:GYRO_X_CHARACTERISTIC_UUID]]) {
-        NSLog(@"Found X Char, Reading X Axis Data");
         [self readAxisData:characteristic error:error withValue:0];
     }
     
     // Gyroscope Y-axis Service
     if([characteristic.UUID isEqual:[CBUUID UUIDWithString:GYRO_Y_CHARACTERISTIC_UUID]]) {
-        NSLog(@"Found Y Char, Reading Y Axis Data");
         [self readAxisData:characteristic error:error withValue:1];
     }
     
     // Gyroscope Z-Axis Service
     if([characteristic.UUID isEqual:[CBUUID UUIDWithString:GYRO_Z_CHARACTERISTIC_UUID]]) {
-        NSLog(@"Found Z Char, Reading Z Axis Data");
         [self readAxisData:characteristic error:error withValue:2];
     }
 }
@@ -228,19 +224,16 @@
         
         // Gyroscope X-axis char
         if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_X_CHARACTERISTIC_UUID]]) {
-            NSLog(@"Calling read function on X Axis char");
             [self.peripheral readValueForCharacteristic:aChar];
         }
         
         // Gyroscope Y-axis Char
         if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_Y_CHARACTERISTIC_UUID]]) {
-            NSLog(@"Calling read function on Y Axis char");
             [self.peripheral readValueForCharacteristic:aChar];
         }
         
         // Gyroscope Z-Axis Char
         if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_Z_CHARACTERISTIC_UUID]]) {
-            NSLog(@"Calling read function on Z Axis char");
             [self.peripheral readValueForCharacteristic:aChar];
         }
     }
@@ -257,8 +250,6 @@
         //make a new string based off of i
         NSString *currChar = [NSString stringWithFormat:@"%@%02x", DISPLAY_DATA_BASE_CHARACTERISTIC_UUID, i+1];
         
-        NSLog(@"Using Char: %@", currChar);
-        
         //send data
         for(CBCharacteristic *aChar in self.dispDataService.characteristics) {
             if ([aChar.UUID isEqual:[CBUUID UUIDWithString:currChar]]) {
@@ -270,15 +261,15 @@
                 
                 NSData *sendData = [NSData dataWithBytes:test length:sizeof(test)];
                 
-                NSLog(@"Writing index: %i", i);
                 [self.peripheral writeValue:sendData forCharacteristic:aChar type:self.writeType];
             }
         }
         
     }
     
-    //sleep to ensure this works (magic number 0.4)
-    [NSThread sleepForTimeInterval:0.4f];
+    //sleep to ensure this works (magic number 0.5)
+    //0.4 works 90% of the time
+    [NSThread sleepForTimeInterval:0.5f];
     
     //now that we wrote, write 1 to busy signal
     for(CBCharacteristic *aChar in self.dispInfoService.characteristics) {
@@ -291,7 +282,6 @@
         }
     }
     
-    NSLog(@"DONE");
     [self.delegate finishedSending];
 }
 
@@ -308,13 +298,10 @@
     unsigned char *readData = (unsigned char*) [data bytes];
     
     if(axis == 0) {
-        NSLog(@"X Data: %@", data);
         [self.gyroDelegate receivedXValue:readData];
     } else if(axis == 1) {
-        NSLog(@"Y Data: %@", data);
         [self.gyroDelegate receivedYValue:readData];
     } else {
-        NSLog(@"Z Data: %@", data);
         [self.gyroDelegate receivedZValue:readData];
     }
 }

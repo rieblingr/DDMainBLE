@@ -31,12 +31,15 @@
 
 @property (nonatomic, assign) int state;
 
-@property (nonatomic) unsigned char* xGyro;
-@property (nonatomic) unsigned char* yGyro;
-@property (nonatomic) unsigned char* zGyro;
+@property (nonatomic) char xGyro;
+@property (nonatomic) char yGyro;
+@property (nonatomic) char zGyro;
 
 @property (nonatomic) CGFloat screenWidth;
 
 @property NSMutableArray *previewArray;
+
+@property (strong, nonatomic) NSTimer *gyroTimer;
+@property (strong, nonatomic) NSTimer *updateServerTimer;
 
 @end

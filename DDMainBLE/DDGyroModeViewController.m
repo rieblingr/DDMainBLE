@@ -43,9 +43,9 @@
     
     [self updateServerLabel];
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateServerLabel) userInfo:nil repeats:YES];
+    self.updateServerTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateServerLabel) userInfo:nil repeats:YES];
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateGyroData) userInfo:nil repeats:YES];
+    self.gyroTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateGyroData) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,7 +136,7 @@
     }
 }
 
-- (IBAction)setServerLabel:(NSString*) state {
+- (void)setServerLabel:(NSString*) state {
     NSError *error;
     
     NSNumber *currDate = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
@@ -163,19 +163,37 @@
 
 #pragma mark - DDSingletonGyroBluetooth
 - (void) receivedXValue:(unsigned char*)xValue {
-    self.xGyro = xValue;
+    if((xValue[1] > 100) && (xValue[1] < 250)) {
+        
+        //set the state
+        int newState = 0;
+        
+        if(self.state == 6) {
+            newState = 1;
+        } else {
+            newState = self.state + 1;
+        }
+        
+        NSString *state = [NSString stringWithFormat:@"%i", newState];
+        
+        [self setServerLabel:state];
+    }
+    
+    self.xGyro = xValue[1];
 }
 
 - (void) receivedYValue:(unsigned char*)yValue {
-    self.yGyro = yValue;
+    self.yGyro = yValue[1];
 }
 
 - (void) receivedZValue:(unsigned char*)zValue {
-    self.zGyro = zValue;
+    self.zGyro = zValue[1];
 }
 
 - (IBAction)cancel:(id)sender
 {
+    [self.gyroTimer invalidate];
+    [self.updateServerTimer invalidate];
     [self.delegate didCancelGyroMode:self];
 }
 
