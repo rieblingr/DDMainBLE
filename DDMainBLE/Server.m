@@ -14,7 +14,7 @@ NSString *url = @"http://kennethksiu.com:3000/DD";
 
 + (NSData*) setState:(NSNumber *)state time:(NSNumber *)number {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    NSURL *urlSend =[NSURL URLWithString:[NSString stringWithFormat:@"%@/state/%i/%ld", url, [state intValue], [number longValue]]];
+    NSURL *urlSend =[NSURL URLWithString:[NSString stringWithFormat:@"%@/state/set/%i/%ld", url, [state intValue], [number longValue]]];
     NSError *requestError;
     NSURLResponse *urlResponse = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:[[NSURLRequest alloc] initWithURL:urlSend] returningResponse:&urlResponse error:&requestError];

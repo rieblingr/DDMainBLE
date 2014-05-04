@@ -56,7 +56,6 @@
 
 #pragma mark - Gyro Data
 - (IBAction) updateGyroData {
-    NSLog(@"Updating Gyro Data");
     DDSingletonBluetooth *bluetooth =[DDSingletonBluetooth singleton];
 
     [bluetooth getGyroData];
@@ -83,7 +82,7 @@
         
         [self.serverStateLabel setText:[NSString stringWithFormat:@"Server State: %@", dataState]];
         
-        self.state = [dataState intValue];
+        self.state = tempState;
         
         //now set the images to that state
         DDSingletonArray *singleton = [DDSingletonArray singleton];
@@ -132,6 +131,7 @@
             
             //now update cube (bitmask is based on the char we're on
             [bluetooth startTransferWithArray:imageArray withBitmask:bitmask];
+            [NSThread sleepForTimeInterval:0.5f];
         }
     }
 }
@@ -141,14 +141,14 @@
     
     NSNumber *currDate = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
     
+    currDate = [NSNumber numberWithDouble:[currDate doubleValue] * 1000];
+    
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[Server setState:state time:currDate] options:kNilOptions error:&error];
     
     BOOL success = [[json objectForKey:@"success"] boolValue];
     
     if(success) {
         NSLog(@"Successfully set state");
-        [self.serverStateLabel setText:[NSString stringWithFormat:@"Server State: %@", state]];
-        
     } else {
         NSLog(@"ERROR SETTING STATE");
     }
