@@ -12,7 +12,7 @@
 #import "DDButtonCreateImage.h"
 
 #define IMAGE_WIDTH 32
-#define IMAGE_HEIGHT 28
+#define IMAGE_HEIGHT 32
 
 @class DDStateImageSelectViewController;
 

@@ -12,16 +12,13 @@
 
 @synthesize BUTTON_SIZE;
 
-- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray *)buttons withBitmask:(char) bitmask
+- (id)initWithFrame:(CGRect)frame withArray:(NSMutableArray *)buttons
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         //button size is size of screen divided by the pixels of image
         self.BUTTON_SIZE = (CGFloat) (frame.size.width / IMAGE_WIDTH);
-        
-        //set bitmask
-        self.bitmask = bitmask;
         
         //initialize arrayd
         self.table = [[NSMutableArray alloc] init];
@@ -43,7 +40,9 @@
                 
                 [tempArr addObject:buttonCopy];
                 
-                [self addSubview:buttonCopy];
+                if(i < 28) {
+                    [self addSubview:buttonCopy];
+                }
             }
             
             //now add to table
@@ -80,10 +79,10 @@
     bluetooth.delegate = self;
     
     //send the view's delegate that it began sending
-    [self.delegate sendBegin];
+    char returned = [self.delegate sendBegin];
     
     //begin tranfser of the bluetooth
-    [bluetooth startTransferWithArray:self.table withBitmask:self.bitmask];
+    [bluetooth startTransferWithArray:self.table withBitmask:returned];
 }
 
 -(void) finishedSending {

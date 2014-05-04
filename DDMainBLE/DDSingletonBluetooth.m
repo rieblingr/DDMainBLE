@@ -224,7 +224,26 @@
 }
 
 - (void) requestGyroData {
-    
+    for (CBCharacteristic *aChar in self.gyroService.characteristics) {
+        
+        // Gyroscope X-axis char
+        if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_X_CHARACTERISTIC_UUID]]) {
+            NSLog(@"Calling read function on X Axis char");
+            [self.peripheral readValueForCharacteristic:aChar];
+        }
+        
+        // Gyroscope Y-axis Char
+        if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_Y_CHARACTERISTIC_UUID]]) {
+            NSLog(@"Calling read function on Y Axis char");
+            [self.peripheral readValueForCharacteristic:aChar];
+        }
+        
+        // Gyroscope Z-Axis Char
+        if([aChar.UUID isEqual:[CBUUID UUIDWithString:GYRO_Z_CHARACTERISTIC_UUID]]) {
+            NSLog(@"Calling read function on Z Axis char");
+            [self.peripheral readValueForCharacteristic:aChar];
+        }
+    }
 }
 
 - (void) sendData {
