@@ -27,6 +27,12 @@
 		A1109E501905E89D00C0088B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1109E2F1905E89D00C0088B /* UIKit.framework */; };
 		A1109E581905E89D00C0088B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1109E561905E89D00C0088B /* InfoPlist.strings */; };
 		A1109E5A1905E89D00C0088B /* DDMainBLETests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1109E591905E89D00C0088B /* DDMainBLETests.m */; };
+		A110D7C4191698D900F8435B /* digit6image.txt in Resources */ = {isa = PBXBuildFile; fileRef = A110D7BE191698D900F8435B /* digit6image.txt */; };
+		A110D7C5191698D900F8435B /* digit5image.txt in Resources */ = {isa = PBXBuildFile; fileRef = A110D7BF191698D900F8435B /* digit5image.txt */; };
+		A110D7C6191698D900F8435B /* digit4image.txt in Resources */ = {isa = PBXBuildFile; fileRef = A110D7C0191698D900F8435B /* digit4image.txt */; };
+		A110D7C7191698D900F8435B /* digit3image.txt in Resources */ = {isa = PBXBuildFile; fileRef = A110D7C1191698D900F8435B /* digit3image.txt */; };
+		A110D7C8191698D900F8435B /* digit2image.txt in Resources */ = {isa = PBXBuildFile; fileRef = A110D7C2191698D900F8435B /* digit2image.txt */; };
+		A110D7C9191698D900F8435B /* digit1image.txt in Resources */ = {isa = PBXBuildFile; fileRef = A110D7C3191698D900F8435B /* digit1image.txt */; };
 		A17D55B719077095008DD792 /* DDStateSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A17D55B619077095008DD792 /* DDStateSelectViewController.m */; };
 		A1890FC2190D8D3B000383FC /* iPadMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1890FC1190D8D3B000383FC /* iPadMain.storyboard */; };
 		A1890FC9190DBAE1000383FC /* DDStateImageSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1890FC8190DBAE1000383FC /* DDStateImageSelectViewController.m */; };
@@ -284,6 +290,12 @@
 		A1109E551905E89D00C0088B /* DDMainBLETests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DDMainBLETests-Info.plist"; sourceTree = "<group>"; };
 		A1109E571905E89D00C0088B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A1109E591905E89D00C0088B /* DDMainBLETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDMainBLETests.m; sourceTree = "<group>"; };
+		A110D7BE191698D900F8435B /* digit6image.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = digit6image.txt; sourceTree = "<group>"; };
+		A110D7BF191698D900F8435B /* digit5image.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = digit5image.txt; sourceTree = "<group>"; };
+		A110D7C0191698D900F8435B /* digit4image.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = digit4image.txt; sourceTree = "<group>"; };
+		A110D7C1191698D900F8435B /* digit3image.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = digit3image.txt; sourceTree = "<group>"; };
+		A110D7C2191698D900F8435B /* digit2image.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = digit2image.txt; sourceTree = "<group>"; };
+		A110D7C3191698D900F8435B /* digit1image.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = digit1image.txt; sourceTree = "<group>"; };
 		A17D55B519077095008DD792 /* DDStateSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDStateSelectViewController.h; sourceTree = "<group>"; };
 		A17D55B619077095008DD792 /* DDStateSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDStateSelectViewController.m; sourceTree = "<group>"; };
 		A1890FC1190D8D3B000383FC /* iPadMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPadMain.storyboard; sourceTree = "<group>"; };
@@ -583,6 +595,12 @@
 				A1109E411905E89D00C0088B /* DDFirstViewController.m */,
 				A1109E431905E89D00C0088B /* DDSecondViewController.h */,
 				A1109E441905E89D00C0088B /* DDSecondViewController.m */,
+				A110D7BE191698D900F8435B /* digit6image.txt */,
+				A110D7BF191698D900F8435B /* digit5image.txt */,
+				A110D7C0191698D900F8435B /* digit4image.txt */,
+				A110D7C1191698D900F8435B /* digit3image.txt */,
+				A110D7C2191698D900F8435B /* digit2image.txt */,
+				A110D7C3191698D900F8435B /* digit1image.txt */,
 				A1109E461905E89D00C0088B /* Images.xcassets */,
 				A1109E321905E89D00C0088B /* Supporting Files */,
 				A17D55B519077095008DD792 /* DDStateSelectViewController.h */,
@@ -939,6 +957,7 @@
 				A1D7FEA6190C544200293268 /* 08-chat.png in Resources */,
 				A1D7FEA7190C544200293268 /* 09-chat-2.png in Resources */,
 				A1D7FEA8190C544200293268 /* 10-medical.png in Resources */,
+				A110D7C9191698D900F8435B /* digit1image.txt in Resources */,
 				A1D7FEA9190C544200293268 /* 100-coffee.png in Resources */,
 				A1D7FEAA190C544200293268 /* 101-gameplan.png in Resources */,
 				A1D7FEAB190C544200293268 /* 102-walk.png in Resources */,
@@ -980,6 +999,7 @@
 				A1D7FECF190C544200293268 /* 135-hockeymask.png in Resources */,
 				A1D7FED0190C544200293268 /* 136-tractor.png in Resources */,
 				A1D7FED1190C544200293268 /* 137-presentation.png in Resources */,
+				A110D7C8191698D900F8435B /* digit2image.txt in Resources */,
 				A1D7FED2190C544200293268 /* 138-scales.png in Resources */,
 				A1D7FED3190C544200293268 /* 139-flags.png in Resources */,
 				A1D7FED4190C544200293268 /* 14-tag.png in Resources */,
@@ -1048,6 +1068,7 @@
 				A1D7FF12190C544200293268 /* 196-radiation.png in Resources */,
 				A1D7FF13190C544200293268 /* 197-card-diamonds.png in Resources */,
 				A1D7FF14190C544200293268 /* 198-card-spades.png in Resources */,
+				A110D7C4191698D900F8435B /* digit6image.txt in Resources */,
 				A1D7FF15190C544200293268 /* 199-card-hearts.png in Resources */,
 				A1D7FF16190C544200293268 /* 20-gear2.png in Resources */,
 				A1D7FF17190C544200293268 /* 200-card-clubs.png in Resources */,
@@ -1076,6 +1097,7 @@
 				A1D7FF2E190C544200293268 /* 43-film-roll.png in Resources */,
 				A1D7FF2F190C544200293268 /* 44-shoebox.png in Resources */,
 				A1D7FF30190C544200293268 /* 45-movie-1.png in Resources */,
+				A110D7C5191698D900F8435B /* digit5image.txt in Resources */,
 				A1D7FF31190C544200293268 /* 46-movie-2.png in Resources */,
 				A1D7FF32190C544200293268 /* 47-fuel.png in Resources */,
 				A1D7FF33190C544200293268 /* 48-fork-and-knife.png in Resources */,
@@ -1098,6 +1120,7 @@
 				A1D7FF44190C544200293268 /* 65-note.png in Resources */,
 				A1D7FF45190C544200293268 /* 66-microphone.png in Resources */,
 				A19DA7F119119FEA00ACC302 /* 6digitimage.txt in Resources */,
+				A110D7C6191698D900F8435B /* digit4image.txt in Resources */,
 				A1D7FF46190C544200293268 /* 67-tshirt.png in Resources */,
 				A1D7FF47190C544200293268 /* 68-paperclip.png in Resources */,
 				A1D7FF48190C544200293268 /* 69-display.png in Resources */,
@@ -1126,6 +1149,7 @@
 				A1D7FF5F190C544200293268 /* 92-test-tube.png in Resources */,
 				A1D7FF60190C544200293268 /* 93-thermometer.png in Resources */,
 				A1D7FF61190C544200293268 /* 94-pill.png in Resources */,
+				A110D7C7191698D900F8435B /* digit3image.txt in Resources */,
 				A1D7FF62190C544200293268 /* 95-equalizer.png in Resources */,
 				A1D7FF63190C544200293268 /* 96-book.png in Resources */,
 				A1D7FF64190C544200293268 /* 97-puzzle.png in Resources */,

@@ -58,7 +58,7 @@
 - (IBAction) updateGyroData {
     NSLog(@"Updating Gyro Data");
     DDSingletonBluetooth *bluetooth =[DDSingletonBluetooth singleton];
-    
+
     [bluetooth getGyroData];
 }
 

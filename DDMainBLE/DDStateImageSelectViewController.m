@@ -13,7 +13,6 @@
 @end
 
 @implementation DDStateImageSelectViewController
-@synthesize BUTTON_SIZE;
 
 - (void)viewDidLoad
 {
@@ -22,8 +21,6 @@
     
     NSLog(@"Setting Label to server state: %i", self.state + 1);
     self.imageSetLabel.text = [self.imageSetLabel.text stringByAppendingString:[NSString stringWithFormat:@"%i", self.state + 1]];
-    //button size is size of screen divided by the pixels of image
-    BUTTON_SIZE = (CGFloat) ([[UIScreen mainScreen] bounds].size.width / IMAGE_WIDTH);
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,59 +86,6 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (IBAction)setDefaultImages:(id)sender
-{
-    // Parse the digits text file
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"6digitimage" ofType:@"txt"];
-    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    
-    //NSLog(@"File: %@", content);
-    NSArray *images = [content componentsSeparatedByString:@"\n"];
-    //NSLog(@"Images array: %@", [images description]);
-    
-    for (int i = 0; i < 6; i++) {
-        //NSLog(@"Image %i: %@", i, [images objectAtIndex:i]);
-        NSString *image = [[images objectAtIndex:i] description];
-        [self setImage:image withIndex:i];
-    }
-}
-
-- (BOOL)setImage:(NSString *)image withIndex:(int)imageIndex
-{
-    //save image into singleton
-    DDSingletonArray *singleton = [DDSingletonArray singleton];
-    self.defaultImage = [[NSMutableArray alloc] init];
-    
-    // Get an array of 1's and 0's
-    NSArray *buttons = [image componentsSeparatedByString:@","];
-    
-    for(int i = 0; i < IMAGE_HEIGHT; i++) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for(int j = 0; j < IMAGE_WIDTH; j++) {
-            DDButtonCreateImage *button = [[DDButtonCreateImage alloc] initWithFrame:CGRectMake(j * BUTTON_SIZE, (i * BUTTON_SIZE) + BUTTON_HEIGHT_OFFSET, BUTTON_SIZE, BUTTON_SIZE)];
-            
-            if ([[buttons objectAtIndex:(j+(32*i))] isEqualToString:@"1"]) {
-                [button buttonDraw];
-            } else {
-                [button buttonErase];
-            }
-            [tempArray addObject:button];
-         //   NSLog(@"Length temp: %lu", (unsigned long)[tempArray count]);
-        }
-        
-        [self.defaultImage addObject:tempArray];
-       // NSLog(@"Length image: %lu", (unsigned long)[self.defaultImage count]);
-    }
-    
-    //now add it to the particular array
-    NSMutableArray *imagesArray = [singleton.array objectAtIndex:self.state];
-    
-    //add it
-    [imagesArray removeObjectAtIndex:imageIndex];
-    [imagesArray insertObject:self.defaultImage atIndex:imageIndex];
-    
-    return NO;
-}
 
 - (IBAction)cancel:(id)sender
 {
