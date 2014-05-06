@@ -27,7 +27,7 @@
                                      target:self
                                    selector:@selector(updateServerLabel)
                                    userInfo:nil
-                                    repeats:NO];
+                                    repeats:YES];
     //button size is size of screen divided by the pixels of image
     BUTTON_SIZE = (CGFloat) ([[UIScreen mainScreen] bounds].size.width / IMAGE_WIDTH);
 }
